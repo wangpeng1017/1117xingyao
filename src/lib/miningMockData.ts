@@ -484,6 +484,144 @@ export const analyticsMock = {
     { category: '折旧摊销', value: 8.2 },
     { category: '其他', value: 7.5 },
   ],
+  // 生产报表（日/周/月报）
+  productionReports: [
+    {
+      id: 'RPT-20251115',
+      type: '日报',
+      period: '2025-11-15',
+      oreTonnage: 52300,
+      concentrateTonnage: 17200,
+      avgGrade: 64.8,
+      recovery: 89.2,
+      equipmentAvailability: 96.8,
+      status: '已发布',
+      generatedAt: '2025-11-16 08:00',
+    },
+    {
+      id: 'RPT-W46-2025',
+      type: '周报',
+      period: '2025年第46周',
+      oreTonnage: 365000,
+      concentrateTonnage: 120500,
+      avgGrade: 65.1,
+      recovery: 89.5,
+      equipmentAvailability: 97.2,
+      status: '已发布',
+      generatedAt: '2025-11-11 08:00',
+    },
+    {
+      id: 'RPT-202510',
+      type: '月报',
+      period: '2025年10月',
+      oreTonnage: 1580000,
+      concentrateTonnage: 522000,
+      avgGrade: 64.9,
+      recovery: 89.3,
+      equipmentAvailability: 96.5,
+      status: '已发布',
+      generatedAt: '2025-11-01 08:00',
+    },
+  ],
+  // 资源储量分析（三级矿量）
+  resourceReserves: {
+    totalReserves: 125800000, // t
+    reserves: [
+      {
+        category: '控制储量',
+        tonnage: 52300000,
+        avgGradeFe: 34.5,
+        percentage: 41.6,
+      },
+      {
+        category: '推断储量',
+        tonnage: 48900000,
+        avgGradeFe: 33.2,
+        percentage: 38.9,
+      },
+      {
+        category: '预测储量',
+        tonnage: 24600000,
+        avgGradeFe: 31.8,
+        percentage: 19.5,
+      },
+    ],
+    monthlyDepletion: [
+      { month: '2025-05', depletion: 158000 },
+      { month: '2025-06', depletion: 162000 },
+      { month: '2025-07', depletion: 160000 },
+      { month: '2025-08', depletion: 155000 },
+      { month: '2025-09', depletion: 159000 },
+      { month: '2025-10', depletion: 158000 },
+      { month: '2025-11', depletion: 160000 },
+    ],
+  },
+  // 供矿品位分析（多矿源对比）
+  gradeAnalysis: {
+    bySource: [
+      {
+        source: '东矿带露采',
+        tonnage: 185000,
+        avgGradeFe: 32.5,
+        fluctuation: 0.8, // 波动系数
+      },
+      {
+        source: '东矿带地采',
+        tonnage: 96500,
+        avgGradeFe: 35.8,
+        fluctuation: 1.2,
+      },
+      {
+        source: '西矿带露采',
+        tonnage: 135000,
+        avgGradeFe: 31.2,
+        fluctuation: 1.5,
+      },
+      {
+        source: '西矿带地采',
+        tonnage: 87500,
+        avgGradeFe: 34.1,
+        fluctuation: 1.0,
+      },
+    ],
+    weeklyTrend: [
+      { week: '第42周', avgGradeFe: 33.8 },
+      { week: '第43周', avgGradeFe: 34.1 },
+      { week: '第44周', avgGradeFe: 33.5 },
+      { week: '第45周', avgGradeFe: 34.3 },
+      { week: '第46周', avgGradeFe: 34.0 },
+    ],
+  },
+  // 矿石流执行分析（从采场到选厂）
+  oreFlowTracking: [
+    {
+      stage: '采场采出',
+      tonnage: 52800,
+      avgGradeFe: 33.8,
+      timestamp: '2025-11-15 06:00',
+    },
+    {
+      stage: '运输到矿',
+      tonnage: 52500,
+      avgGradeFe: 33.8,
+      timestamp: '2025-11-15 08:00',
+      loss: 300, // 损失量
+    },
+    {
+      stage: '入选厂',
+      tonnage: 52300,
+      avgGradeFe: 33.9,
+      timestamp: '2025-11-15 09:00',
+      loss: 200,
+    },
+    {
+      stage: '精矿产出',
+      tonnage: 17200,
+      avgGradeFe: 64.8,
+      timestamp: '2025-11-15 18:00',
+      recovery: 89.2,
+    },
+  ],
 };
 
 // 8. 安全环保管理

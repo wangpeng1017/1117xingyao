@@ -567,6 +567,7 @@ function SectionEquipment() {
 }
 
 function SectionAnalytics() {
+  const [tab, setTab] = React.useState<'dashboard' | 'reports' | 'reserves' | 'grade' | 'flow'>('dashboard');
   return (
     <div>
       <h2>矿山决策分析</h2>
@@ -575,15 +576,140 @@ function SectionAnalytics() {
       </p>
       <KpiCards items={analyticsMock.kpis} />
 
-      <h3 style={{ marginTop: 16, marginBottom: 8 }}>矿石流向</h3>
-      <BasicTable
-        headers={["来源", "矿量(t)", "平均品位(Fe, %)"]}
-        rows={analyticsMock.oreFlow.map((o) => [
-          o.source,
-          o.tonnage,
-          o.avgGradeFe,
-        ])}
-      />
+      {/* Tab 导航 */}
+      <div style={{ display: 'flex', gap: 8, marginTop: 8, marginBottom: 16, borderBottom: '1px solid #eee' }}>
+        {[
+          { key: 'dashboard', label: '驾驶舱' },
+          { key: 'reports', label: '生产报表' },
+          { key: 'reserves', label: '资源储量' },
+          { key: 'grade', label: '供矿品位' },
+          { key: 'flow', label: '矿石流执行' },
+        ].map((t) => (
+          <div
+            key={t.key}
+            onClick={() => setTab(t.key as 'dashboard' | 'reports' | 'reserves' | 'grade' | 'flow')}
+            style={{
+              padding: '8px 16px',
+              cursor: 'pointer',
+              borderBottom: tab === t.key ? '2px solid #1677ff' : '2px solid transparent',
+              color: tab === t.key ? '#1677ff' : '#666',
+              fontWeight: tab === t.key ? 600 : 400,
+              fontSize: 13,
+            }}
+          >
+            {t.label}
+          </div>
+        ))}
+      </div>
+
+      {tab === 'dashboard' && (
+        <div>
+          <h3 style={{ marginTop: 8, marginBottom: 8 }}>矿石流向</h3>
+          <BasicTable
+            headers={["来源", "矿量(t)", "平均品位(Fe, %)"]}
+            rows={analyticsMock.oreFlow.map((o) => [o.source, o.tonnage, o.avgGradeFe])}
+          />
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>成本结构</h3>
+          <BasicTable
+            headers={["类别", "占比(%)"]}
+            rows={analyticsMock.costBreakdown.map((c) => [c.category, c.value])}
+          />
+        </div>
+      )}
+
+      {tab === 'reports' && (
+        <div>
+          <h3 style={{ marginTop: 8, marginBottom: 8 }}>生产报表</h3>
+          <BasicTable
+            headers={["编号", "类型", "周期", "处理矿量(t)", "精矿(t)", "平均品位(%)", "回收率(%)", "开机率(%)", "状态", "生成时间"]}
+            rows={analyticsMock.productionReports.map((r) => [
+              r.id,
+              r.type,
+              r.period,
+              r.oreTonnage,
+              r.concentrateTonnage,
+              r.avgGrade,
+              r.recovery,
+              r.equipmentAvailability,
+              r.status,
+              r.generatedAt,
+            ])}
+          />
+          <div style={{ marginTop: 16, padding: 12, background: '#f0f9ff', borderRadius: 8, fontSize: 12 }}>
+            <strong>功能说明：</strong>系统每日 8:00 自动生成日报，每周一生成周报，每月 1 日生成月报。报表可导出 Excel/PDF 格式。
+          </div>
+        </div>
+      )}
+
+      {tab === 'reserves' && (
+        <div>
+          <h3 style={{ marginTop: 8, marginBottom: 8 }}>三级储量结构</h3>
+          <div style={{ marginBottom: 12, padding: 12, background: '#fff', borderRadius: 8, border: '1px solid #eee' }}>
+            <div style={{ fontSize: 12, color: '#666' }}>总储量</div>
+            <div style={{ fontSize: 24, fontWeight: 600, marginTop: 4 }}>
+              {analyticsMock.resourceReserves.totalReserves.toLocaleString()}
+              <span style={{ fontSize: 14, marginLeft: 4 }}>t</span>
+            </div>
+          </div>
+          <BasicTable
+            headers={["类别", "矿量(t)", "平均品位(Fe, %)", "占比(%)"]}
+            rows={analyticsMock.resourceReserves.reserves.map((r) => [
+              r.category,
+              r.tonnage.toLocaleString(),
+              r.avgGradeFe,
+              r.percentage,
+            ])}
+          />
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>月度消耗趋势</h3>
+          <BasicTable
+            headers={["月份", "消耗量(t)"]}
+            rows={analyticsMock.resourceReserves.monthlyDepletion.map((m) => [m.month, m.depletion.toLocaleString()])}
+          />
+        </div>
+      )}
+
+      {tab === 'grade' && (
+        <div>
+          <h3 style={{ marginTop: 8, marginBottom: 8 }}>按来源供矿品位</h3>
+          <BasicTable
+            headers={["来源", "矿量(t)", "平均品位(Fe, %)", "波动系数"]}
+            rows={analyticsMock.gradeAnalysis.bySource.map((s) => [
+              s.source,
+              s.tonnage.toLocaleString(),
+              s.avgGradeFe,
+              s.fluctuation,
+            ])}
+          />
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>周度品位趋势</h3>
+          <BasicTable
+            headers={["周次", "平均品位(Fe, %)"]}
+            rows={analyticsMock.gradeAnalysis.weeklyTrend.map((w) => [w.week, w.avgGradeFe])}
+          />
+        </div>
+      )}
+
+      {tab === 'flow' && (
+        <div>
+          <h3 style={{ marginTop: 8, marginBottom: 8 }}>矿石流转节点</h3>
+          <BasicTable
+            headers={["阶段", "矿量(t)", "平均品位(Fe, %)", "时间", "损失(t)", "回收率(%)"]}
+            rows={analyticsMock.oreFlowTracking.map((f) => [
+              f.stage,
+              f.tonnage.toLocaleString(),
+              f.avgGradeFe,
+              f.timestamp,
+              (f as any).loss?.toLocaleString() || '-',
+              (f as any).recovery || '-',
+            ])}
+          />
+          <div style={{ marginTop: 16, padding: 12, background: '#fff5f5', borderRadius: 8, fontSize: 12 }}>
+            <strong>损失分析：</strong>从采场到选厂入口总损失 500t，损失率 0.95%。建议优化运输路线和装卸方式降低损耗。
+          </div>
+        </div>
+      )}
     </div>
   );
 }
