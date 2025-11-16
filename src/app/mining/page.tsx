@@ -1604,8 +1604,10 @@ function SectionLab() {
         style={{
           borderRadius: 8,
           border: "1px solid #eee",
-          overflow: "hidden",
+          overflowX: "auto",
+          overflowY: "hidden",
           background: "#fff",
+          maxWidth: "100%",
         }}
       >
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
