@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Layout from "@/components/Layout";
 import {
   navItems,
   type NavKey,
@@ -824,67 +825,97 @@ function renderSection(key: NavKey) {
   }
 }
 
+const navIcons: Record<NavKey, string> = {
+  geoInfo: '🌍',
+  openPit: '⛏️',
+  underground: '🕳️',
+  concentrator: '🏭',
+  lab: '🧪',
+  equipment: '⚙️',
+  analytics: '📈',
+  safety: '🛡️',
+  mobile: '📱',
+};
+
 export default function MiningOperationPage() {
   const [active, setActive] = useState<NavKey>("concentrator");
 
   return (
-    <div
-      style={{
-        display: "flex",
-        height: "100vh",
-        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-        fontSize: 14,
-      }}
-    >
-      {/* 左侧导航 */}
-      <aside
-        style={{
-          width: 220,
-          borderRight: "1px solid #eee",
-          padding: "16px 0",
-          background: "#fafafa",
-        }}
-      >
-        <div
+    <Layout>
+      <div style={{ display: "flex", flex: 1, fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", fontSize: 14 }}>
+        {/* 左侧导航 */}
+        <aside
           style={{
-            padding: "0 16px 12px",
-            fontWeight: 600,
-            fontSize: 13,
+            width: 200,
+            borderRight: "1px solid #e8e8e8",
+            padding: "16px 0",
+            background: "#fff",
+            boxShadow: "2px 0 8px rgba(0,0,0,0.05)",
           }}
         >
-          选矿生产安环管理
-        </div>
-        {navItems.map((item) => {
-          const activeStyle = item.key === active;
-          return (
-            <div
-              key={item.key}
-              onClick={() => setActive(item.key)}
-              style={{
-                padding: "8px 16px",
-                cursor: "pointer",
-                background: activeStyle ? "#e6f4ff" : "transparent",
-                color: activeStyle ? "#1677ff" : "#333",
-                fontSize: 13,
-              }}
-            >
-              {item.label}
-            </div>
-          );
-        })}
-      </aside>
+          <div
+            style={{
+              padding: "8px 16px 16px",
+              fontWeight: 600,
+              fontSize: 14,
+              color: "#333",
+              borderBottom: "1px solid #f0f0f0",
+              marginBottom: 8,
+            }}
+          >
+            🏛️ 选矿生产安环管理
+          </div>
+          {navItems.map((item) => {
+            const isActive = item.key === active;
+            return (
+              <div
+                key={item.key}
+                onClick={() => setActive(item.key)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "10px 16px",
+                  margin: "2px 8px",
+                  cursor: "pointer",
+                  borderRadius: 6,
+                  background: isActive ? "#e6f4ff" : "transparent",
+                  color: isActive ? "#1677ff" : "#666",
+                  fontSize: 13,
+                  fontWeight: isActive ? 600 : 400,
+                  transition: "all 0.2s",
+                  borderLeft: isActive ? "3px solid #1677ff" : "3px solid transparent",
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = "#f5f5f5";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = "transparent";
+                  }
+                }}
+              >
+                <span style={{ fontSize: 16 }}>{navIcons[item.key]}</span>
+                <span>{item.label}</span>
+              </div>
+            );
+          })}
+        </aside>
 
-      {/* 右侧内容 */}
-      <main
-        style={{
-          flex: 1,
-          padding: 24,
-          overflow: "auto",
-          background: "#f5f5f5",
-        }}
-      >
-        {renderSection(active)}
-      </main>
-    </div>
+        {/* 右侧内容 */}
+        <main
+          style={{
+            flex: 1,
+            padding: 20,
+            overflow: "auto",
+            background: "#f5f7fa",
+          }}
+        >
+          {renderSection(active)}
+        </main>
+      </div>
+    </Layout>
   );
 }

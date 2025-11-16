@@ -1,0 +1,109 @@
+"use client";
+
+import React from "react";
+import Link from "next/link";
+
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+export default function Layout({ children }: LayoutProps) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      {/* 顶部导航栏 */}
+      <header
+        style={{
+          height: 60,
+          background: "linear-gradient(90deg, #1677ff 0%, #0052cc 100%)",
+          display: "flex",
+          alignItems: "center",
+          padding: "0 24px",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+          position: "sticky",
+          top: 0,
+          zIndex: 100,
+        }}
+      >
+        <Link
+          href="/"
+          style={{
+            color: "white",
+            fontSize: 20,
+            fontWeight: 700,
+            textDecoration: "none",
+            marginRight: 40,
+          }}
+        >
+          智慧矿山综合平台
+        </Link>
+        
+        <nav style={{ display: "flex", gap: 24, flex: 1 }}>
+          {[
+            { label: "首页", href: "/" },
+            { label: "IOCC中心", href: "#" },
+            { label: "智慧矿山设计", href: "#" },
+            { label: "智能生产协同", href: "#" },
+            { label: "智慧安全保障", href: "/mining", active: true },
+            { label: "综合环境监测", href: "#" },
+            { label: "智慧产运销", href: "#" },
+          ].map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              style={{
+                color: "white",
+                textDecoration: "none",
+                fontSize: 14,
+                padding: "8px 16px",
+                borderRadius: 4,
+                background: item.active ? "rgba(255,255,255,0.2)" : "transparent",
+                transition: "background 0.2s",
+              }}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+          <div
+            style={{
+              width: 32,
+              height: 32,
+              borderRadius: "50%",
+              background: "rgba(255,255,255,0.2)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "white",
+              fontSize: 14,
+              cursor: "pointer",
+            }}
+          >
+            🔔
+          </div>
+          <div
+            style={{
+              width: 32,
+              height: 32,
+              borderRadius: "50%",
+              background: "rgba(255,255,255,0.2)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "white",
+              fontSize: 14,
+              cursor: "pointer",
+            }}
+          >
+            👤
+          </div>
+          <span style={{ color: "white", fontSize: 14 }}>管理员</span>
+        </div>
+      </header>
+
+      {/* 主体内容 */}
+      <div style={{ flex: 1, display: "flex" }}>{children}</div>
+    </div>
+  );
+}
