@@ -206,6 +206,8 @@ function SectionUnderground() {
 }
 
 function SectionConcentrator() {
+  const [subTab, setSubTab] = React.useState<'ledger' | 'plan' | 'energy' | 'economic'>('ledger');
+
   return (
     <div>
       <h2>选矿生产管理</h2>
@@ -214,63 +216,251 @@ function SectionConcentrator() {
       </p>
       <KpiCards items={concentratorMock.kpis} />
 
-      <h3 style={{ marginTop: 16, marginBottom: 8 }}>工艺段运行概况</h3>
-      <BasicTable
-        headers={[
-          "工艺段",
-          "计划处理量(t)",
-          "实际处理量(t)",
-          "开机率(%)",
-          "电耗(kWh/t)",
-          "关键设备",
-        ]}
-        rows={concentratorMock.processSummary.map((s) => [
-          s.section,
-          s.plannedTonnage,
-          s.actualTonnage,
-          s.availability,
-          s.energyKwhPerTon,
-          s.keyEquipment,
-        ])}
-      />
+      {/* 子 Tab 导航 */}
+      <div style={{ display: 'flex', gap: 8, marginTop: 16, marginBottom: 16, borderBottom: '1px solid #eee' }}>
+        {[
+          { key: 'ledger', label: '生产台账' },
+          { key: 'plan', label: '计划编制' },
+          { key: 'energy', label: '能耗分析' },
+          { key: 'economic', label: '经济指标' },
+        ].map((t) => (
+          <div
+            key={t.key}
+            onClick={() => setSubTab(t.key as 'ledger' | 'plan' | 'energy' | 'economic')}
+            style={{
+              padding: '8px 16px',
+              cursor: 'pointer',
+              borderBottom: subTab === t.key ? '2px solid #1677ff' : '2px solid transparent',
+              color: subTab === t.key ? '#1677ff' : '#666',
+              fontWeight: subTab === t.key ? 600 : 400,
+              fontSize: 13,
+            }}
+          >
+            {t.label}
+          </div>
+        ))}
+      </div>
 
-      <h3 style={{ marginTop: 16, marginBottom: 8 }}>日计划执行台账</h3>
-      <BasicTable
-        headers={[
-          "日期",
-          "班次",
-          "矿石类型",
-          "计划处理量(t)",
-          "实际处理量(t)",
-          "入选品位(Fe, %)",
-          "精矿品位(Fe, %)",
-          "回收率(%)",
-        ]}
-        rows={concentratorMock.dailyPlanLedger.map((r) => [
-          r.date,
-          r.shift,
-          r.oreType,
-          r.plannedTonnage,
-          r.actualTonnage,
-          r.feedGradeFe,
-          r.concentrateGradeFe,
-          r.recovery,
-        ])}
-      />
+      {/* 子 Tab 内容 */}
+      {subTab === 'ledger' && (
+        <div>
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>工艺段运行概况</h3>
+          <BasicTable
+            headers={[
+              "工艺段",
+              "计划处理量(t)",
+              "实际处理量(t)",
+              "开机率(%)",
+              "电耗(kWh/t)",
+              "关键设备",
+            ]}
+            rows={concentratorMock.processSummary.map((s) => [
+              s.section,
+              s.plannedTonnage,
+              s.actualTonnage,
+              s.availability,
+              s.energyKwhPerTon,
+              s.keyEquipment,
+            ])}
+          />
 
-      <h3 style={{ marginTop: 16, marginBottom: 8 }}>精矿库存与发运</h3>
-      <BasicTable
-        headers={["产品", "库位", "当前库存(t)", "安全库存(t)", "在途(t)", "最近发运日期", "最近发运量(t)"]}
-        rows={concentratorMock.inventory.map((i) => [
-          i.product,
-          i.warehouse,
-          i.currentStock,
-          i.safetyStock,
-          i.onTheWay,
-          i.lastShipmentDate,
-          i.lastShipmentTonnage,
-        ])}
-      />
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>日计划执行台账</h3>
+          <BasicTable
+            headers={[
+              "日期",
+              "班次",
+              "矿石类型",
+              "计划处理量(t)",
+              "实际处理量(t)",
+              "入选品位(Fe, %)",
+              "精矿品位(Fe, %)",
+              "回收率(%)",
+            ]}
+            rows={concentratorMock.dailyPlanLedger.map((r) => [
+              r.date,
+              r.shift,
+              r.oreType,
+              r.plannedTonnage,
+              r.actualTonnage,
+              r.feedGradeFe,
+              r.concentrateGradeFe,
+              r.recovery,
+            ])}
+          />
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>精矿库存与发运</h3>
+          <BasicTable
+            headers={["产品", "库位", "当前库存(t)", "安全库存(t)", "在途(t)", "最近发运日期", "最近发运量(t)"]}
+            rows={concentratorMock.inventory.map((i) => [
+              i.product,
+              i.warehouse,
+              i.currentStock,
+              i.safetyStock,
+              i.onTheWay,
+              i.lastShipmentDate,
+              i.lastShipmentTonnage,
+            ])}
+          />
+        </div>
+      )}
+
+      {subTab === 'plan' && (
+        <div>
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>生产计划列表</h3>
+          <BasicTable
+            headers={[
+              "计划编号",
+              "计划类型",
+              "周期",
+              "目标处理量(t)",
+              "目标品位(%)",
+              "目标回收率(%)",
+              "状态",
+              "制定人",
+              "审批人",
+              "制定时间",
+            ]}
+            rows={concentratorMock.productionPlans.map((p) => [
+              p.id,
+              p.type,
+              p.period,
+              p.targetTonnage,
+              p.targetGrade,
+              p.targetRecovery,
+              p.status,
+              p.createdBy,
+              p.approvedBy || '-',
+              p.createdAt,
+            ])}
+          />
+          <div style={{ marginTop: 16, padding: 12, background: '#f0f9ff', borderRadius: 8, fontSize: 12 }}>
+            <strong>操作说明：</strong>新建计划需填写周期、目标处理量、品位、回收率等指标，提交后由上级审批。审批通过后进入执行状态。
+          </div>
+        </div>
+      )}
+
+      {subTab === 'energy' && (
+        <div>
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>能耗趋势（最近7天）</h3>
+          <BasicTable
+            headers={[
+              "日期",
+              "电耗(kWh)",
+              "水耗(m³)",
+              "单位电耗成本(元/t)",
+            ]}
+            rows={concentratorMock.energyTrend.map((e) => [
+              e.date,
+              e.powerKwh,
+              e.waterM3,
+              e.unitPowerCost,
+            ])}
+          />
+
+          {/* 简单的能耗趋势图（用 CSS 模拟柱状图） */}
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>电耗趋势图</h3>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'flex-end',
+              gap: 8,
+              height: 160,
+              padding: 16,
+              background: '#fff',
+              borderRadius: 8,
+              border: '1px solid #eee',
+            }}
+          >
+            {concentratorMock.energyTrend.map((e) => {
+              const maxPower = 170000;
+              const heightPercent = (e.powerKwh / maxPower) * 100;
+              return (
+                <div
+                  key={e.date}
+                  style={{
+                    flex: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'flex-end',
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '100%',
+                      height: `${heightPercent}%`,
+                      background: '#1677ff',
+                      borderRadius: '4px 4px 0 0',
+                    }}
+                  />
+                  <div style={{ marginTop: 8, fontSize: 10, color: '#666' }}>
+                    {e.date.slice(5)}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {subTab === 'economic' && (
+        <div>
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>本月经济指标</h3>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: 12,
+              marginBottom: 16,
+            }}
+          >
+            {[
+              { label: '总成本', value: concentratorMock.economicIndicators.currentMonth.totalCost, unit: '元' },
+              { label: '营收', value: concentratorMock.economicIndicators.currentMonth.revenue, unit: '元' },
+              { label: '利润', value: concentratorMock.economicIndicators.currentMonth.profit, unit: '元' },
+              { label: '利润率', value: concentratorMock.economicIndicators.currentMonth.profitMargin, unit: '%' },
+              { label: '单位成本', value: concentratorMock.economicIndicators.currentMonth.unitCost, unit: '元/t' },
+              { label: '单位营收', value: concentratorMock.economicIndicators.currentMonth.unitRevenue, unit: '元/t' },
+            ].map((item) => (
+              <div
+                key={item.label}
+                style={{
+                  padding: 12,
+                  background: '#fff',
+                  borderRadius: 8,
+                  border: '1px solid #eee',
+                }}
+              >
+                <div style={{ fontSize: 12, color: '#666' }}>{item.label}</div>
+                <div style={{ fontSize: 18, fontWeight: 600, marginTop: 4 }}>
+                  {item.value.toLocaleString()}
+                  <span style={{ fontSize: 12, marginLeft: 4 }}>{item.unit}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>成本结构分析</h3>
+          <BasicTable
+            headers={["成本类别", "金额(元)", "占比(%)"]}
+            rows={concentratorMock.economicIndicators.costBreakdown.map((c) => [
+              c.category,
+              c.amount.toLocaleString(),
+              c.percentage,
+            ])}
+          />
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>月度成本与利润率对比</h3>
+          <BasicTable
+            headers={["月份", "单位成本(元/t)", "利润率(%)"]}
+            rows={concentratorMock.economicIndicators.monthlyComparison.map((m) => [
+              m.month,
+              m.unitCost,
+              m.profitMargin,
+            ])}
+          />
+        </div>
+      )}
     </div>
   );
 }

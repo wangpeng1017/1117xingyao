@@ -256,6 +256,85 @@ export const concentratorMock = {
       lastShipmentTonnage: 800,
     },
   ],
+  // 计划编制
+  productionPlans: [
+    {
+      id: 'PLAN-2025-11',
+      type: '月度计划',
+      period: '2025年11月',
+      targetTonnage: 560000,
+      targetGrade: 65.0,
+      targetRecovery: 89.5,
+      status: '执行中',
+      createdBy: '张主任',
+      approvedBy: '李厂长',
+      createdAt: '2025-10-28',
+      approvedAt: '2025-10-30',
+    },
+    {
+      id: 'PLAN-2025-W46',
+      type: '周计划',
+      period: '2025年第46周',
+      targetTonnage: 130000,
+      targetGrade: 65.2,
+      targetRecovery: 89.8,
+      status: '已完成',
+      createdBy: '王工',
+      approvedBy: '张主任',
+      createdAt: '2025-11-08',
+      approvedAt: '2025-11-09',
+    },
+    {
+      id: 'PLAN-2025-W47',
+      type: '周计划',
+      period: '2025年第47周',
+      targetTonnage: 132000,
+      targetGrade: 65.0,
+      targetRecovery: 89.6,
+      status: '待审批',
+      createdBy: '王工',
+      approvedBy: null,
+      createdAt: '2025-11-15',
+      approvedAt: null,
+    },
+  ],
+  // 能耗趋势（最近7天）
+  energyTrend: [
+    { date: '2025-11-09', powerKwh: 162000, waterM3: 7050, unitPowerCost: 9.2 },
+    { date: '2025-11-10', powerKwh: 165000, waterM3: 7100, unitPowerCost: 9.3 },
+    { date: '2025-11-11', powerKwh: 163500, waterM3: 7020, unitPowerCost: 9.1 },
+    { date: '2025-11-12', powerKwh: 168000, waterM3: 7200, unitPowerCost: 9.5 },
+    { date: '2025-11-13', powerKwh: 164800, waterM3: 7080, unitPowerCost: 9.2 },
+    { date: '2025-11-14', powerKwh: 166200, waterM3: 7150, unitPowerCost: 9.3 },
+    { date: '2025-11-15', powerKwh: 165000, waterM3: 7100, unitPowerCost: 9.2 },
+  ],
+  // 经济指标分析
+  economicIndicators: {
+    currentMonth: {
+      totalCost: 2586000, // 元
+      revenue: 3920000, // 元
+      profit: 1334000, // 元
+      profitMargin: 34.0, // %
+      unitCost: 48.6, // 元/t
+      unitRevenue: 73.7, // 元/t
+    },
+    costBreakdown: [
+      { category: '电力成本', amount: 1068000, percentage: 41.3 },
+      { category: '人工成本', amount: 610000, percentage: 23.6 },
+      { category: '药剂材料', amount: 502000, percentage: 19.4 },
+      { category: '折旧摊销', amount: 212000, percentage: 8.2 },
+      { category: '其他', amount: 194000, percentage: 7.5 },
+    ],
+    monthlyComparison: [
+      { month: '2025-05', unitCost: 51.2, profitMargin: 30.5 },
+      { month: '2025-06', unitCost: 50.8, profitMargin: 31.2 },
+      { month: '2025-07', unitCost: 49.5, profitMargin: 32.8 },
+      { month: '2025-08', unitCost: 50.1, profitMargin: 32.1 },
+      { month: '2025-09', unitCost: 49.8, profitMargin: 32.6 },
+      { month: '2025-10', unitCost: 49.2, profitMargin: 33.5 },
+      { month: '2025-11', unitCost: 48.6, profitMargin: 34.0 },
+    ],
+  },
 };
 
 // 5. 质检化验管理（样品 & 金属平衡）
