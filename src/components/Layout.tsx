@@ -39,17 +39,16 @@ export default function Layout({ children }: LayoutProps) {
         
         <nav style={{ display: "flex", gap: 24, flex: 1 }}>
           {[
-            { label: "首页", href: "/" },
-            { label: "IOCC中心", href: "#" },
-            { label: "智慧矿山设计", href: "#" },
-            { label: "智能生产协同", href: "#" },
-            { label: "智慧安全保障", href: "/mining", active: true },
-            { label: "综合环境监测", href: "#" },
-            { label: "智慧产运销", href: "#" },
+            { label: "地质管理", href: "#", disabled: true },
+            { label: "采矿管理", href: "#", disabled: true },
+            { label: "选矿生产安环管理", href: "/mining", active: true },
           ].map((item) => (
             <Link
               key={item.label}
               href={item.href}
+              onClick={(e) => {
+                if (item.disabled) e.preventDefault();
+              }}
               style={{
                 color: "white",
                 textDecoration: "none",
@@ -57,6 +56,8 @@ export default function Layout({ children }: LayoutProps) {
                 padding: "8px 16px",
                 borderRadius: 4,
                 background: item.active ? "rgba(255,255,255,0.2)" : "transparent",
+                opacity: item.disabled ? 0.5 : 1,
+                cursor: item.disabled ? "not-allowed" : "pointer",
                 transition: "background 0.2s",
               }}
             >

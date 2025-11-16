@@ -30,6 +30,21 @@ export interface Kpi {
   vsYesterday?: number; // 环比 %
 }
 
+// 生产计划类型（选矿生产计划增删改查使用）
+export interface ProductionPlan {
+  id: string;
+  type: string;
+  period: string;
+  targetTonnage: number;
+  targetGrade: number;
+  targetRecovery: number;
+  status: string;
+  createdBy: string;
+  approvedBy: string | null;
+  createdAt: string;
+  approvedAt: string | null;
+}
+
 // 1. 地质信息管理（项目 & 钻探进度示例）
 export const geoInfoMock = {
   projects: [
@@ -297,7 +312,7 @@ export const concentratorMock = {
       createdAt: '2025-11-15',
       approvedAt: null,
     },
-  ],
+  ] as ProductionPlan[],
   // 能耗趋势（最近7天）
   energyTrend: [
     { date: '2025-11-09', powerKwh: 162000, waterM3: 7050, unitPowerCost: 9.2 },
