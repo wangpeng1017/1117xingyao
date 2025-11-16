@@ -353,6 +353,21 @@ export const concentratorMock = {
 };
 
 // 5. 质检化验管理（样品 & 金属平衡）
+export interface LabSample {
+  sampleId: string;
+  barcode: string;
+  materialType: string;
+  source: string;
+  project: string;
+  status: string;
+  receivedAt: string;
+  reportedAt: string | null;
+  fe: number | null;
+  sio2: number | null;
+  s: number | null;
+  lab: string;
+}
+
 export const labMock = {
   kpis: [
     { name: '当日受理样品数', value: 126, unit: '件', trend: 'up', vsYesterday: 5.0 },
@@ -387,7 +402,7 @@ export const labMock = {
       s: null,
       lab: '化验室二室',
     },
-  ],
+  ] as LabSample[],
   metalBalance: [
     {
       stage: '原矿',
