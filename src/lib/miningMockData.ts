@@ -2,6 +2,7 @@ export type NavKey =
   | 'geoInfo'
   | 'openPit'
   | 'underground'
+  | 'digitalTwin'
   | 'concentrator'
   | 'lab'
   | 'equipment'
@@ -13,6 +14,7 @@ export const navItems: { key: NavKey; label: string }[] = [
   { key: 'geoInfo', label: '地质信息管理' },
   { key: 'openPit', label: '露采生产管理' },
   { key: 'underground', label: '地采生产管理' },
+  { key: 'digitalTwin', label: '数字孪生' },
   { key: 'concentrator', label: '选矿生产管理' },
   { key: 'lab', label: '质检化验管理' },
   { key: 'equipment', label: '设备管理与预测性维护' },

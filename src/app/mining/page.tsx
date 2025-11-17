@@ -16,6 +16,7 @@ import {
   safetyMock,
   mobileMock,
 } from "@/lib/miningMockData";
+import { digitalTwinMock } from "@/lib/digitalTwinMockData";
 
 function KpiCards({
   items,
@@ -2954,6 +2955,265 @@ function SectionMobile() {
   );
 }
 
+function SectionDigitalTwin() {
+  const [selectedStage, setSelectedStage] = useState<string | null>(null);
+  const [selectedNode, setSelectedNode] = useState<string | null>(null);
+
+  const nodeToDisplay = selectedNode
+    ? digitalTwinMock.processNodes.find((n) => n.id === selectedNode)
+    : null;
+
+  return (
+    <div>
+      <h2>数字孪生 - 选矿工艺流程实时监控</h2>
+      <p style={{ fontSize: 12, color: "#666", marginBottom: 12 }}>
+        以工艺流程图为导航，动态、实时地展示设备状态、物料流向、关键工艺参数。
+      </p>
+
+      {/* 实时生产指标 */}
+      <div style={{ marginBottom: 16 }}>
+        <h3 style={{ marginBottom: 8 }}>实时生产指标</h3>
+        <KpiCards
+          items={digitalTwinMock.productionMetrics.metrics.map((m) => ({
+            name: m.name,
+            value: m.value,
+            unit: m.unit,
+          }))}
+        />
+        <div style={{ textAlign: 'right', fontSize: 11, color: '#999' }}>
+          最后更新：{digitalTwinMock.productionMetrics.updateTime}
+        </div>
+      </div>
+
+      {/* 工艺流程阶段导航 */}
+      <div style={{ marginBottom: 16 }}>
+        <h3 style={{ marginBottom: 8 }}>工艺流程阶段</h3>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          {digitalTwinMock.processStages.map((stage) => (
+            <div
+              key={stage.id}
+              onClick={() => setSelectedStage(stage.id)}
+              style={{
+                padding: '8px 16px',
+                borderRadius: 20,
+                border: `2px solid ${selectedStage === stage.id ? '#1677ff' : '#e8e8e8'}`,
+                background: selectedStage === stage.id ? '#e6f7ff' : '#fff',
+                cursor: 'pointer',
+                fontSize: 13,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+                transition: 'all 0.2s',
+              }}
+            >
+              <span>{stage.icon}</span>
+              <span>{stage.name}</span>
+              <div
+                style={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: '50%',
+                  background:
+                    stage.status === 'running'
+                      ? '#52c41a'
+                      : stage.status === 'warning'
+                      ? '#faad14'
+                      : '#ff4d4f',
+                }}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 设备列表 & 参数显示 */}
+      <div style={{ display: 'flex', gap: 16 }}>
+        {/* 左侧：设备列表 */}
+        <div style={{ width: 300, maxHeight: 600, overflow: 'auto' }}>
+          <h3 style={{ marginBottom: 8, position: 'sticky', top: 0, background: '#f5f7fa', paddingBottom: 8 }}>
+            设备列表
+          </h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {digitalTwinMock.processNodes.map((node) => (
+              <div
+                key={node.id}
+                onClick={() => setSelectedNode(node.id)}
+                style={{
+                  padding: 12,
+                  borderRadius: 8,
+                  border: `1px solid ${selectedNode === node.id ? '#1677ff' : '#e8e8e8'}`,
+                  background: selectedNode === node.id ? '#e6f7ff' : '#fff',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                  <div style={{ fontWeight: 600, fontSize: 13 }}>{node.name}</div>
+                  <div
+                    style={{
+                      width: 10,
+                      height: 10,
+                      borderRadius: '50%',
+                      background:
+                        node.status === 'running'
+                          ? '#52c41a'
+                          : node.status === 'warning'
+                          ? '#faad14'
+                          : node.status === 'stopped'
+                          ? '#999'
+                          : '#ff4d4f',
+                    }}
+                  />
+                </div>
+                <div style={{ fontSize: 11, color: '#999' }}>
+                  {node.type === 'equipment' && '⚙️ 设备'}
+                  {node.type === 'tank' && '🚧 罐体'}
+                  {node.type === 'pump' && '💧 泵'}
+                  {node.type === 'conveyor' && '➡️ 皮带'}
+                  {node.type === 'storage' && '📦 存储'}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 右侧：设备详情 */}
+        <div style={{ flex: 1 }}>
+          {nodeToDisplay ? (
+            <div>
+              <div
+                style={{
+                  background: '#fff',
+                  borderRadius: 8,
+                  padding: 16,
+                  border: '1px solid #e8e8e8',
+                  marginBottom: 16,
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                  <h3 style={{ margin: 0 }}>{nodeToDisplay.name}</h3>
+                  <div
+                    style={{
+                      padding: '4px 12px',
+                      borderRadius: 12,
+                      fontSize: 12,
+                      background:
+                        nodeToDisplay.status === 'running'
+                          ? '#f6ffed'
+                          : nodeToDisplay.status === 'warning'
+                          ? '#fffbe6'
+                          : nodeToDisplay.status === 'stopped'
+                          ? '#f5f5f5'
+                          : '#fff1f0',
+                      color:
+                        nodeToDisplay.status === 'running'
+                          ? '#52c41a'
+                          : nodeToDisplay.status === 'warning'
+                          ? '#faad14'
+                          : nodeToDisplay.status === 'stopped'
+                          ? '#999'
+                          : '#ff4d4f',
+                      border: `1px solid ${
+                        nodeToDisplay.status === 'running'
+                          ? '#b7eb8f'
+                          : nodeToDisplay.status === 'warning'
+                          ? '#ffe58f'
+                          : nodeToDisplay.status === 'stopped'
+                          ? '#d9d9d9'
+                          : '#ffccc7'
+                      }`,
+                    }}
+                  >
+                    {nodeToDisplay.status === 'running' && '✅ 运行中'}
+                    {nodeToDisplay.status === 'warning' && '⚠️ 警告'}
+                    {nodeToDisplay.status === 'stopped' && '⏸️ 停机'}
+                    {nodeToDisplay.status === 'alarm' && '🚨 报警'}
+                  </div>
+                </div>
+
+                <div style={{ fontSize: 12, color: '#666' }}>
+                  设备类型：
+                  {nodeToDisplay.type === 'equipment' && '设备'}
+                  {nodeToDisplay.type === 'tank' && '罐体'}
+                  {nodeToDisplay.type === 'pump' && '泵'}
+                  {nodeToDisplay.type === 'conveyor' && '皮带'}
+                  {nodeToDisplay.type === 'storage' && '存储'}
+                </div>
+              </div>
+
+              <div
+                style={{
+                  background: '#fff',
+                  borderRadius: 8,
+                  padding: 16,
+                  border: '1px solid #e8e8e8',
+                }}
+              >
+                <h3 style={{ marginTop: 0, marginBottom: 12 }}>实时参数</h3>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                    gap: 12,
+                  }}
+                >
+                  {nodeToDisplay.parameters.map((param, idx) => (
+                    <div
+                      key={idx}
+                      style={{
+                        padding: 12,
+                        borderRadius: 6,
+                        background:
+                          param.status === 'warning'
+                            ? '#fffbe6'
+                            : param.status === 'alarm'
+                            ? '#fff1f0'
+                            : '#f5f5f5',
+                        border: `1px solid ${
+                          param.status === 'warning'
+                            ? '#ffe58f'
+                            : param.status === 'alarm'
+                            ? '#ffccc7'
+                            : '#e8e8e8'
+                        }`,
+                      }}
+                    >
+                      <div style={{ fontSize: 11, color: '#999', marginBottom: 4 }}>
+                        {param.name}
+                      </div>
+                      <div style={{ fontSize: 18, fontWeight: 600, color: '#333' }}>
+                        {param.value}
+                        {param.unit && (
+                          <span style={{ fontSize: 12, fontWeight: 400, marginLeft: 4, color: '#666' }}>
+                            {param.unit}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div
+              style={{
+                background: '#fff',
+                borderRadius: 8,
+                padding: 60,
+                border: '1px solid #e8e8e8',
+                textAlign: 'center',
+                color: '#999',
+              }}
+            >
+              👈 请选择左侧设备查看详情
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function renderSection(key: NavKey) {
   switch (key) {
     case "geoInfo":
@@ -2962,6 +3222,8 @@ function renderSection(key: NavKey) {
       return <SectionOpenPit />;
     case "underground":
       return <SectionUnderground />;
+    case "digitalTwin":
+      return <SectionDigitalTwin />;
     case "concentrator":
       return <SectionConcentrator />;
     case "lab":
@@ -2983,6 +3245,7 @@ const navIcons: Record<NavKey, string> = {
   geoInfo: '🌍',
   openPit: '⛏️',
   underground: '🕳️',
+  digitalTwin: '🧰',
   concentrator: '🏭',
   lab: '🧪',
   equipment: '⚙️',
