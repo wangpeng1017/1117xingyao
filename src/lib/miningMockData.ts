@@ -1045,10 +1045,10 @@ export const equipmentMock = {
 // 7. 矿山决策分析（驾驶舱 KPI）
 export const analyticsMock = {
   kpis: [
-    { name: '集团日处理矿量', value: 52300, unit: 't', trend: 'up', vsYesterday: 3.1 },
-    { name: '综合精矿品位', value: 64.8, unit: '%', trend: 'flat', vsYesterday: 0.0 },
-    { name: '单位选矿成本', value: 48.6, unit: '元/t', trend: 'down', vsYesterday: -1.2 },
-    { name: '设备综合效率 OEE', value: 87.4, unit: '%', trend: 'up', vsYesterday: 0.6 },
+    { name: '设计年处理能力', value: 1500000, unit: 't/a' },
+    { name: '日处理矿石能力', value: 4000, unit: 't/d' },
+    { name: '金属铜资源量', value: 500000, unit: 't' },
+    { name: '设计服务年限', value: 10, unit: '年（2 年露天 + 8 年地下）' },
   ] as Kpi[],
   oreFlow: [
     {

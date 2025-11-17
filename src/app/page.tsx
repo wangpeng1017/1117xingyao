@@ -41,7 +41,7 @@ export default function Home() {
             opacity: 0.95,
           }}
         >
-          智慧矿山管理系统
+          安哥拉铜矿智慧采选一体化平台
         </h2>
         <p
           style={{
@@ -51,7 +51,7 @@ export default function Home() {
             lineHeight: 1.6,
           }}
         >
-          集成地质管理、采矿管理、选矿生产安环管理、矿山决策分析于一体的智能化平台
+          面向星耀矿业集团安哥拉新购铜矿，覆盖前 2 年露天、后 8 年地下的全生命周期，支撑年处理 150 万吨、日处理 4000 吨矿石的采选一体化、安环与集团决策管理。
         </p>
 
         <Link
@@ -90,16 +90,16 @@ export default function Home() {
           }}
         >
           <div>
-            <div style={{ fontSize: 32, fontWeight: 700 }}>9</div>
-            <div style={{ fontSize: 14, marginTop: 4 }}>业务模块</div>
+            <div style={{ fontSize: 32, fontWeight: 700 }}>150万t</div>
+            <div style={{ fontSize: 14, marginTop: 4 }}>设计年处理能力</div>
           </div>
           <div>
-            <div style={{ fontSize: 32, fontWeight: 700 }}>24/7</div>
-            <div style={{ fontSize: 14, marginTop: 4 }}>实时监控</div>
+            <div style={{ fontSize: 32, fontWeight: 700 }}>4000t</div>
+            <div style={{ fontSize: 14, marginTop: 4 }}>日处理矿石能力</div>
           </div>
           <div>
-            <div style={{ fontSize: 32, fontWeight: 700 }}>100%</div>
-            <div style={{ fontSize: 14, marginTop: 4 }}>数据可视化</div>
+            <div style={{ fontSize: 32, fontWeight: 700 }}>50万t</div>
+            <div style={{ fontSize: 14, marginTop: 4 }}>金属铜资源量</div>
           </div>
         </div>
       </div>

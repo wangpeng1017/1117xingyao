@@ -2112,7 +2112,7 @@ function SectionAnalytics() {
     <div>
       <h2>矿山决策分析</h2>
       <p style={{ fontSize: 12, color: "#666", marginBottom: 12 }}>
-        汇总资源、品位、成本和设备效率等指标，支撑集团级驾驶舱分析。
+        围绕星耀矿业集团安哥拉铜矿项目，汇总资源、产能、品位、成本和设备效率等指标，支撑集团级驾驶舱分析。
       </p>
       <KpiCards items={analyticsMock.kpis} />
 
@@ -2144,7 +2144,31 @@ function SectionAnalytics() {
 
       {tab === 'dashboard' && (
         <div>
-          <h3 style={{ marginTop: 8, marginBottom: 8 }}>矿石流向</h3>
+          <h3 style={{ marginTop: 8, marginBottom: 8 }}>项目基本信息</h3>
+          <BasicTable
+            headers={[
+              "矿山名称",
+              "矿种",
+              "设计服务年限",
+              "开采方式",
+              "设计年处理能力",
+              "日处理矿石能力",
+              "金属铜资源量",
+            ]}
+            rows={[
+              [
+                "星耀安哥拉铜矿",
+                "铜矿",
+                "10 年（2 年露天 + 8 年地下）",
+                "前期露天开采，后期地下开采",
+                "150 万吨/年",
+                "4000 吨/日",
+                "50 万吨",
+              ],
+            ]}
+          />
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>矿石流向</h3>
           <BasicTable
             headers={["来源", "矿量(t)", "平均品位(Fe, %)"]}
             rows={analyticsMock.oreFlow.map((o) => [o.source, o.tonnage, o.avgGradeFe])}
