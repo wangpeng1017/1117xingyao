@@ -1738,6 +1738,7 @@ function SectionConcentrator() {
 }
 
 function SectionLab() {
+  const [subTab, setSubTab] = React.useState<'samples' | 'metalBalance' | 'reagents' | 'dataImport'>('samples');
   const [samples, setSamples] = React.useState(labMock.samples);
 
   const handleAddSample = () => {
@@ -1828,36 +1829,63 @@ function SectionLab() {
     <div>
       <h2>质检化验管理</h2>
       <p style={{ fontSize: 12, color: "#666", marginBottom: 12 }}>
-        生成样品条码、管理送检与分析结果，并支持金属平衡表编制。
+        生成样品条码、管理送检与分析结果，并支持金属平衡表编制、试剂管理、数据自动导入。
       </p>
       <KpiCards items={labMock.kpis} />
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginTop: 16,
-          marginBottom: 8,
-        }}
-      >
-        <h3 style={{ margin: 0 }}>样品列表</h3>
-        <button
-          type="button"
-          onClick={handleAddSample}
-          style={{
-            padding: "6px 12px",
-            fontSize: 12,
-            borderRadius: 4,
-            border: "1px solid #1677ff",
-            background: "#1677ff",
-            color: "#fff",
-            cursor: "pointer",
-          }}
-        >
-          新增样品
-        </button>
+      {/* 子 Tab 导航 */}
+      <div style={{ display: 'flex', gap: 8, marginTop: 16, marginBottom: 16, borderBottom: '1px solid #eee' }}>
+        {[
+          { key: 'samples', label: '🧪 样品管理' },
+          { key: 'metalBalance', label: '⚖️ 金属平衡表' },
+          { key: 'reagents', label: '🧪 试剂管理' },
+          { key: 'dataImport', label: '🔄 数据导入' },
+        ].map((t) => (
+          <div
+            key={t.key}
+            onClick={() => setSubTab(t.key as typeof subTab)}
+            style={{
+              padding: '8px 16px',
+              cursor: 'pointer',
+              borderBottom: subTab === t.key ? '2px solid #1677ff' : '2px solid transparent',
+              color: subTab === t.key ? '#1677ff' : '#666',
+              fontWeight: subTab === t.key ? 600 : 400,
+              fontSize: 13,
+            }}
+          >
+            {t.label}
+          </div>
+        ))}
       </div>
+
+      {/* 子 Tab 内容 */}
+      {subTab === 'samples' && (
+        <div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: 8,
+            }}
+          >
+            <h3 style={{ margin: 0 }}>样品列表</h3>
+            <button
+              type="button"
+              onClick={handleAddSample}
+              style={{
+                padding: "6px 12px",
+                fontSize: 12,
+                borderRadius: 4,
+                border: "1px solid #1677ff",
+                background: "#1677ff",
+                color: "#fff",
+                cursor: "pointer",
+              }}
+            >
+              新增样品
+            </button>
+          </div>
 
       <div
         style={{
@@ -1955,6 +1983,290 @@ function SectionLab() {
           </tbody>
         </table>
       </div>
+        </div>
+      )}
+
+      {subTab === 'metalBalance' && (
+        <div>
+          <h3 style={{ marginBottom: 12 }}>金属平衡表编制</h3>
+          <p style={{ fontSize: 12, color: '#666', marginBottom: 16 }}>
+            根据原矿、精矿、尾矿的化验数据自动计算金属平衡，进行回收率核算。
+          </p>
+          <div style={{ background: '#fff', borderRadius: 8, padding: 16, border: '1px solid #e8e8e8' }}>
+            <div style={{ marginBottom: 16 }}>
+              <h4 style={{ marginTop: 0 }}>金属平衡数据（Fe）</h4>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
+                <thead style={{ background: '#fafafa' }}>
+                  <tr>
+                    <th style={{ textAlign: 'left', padding: '8px 12px', borderBottom: '1px solid #eee' }}>阶段</th>
+                    <th style={{ textAlign: 'right', padding: '8px 12px', borderBottom: '1px solid #eee' }}>处理量(t)</th>
+                    <th style={{ textAlign: 'right', padding: '8px 12px', borderBottom: '1px solid #eee' }}>品位(%)</th>
+                    <th style={{ textAlign: 'right', padding: '8px 12px', borderBottom: '1px solid #eee' }}>金属量(t)</th>
+                    <th style={{ textAlign: 'right', padding: '8px 12px', borderBottom: '1px solid #eee' }}>分配率(%)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {labMock.metalBalance.map((row, idx) => {
+                    const totalMetal = labMock.metalBalance[0].metalFe;
+                    const distribution = (row.metalFe / totalMetal * 100).toFixed(2);
+                    return (
+                      <tr key={idx}>
+                        <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0' }}>{row.stage}</td>
+                        <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0', textAlign: 'right' }}>{row.tonnage.toLocaleString()}</td>
+                        <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0', textAlign: 'right' }}>{row.gradeFe}</td>
+                        <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0', textAlign: 'right' }}>{row.metalFe.toLocaleString()}</td>
+                        <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0', textAlign: 'right' }}>{distribution}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <div style={{ marginTop: 16, padding: 12, background: '#f5f7fa', borderRadius: 6 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, fontSize: 12 }}>
+                <div>
+                  <div style={{ color: '#999', marginBottom: 4 }}>实际回收率</div>
+                  <div style={{ fontSize: 16, fontWeight: 600, color: '#52c41a' }}>
+                    {((labMock.metalBalance[1].metalFe / labMock.metalBalance[0].metalFe) * 100).toFixed(2)}%
+                  </div>
+                </div>
+                <div>
+                  <div style={{ color: '#999', marginBottom: 4 }}>尾矿损失率</div>
+                  <div style={{ fontSize: 16, fontWeight: 600, color: '#ff4d4f' }}>
+                    {((labMock.metalBalance[2].metalFe / labMock.metalBalance[0].metalFe) * 100).toFixed(2)}%
+                  </div>
+                </div>
+                <div>
+                  <div style={{ color: '#999', marginBottom: 4 }}>金属平衡差</div>
+                  <div style={{ fontSize: 16, fontWeight: 600, color: '#1677ff' }}>
+                    {(labMock.metalBalance[0].metalFe - labMock.metalBalance[1].metalFe - labMock.metalBalance[2].metalFe).toFixed(2)} t
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => alert('金属平衡表已导出为 Excel 文件')}
+              style={{
+                marginTop: 16,
+                padding: '6px 12px',
+                fontSize: 12,
+                borderRadius: 4,
+                border: '1px solid #1677ff',
+                background: '#1677ff',
+                color: '#fff',
+                cursor: 'pointer',
+              }}
+            >
+              📊 导出报表
+            </button>
+          </div>
+        </div>
+      )}
+
+      {subTab === 'reagents' && (
+        <div>
+          <h3 style={{ marginBottom: 12 }}>试剂管理</h3>
+          <p style={{ fontSize: 12, color: '#666', marginBottom: 16 }}>
+            试剂入库、领用、库存监控与预警，确保实验室试剂供应。
+          </p>
+          <div style={{ background: '#fff', borderRadius: 8, padding: 16, border: '1px solid #e8e8e8' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
+              <thead style={{ background: '#fafafa' }}>
+                <tr>
+                  <th style={{ textAlign: 'left', padding: '8px 12px', borderBottom: '1px solid #eee' }}>试剂名称</th>
+                  <th style={{ textAlign: 'right', padding: '8px 12px', borderBottom: '1px solid #eee' }}>当前库存</th>
+                  <th style={{ textAlign: 'right', padding: '8px 12px', borderBottom: '1px solid #eee' }}>安全库存</th>
+                  <th style={{ textAlign: 'left', padding: '8px 12px', borderBottom: '1px solid #eee' }}>单位</th>
+                  <th style={{ textAlign: 'left', padding: '8px 12px', borderBottom: '1px solid #eee' }}>状态</th>
+                  <th style={{ textAlign: 'left', padding: '8px 12px', borderBottom: '1px solid #eee' }}>最后领用</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { name: '盐酸', stock: 25.5, safety: 20, unit: 'L', status: '正常', lastUse: '2025-11-14' },
+                  { name: '氢氧化钠', stock: 8.2, safety: 10, unit: 'kg', status: '预警', lastUse: '2025-11-13' },
+                  { name: '硫酸', stock: 15.8, safety: 15, unit: 'L', status: '正常', lastUse: '2025-11-15' },
+                  { name: '硅酸钠', stock: 3.5, safety: 5, unit: 'kg', status: '预警', lastUse: '2025-11-12' },
+                  { name: '硫酸铜标液', stock: 450, safety: 500, unit: 'mL', status: '预警', lastUse: '2025-11-14' },
+                ].map((reagent, idx) => (
+                  <tr key={idx}>
+                    <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0' }}>{reagent.name}</td>
+                    <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0', textAlign: 'right' }}>{reagent.stock}</td>
+                    <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0', textAlign: 'right' }}>{reagent.safety}</td>
+                    <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0' }}>{reagent.unit}</td>
+                    <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0' }}>
+                      <span style={{
+                        padding: '2px 8px',
+                        borderRadius: 12,
+                        fontSize: 11,
+                        background: reagent.status === '正常' ? '#f6ffed' : '#fffbe6',
+                        color: reagent.status === '正常' ? '#52c41a' : '#faad14',
+                        border: `1px solid ${reagent.status === '正常' ? '#b7eb8f' : '#ffe58f'}`,
+                      }}>
+                        {reagent.status}
+                      </span>
+                    </td>
+                    <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0' }}>{reagent.lastUse}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div style={{ marginTop: 16, display: 'flex', gap: 8 }}>
+              <button
+                type="button"
+                onClick={() => alert('请扫描试剂条码进行入库登记')}
+                style={{
+                  padding: '6px 12px',
+                  fontSize: 12,
+                  borderRadius: 4,
+                  border: '1px solid #52c41a',
+                  background: '#52c41a',
+                  color: '#fff',
+                  cursor: 'pointer',
+                }}
+              >
+                📦 试剂入库
+              </button>
+              <button
+                type="button"
+                onClick={() => alert('请选择试剂并记录领用量')}
+                style={{
+                  padding: '6px 12px',
+                  fontSize: 12,
+                  borderRadius: 4,
+                  border: '1px solid #1677ff',
+                  background: '#fff',
+                  color: '#1677ff',
+                  cursor: 'pointer',
+                }}
+              >
+                📋 试剂领用
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {subTab === 'dataImport' && (
+        <div>
+          <h3 style={{ marginBottom: 12 }}>化验结果自动导入</h3>
+          <p style={{ fontSize: 12, color: '#666', marginBottom: 16 }}>
+            自动读取化验仪器数据或 Excel 批量导入，同步到生产管理系统。
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }}>
+            <div style={{ background: '#fff', borderRadius: 8, padding: 20, border: '1px solid #e8e8e8' }}>
+              <div style={{ fontSize: 32, marginBottom: 12 }}>📡</div>
+              <h4 style={{ marginTop: 0, marginBottom: 8 }}>仪器数据自动采集</h4>
+              <p style={{ fontSize: 12, color: '#666', marginBottom: 16 }}>
+                支持从LIMS系统、原子吸收光谱仪、ICP等设备自动采集化验结果。
+              </p>
+              <button
+                type="button"
+                onClick={() => alert('正在连接化验仪器...')}
+                style={{
+                  width: '100%',
+                  padding: '8px 12px',
+                  fontSize: 13,
+                  borderRadius: 4,
+                  border: '1px solid #1677ff',
+                  background: '#1677ff',
+                  color: '#fff',
+                  cursor: 'pointer',
+                }}
+              >
+                启动自动采集
+              </button>
+              <div style={{ marginTop: 12, fontSize: 11, color: '#52c41a' }}>
+                ✅ 仪器连接正常，最后同步：2025-11-15 14:35
+              </div>
+            </div>
+
+            <div style={{ background: '#fff', borderRadius: 8, padding: 20, border: '1px solid #e8e8e8' }}>
+              <div style={{ fontSize: 32, marginBottom: 12 }}>📄</div>
+              <h4 style={{ marginTop: 0, marginBottom: 8 }}>Excel 批量导入</h4>
+              <p style={{ fontSize: 12, color: '#666', marginBottom: 16 }}>
+                下载模板后填写化验数据，批量导入到系统中。
+              </p>
+              <div style={{ display: 'flex', gap: 8 }}>
+                <button
+                  type="button"
+                  onClick={() => alert('正在下载导入模板...')}
+                  style={{
+                    flex: 1,
+                    padding: '8px 12px',
+                    fontSize: 13,
+                    borderRadius: 4,
+                    border: '1px solid #52c41a',
+                    background: '#fff',
+                    color: '#52c41a',
+                    cursor: 'pointer',
+                  }}
+                >
+                  下载模板
+                </button>
+                <button
+                  type="button"
+                  onClick={() => alert('请选择 Excel 文件上传')}
+                  style={{
+                    flex: 1,
+                    padding: '8px 12px',
+                    fontSize: 13,
+                    borderRadius: 4,
+                    border: '1px solid #1677ff',
+                    background: '#1677ff',
+                    color: '#fff',
+                    cursor: 'pointer',
+                  }}
+                >
+                  上传文件
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div style={{ marginTop: 16, background: '#fff', borderRadius: 8, padding: 16, border: '1px solid #e8e8e8' }}>
+            <h4 style={{ marginTop: 0, marginBottom: 12 }}>最近导入记录</h4>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
+              <thead style={{ background: '#fafafa' }}>
+                <tr>
+                  <th style={{ textAlign: 'left', padding: '8px 12px', borderBottom: '1px solid #eee' }}>导入时间</th>
+                  <th style={{ textAlign: 'left', padding: '8px 12px', borderBottom: '1px solid #eee' }}>数据来源</th>
+                  <th style={{ textAlign: 'right', padding: '8px 12px', borderBottom: '1px solid #eee' }}>导入样品数</th>
+                  <th style={{ textAlign: 'left', padding: '8px 12px', borderBottom: '1px solid #eee' }}>操作人</th>
+                  <th style={{ textAlign: 'left', padding: '8px 12px', borderBottom: '1px solid #eee' }}>状态</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { time: '2025-11-15 14:35', source: 'LIMS系统', count: 8, operator: '张化验员', status: '成功' },
+                  { time: '2025-11-15 10:20', source: 'Excel导入', count: 12, operator: '李化验员', status: '成功' },
+                  { time: '2025-11-14 16:45', source: 'ICP仪器', count: 6, operator: '自动采集', status: '成功' },
+                ].map((record, idx) => (
+                  <tr key={idx}>
+                    <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0' }}>{record.time}</td>
+                    <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0' }}>{record.source}</td>
+                    <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0', textAlign: 'right' }}>{record.count}</td>
+                    <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0' }}>{record.operator}</td>
+                    <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0' }}>
+                      <span style={{
+                        padding: '2px 8px',
+                        borderRadius: 12,
+                        fontSize: 11,
+                        background: '#f6ffed',
+                        color: '#52c41a',
+                        border: '1px solid #b7eb8f',
+                      }}>
+                        {record.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
