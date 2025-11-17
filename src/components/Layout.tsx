@@ -22,6 +22,7 @@ export default function Layout({ children }: LayoutProps) {
           position: "sticky",
           top: 0,
           zIndex: 100,
+          gap: 24,
         }}
       >
         <Link
@@ -36,7 +37,7 @@ export default function Layout({ children }: LayoutProps) {
         >
           智慧矿山综合平台
         </Link>
-        
+
         <nav style={{ display: "flex", gap: 24, flex: 1 }}>
           {[
             { label: "地质管理", href: "#", disabled: true },
@@ -66,40 +67,71 @@ export default function Layout({ children }: LayoutProps) {
           ))}
         </nav>
 
-        <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
-          <div
+        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+          <Link
+            href="/iot"
             style={{
-              width: 32,
-              height: 32,
-              borderRadius: "50%",
+              padding: "6px 12px",
+              borderRadius: 16,
               background: "rgba(255,255,255,0.2)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
               color: "white",
-              fontSize: 14,
-              cursor: "pointer",
+              fontSize: 12,
+              textDecoration: "none",
+              whiteSpace: "nowrap",
             }}
           >
-            🔔
-          </div>
-          <div
+            物联网平台
+          </Link>
+          <Link
+            href="/data-integration"
             style={{
-              width: 32,
-              height: 32,
-              borderRadius: "50%",
+              padding: "6px 12px",
+              borderRadius: 16,
               background: "rgba(255,255,255,0.2)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
               color: "white",
-              fontSize: 14,
-              cursor: "pointer",
+              fontSize: 12,
+              textDecoration: "none",
+              whiteSpace: "nowrap",
             }}
           >
-            👤
+            数据集成平台
+          </Link>
+
+          <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+            <div
+              style={{
+                width: 32,
+                height: 32,
+                borderRadius: "50%",
+                background: "rgba(255,255,255,0.2)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "white",
+                fontSize: 14,
+                cursor: "pointer",
+              }}
+            >
+              🔔
+            </div>
+            <div
+              style={{
+                width: 32,
+                height: 32,
+                borderRadius: "50%",
+                background: "rgba(255,255,255,0.2)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "white",
+                fontSize: 14,
+                cursor: "pointer",
+              }}
+            >
+              👤
+            </div>
+            <span style={{ color: "white", fontSize: 14 }}>管理员</span>
           </div>
-          <span style={{ color: "white", fontSize: 14 }}>管理员</span>
         </div>
       </header>
 
