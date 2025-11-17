@@ -305,17 +305,215 @@ function SectionProtocolManagement() {
 }
 
 function SectionDeviceMonitoring() {
+  const [selectedDevice, setSelectedDevice] = useState<string | null>(
+    iotMock.deviceMonitoring[0]?.id || null
+  );
+
+  const currentPoints = selectedDevice
+    ? iotMock.monitoringPoints[selectedDevice] || []
+    : [];
+
+  const selectedDeviceInfo = iotMock.deviceMonitoring.find(
+    (d) => d.id === selectedDevice
+  );
+
   return (
     <div>
       <h2>设备状态监控</h2>
       <p style={{ fontSize: 12, color: "#666", marginBottom: 12 }}>
         实时采集关键设备电流、温度、压力、转速等运行参数，支持告警与趋势分析，体现"万物互联"能力（DCS/PLC + 在线分析仪接入）。
       </p>
-      <h3 style={{ marginTop: 16, marginBottom: 8 }}>监控一览</h3>
-      <BasicTable
-        headers={["类型", "设备/仪表", "所属系统", "关键参数", "状态"]}
-        rows={iotMock.deviceMonitoring.map((m) => [m.type, m.name, m.system, m.metrics, m.status])}
-      />
+
+      <div style={{ display: "flex", gap: 16, marginTop: 16 }}>
+        {/* 左侧设备列表 */}
+        <div
+          style={{
+            width: 280,
+            maxHeight: 600,
+            overflow: "auto",
+            display: "flex",
+            flexDirection: "column",
+            gap: 8,
+          }}
+        >
+          {iotMock.deviceMonitoring.map((device) => (
+            <div
+              key={device.id}
+              onClick={() => setSelectedDevice(device.id)}
+              style={{
+                background:
+                  selectedDevice === device.id ? "#e6f7ff" : "#fff",
+                border:
+                  selectedDevice === device.id
+                    ? "1px solid #1677ff"
+                    : "1px solid #eee",
+                borderRadius: 8,
+                padding: 12,
+                cursor: "pointer",
+                transition: "all 0.2s",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginBottom: 8,
+                }}
+              >
+                <div
+                  style={{
+                    width: 48,
+                    height: 48,
+                    background: "#f5f5f5",
+                    borderRadius: 4,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginRight: 12,
+                  }}
+                >
+                  <span style={{ fontSize: 20 }}>📡</span>
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 600,
+                      color: "#333",
+                      marginBottom: 4,
+                    }}
+                  >
+                    {device.name}
+                  </div>
+                  <div style={{ fontSize: 12, color: "#999" }}>
+                    {device.type}
+                  </div>
+                </div>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontSize: 12,
+                  color: "#666",
+                }}
+              >
+                <span>🕒 {device.lastUpdate}</span>
+                <span
+                  style={{
+                    color:
+                      device.status === "运行" || device.status === "正常"
+                        ? "#52c41a"
+                        : "#999",
+                    fontWeight: 600,
+                  }}
+                >
+                  {device.status}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* 右侧点位详情 */}
+        <div style={{ flex: 1 }}>
+          {selectedDeviceInfo && (
+            <>
+              <div
+                style={{
+                  background: "#fff",
+                  borderRadius: 8,
+                  padding: 16,
+                  border: "1px solid #eee",
+                  marginBottom: 16,
+                }}
+              >
+                <h3 style={{ margin: 0, marginBottom: 8 }}>
+                  {selectedDeviceInfo.name}
+                </h3>
+                <div style={{ fontSize: 12, color: "#666" }}>
+                  <div>📍 所属系统：{selectedDeviceInfo.system}</div>
+                  <div>📋 设备类型：{selectedDeviceInfo.type}</div>
+                  <div>🕒 最后更新：{selectedDeviceInfo.lastUpdate}</div>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  background: "#fff",
+                  borderRadius: 8,
+                  padding: 16,
+                  border: "1px solid #eee",
+                }}
+              >
+                <h3 style={{ margin: 0, marginBottom: 12 }}>实时监控点位</h3>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+                    gap: 12,
+                  }}
+                >
+                  {currentPoints.map((point, idx) => (
+                    <div
+                      key={idx}
+                      style={{
+                        background:
+                          point.status === "warning"
+                            ? "#fff7e6"
+                            : point.status === "alarm"
+                            ? "#fff1f0"
+                            : "#f5f5f5",
+                        borderLeft:
+                          point.status === "warning"
+                            ? "3px solid #faad14"
+                            : point.status === "alarm"
+                            ? "3px solid #ff4d4f"
+                            : "3px solid #52c41a",
+                        borderRadius: 4,
+                        padding: 12,
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontSize: 12,
+                          color: "#999",
+                          marginBottom: 4,
+                        }}
+                      >
+                        {point.name}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: 20,
+                          fontWeight: 600,
+                          color: "#333",
+                          marginBottom: 4,
+                        }}
+                      >
+                        {point.value}
+                        <span
+                          style={{
+                            fontSize: 12,
+                            fontWeight: 400,
+                            color: "#666",
+                            marginLeft: 4,
+                          }}
+                        >
+                          {point.unit}
+                        </span>
+                      </div>
+                      <div style={{ fontSize: 10, color: "#999" }}>
+                        {point.updateTime}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
