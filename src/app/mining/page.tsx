@@ -852,10 +852,11 @@ function SectionUnderground() {
 }
 
 function SectionConcentrator() {
-  const [subTab, setSubTab] = React.useState<'ledger' | 'plan' | 'energy' | 'economic'>('ledger');
+  const [subTab, setSubTab] = React.useState<'digitalTwin' | 'ledger' | 'plan' | 'energy' | 'economic'>('digitalTwin');
   const [plans, setPlans] = React.useState<ProductionPlan[]>(concentratorMock.productionPlans);
   const [formMode, setFormMode] = React.useState<'create' | 'edit' | null>(null);
   const [editingPlan, setEditingPlan] = React.useState<ProductionPlan | null>(null);
+  const [selectedEquipment, setSelectedEquipment] = React.useState<string | null>(null);
 
   const handleDeletePlan = (id: string) => {
     if (!window.confirm('确定要删除该计划吗？')) return;
@@ -892,6 +893,7 @@ function SectionConcentrator() {
       {/* 子 Tab 导航 */}
       <div style={{ display: 'flex', gap: 8, marginTop: 16, marginBottom: 16, borderBottom: '1px solid #eee' }}>
         {[
+          { key: 'digitalTwin', label: '🧰 数字孪生' },
           { key: 'ledger', label: '生产台账' },
           { key: 'plan', label: '计划编制' },
           { key: 'energy', label: '能耗分析' },
@@ -899,7 +901,7 @@ function SectionConcentrator() {
         ].map((t) => (
           <div
             key={t.key}
-            onClick={() => setSubTab(t.key as 'ledger' | 'plan' | 'energy' | 'economic')}
+            onClick={() => setSubTab(t.key as 'digitalTwin' | 'ledger' | 'plan' | 'energy' | 'economic')}
             style={{
               padding: '8px 16px',
               cursor: 'pointer',
@@ -915,6 +917,262 @@ function SectionConcentrator() {
       </div>
 
       {/* 子 Tab 内容 */}
+      {subTab === 'digitalTwin' && (
+        <div>
+          <div style={{ marginBottom: 16 }}>
+            <h3 style={{ marginBottom: 8 }}>实时生产指标</h3>
+            <KpiCards
+              items={digitalTwinMock.productionMetrics.metrics.map((m) => ({
+                name: m.name,
+                value: m.value,
+                unit: m.unit,
+              }))}
+            />
+            <div style={{ textAlign: 'right', fontSize: 11, color: '#999', marginTop: 4 }}>
+              最后更新：{digitalTwinMock.productionMetrics.updateTime}
+            </div>
+          </div>
+
+          <div style={{ background: '#fff', borderRadius: 8, padding: 16, border: '1px solid #e8e8e8' }}>
+            <h3 style={{ marginTop: 0, marginBottom: 12 }}>选矿工艺流程图</h3>
+            <p style={{ fontSize: 12, color: '#666', marginBottom: 16 }}>
+              点击设备查看实时参数（给矿量、矿浆浓度、品位等）
+            </p>
+            
+            {/* SVG 工艺流程图 */}
+            <div style={{ position: 'relative', width: '100%', height: 600, overflow: 'auto', background: '#f8f9fa', borderRadius: 8 }}>
+              <svg width="1400" height="800" viewBox="0 0 1400 800" style={{ display: 'block' }}>
+                {/* 定义箭头 */}
+                <defs>
+                  <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <polygon points="0 0, 10 3, 0 6" fill="#1677ff" />
+                  </marker>
+                </defs>
+
+                {/* 1. 中间矿堆 */}
+                <g onClick={() => setSelectedEquipment('storage-intermediate')} style={{ cursor: 'pointer' }}>
+                  <rect x="50" y="150" width="100" height="80" rx="8" fill={selectedEquipment === 'storage-intermediate' ? '#e6f7ff' : '#fff'} stroke="#1677ff" strokeWidth="2" />
+                  <text x="100" y="185" textAnchor="middle" fontSize="13" fontWeight="600" fill="#333">中间矿堆</text>
+                  <text x="100" y="205" textAnchor="middle" fontSize="11" fill="#666">4485 t</text>
+                  <circle cx="145" cy="155" r="4" fill={digitalTwinMock.processNodes.find(n => n.id === 'storage-intermediate')?.status === 'running' ? '#52c41a' : '#999'} />
+                </g>
+                {/* 箭头：矿堆 -> 皮带 */}
+                <line x1="150" y1="190" x2="200" y2="190" stroke="#1677ff" strokeWidth="2" markerEnd="url(#arrowhead)" />
+                <text x="175" y="185" textAnchor="middle" fontSize="10" fill="#1677ff">100 t/h</text>
+
+                {/* 2. 皮带输送 */}
+                <g onClick={() => setSelectedEquipment('conveyor-01')} style={{ cursor: 'pointer' }}>
+                  <rect x="200" y="170" width="80" height="40" rx="4" fill={selectedEquipment === 'conveyor-01' ? '#e6f7ff' : '#fff'} stroke="#666" strokeWidth="2" />
+                  <text x="240" y="195" textAnchor="middle" fontSize="12" fill="#333">皮带机</text>
+                  <circle cx="275" cy="175" r="3" fill="#52c41a" />
+                </g>
+                <line x1="280" y1="190" x2="330" y2="190" stroke="#1677ff" strokeWidth="2" markerEnd="url(#arrowhead)" />
+
+                {/* 3. 半自磨机 SAG */}
+                <g onClick={() => setSelectedEquipment('mill-sag')} style={{ cursor: 'pointer' }}>
+                  <circle cx="380" cy="190" r="50" fill={selectedEquipment === 'mill-sag' ? '#e6f7ff' : '#fff'} stroke="#1677ff" strokeWidth="3" />
+                  <text x="380" y="185" textAnchor="middle" fontSize="13" fontWeight="600" fill="#333">SAG磨</text>
+                  <text x="380" y="202" textAnchor="middle" fontSize="10" fill="#666">100 t/h</text>
+                  <circle cx="410" cy="160" r="4" fill="#52c41a" />
+                </g>
+                <line x1="430" y1="190" x2="480" y2="190" stroke="#1677ff" strokeWidth="2" markerEnd="url(#arrowhead)" />
+
+                {/* 4. 旋流器 */}
+                <g onClick={() => setSelectedEquipment('hydrocyclone-01')} style={{ cursor: 'pointer' }}>
+                  <polygon points="530,150 560,200 500,200" fill={selectedEquipment === 'hydrocyclone-01' ? '#e6f7ff' : '#fff'} stroke="#1677ff" strokeWidth="2" />
+                  <text x="530" y="185" textAnchor="middle" fontSize="11" fontWeight="600" fill="#333">旋流器</text>
+                  <circle cx="555" cy="155" r="3" fill="#52c41a" />
+                </g>
+                {/* 溢流 -> 浮选 */}
+                <line x1="530" y1="150" x2="530" y2="100" stroke="#1677ff" strokeWidth="2" />
+                <line x1="530" y1="100" x2="630" y2="100" stroke="#1677ff" strokeWidth="2" markerEnd="url(#arrowhead)" />
+                <text x="580" y="95" textAnchor="middle" fontSize="10" fill="#1677ff">75 t/h</text>
+                {/* 沉砂 -> 球磨 */}
+                <line x1="500" y1="200" x2="450" y2="240" stroke="#ff9800" strokeWidth="2" markerEnd="url(#arrowhead)" />
+                <text x="465" y="225" textAnchor="middle" fontSize="10" fill="#ff9800">50 t/h</text>
+
+                {/* 5. 球磨机 */}
+                <g onClick={() => setSelectedEquipment('mill-ball')} style={{ cursor: 'pointer' }}>
+                  <circle cx="400" cy="280" r="45" fill={selectedEquipment === 'mill-ball' ? '#e6f7ff' : '#fff'} stroke="#1677ff" strokeWidth="3" />
+                  <text x="400" y="280" textAnchor="middle" fontSize="13" fontWeight="600" fill="#333">球磨机</text>
+                  <text x="400" y="295" textAnchor="middle" fontSize="10" fill="#666">125 t/h</text>
+                  <circle cx="430" cy="255" r="4" fill="#52c41a" />
+                </g>
+                {/* 球磨 -> 旋流器 循环 */}
+                <line x1="445" y1="280" x2="500" y2="210" stroke="#ff9800" strokeWidth="2" markerEnd="url(#arrowhead)" strokeDasharray="4,2" />
+
+                {/* 6. 粗选浮选机 */}
+                <g onClick={() => setSelectedEquipment('flotation-rougher')} style={{ cursor: 'pointer' }}>
+                  <rect x="630" y="70" width="100" height="60" rx="8" fill={selectedEquipment === 'flotation-rougher' ? '#e6f7ff' : '#fff'} stroke="#00bcd4" strokeWidth="2" />
+                  <text x="680" y="95" textAnchor="middle" fontSize="12" fontWeight="600" fill="#333">粗选</text>
+                  <text x="680" y="110" textAnchor="middle" fontSize="10" fill="#666">125 t/h</text>
+                  <text x="680" y="123" textAnchor="middle" fontSize="9" fill="#666">pH 8.2</text>
+                  <circle cx="725" cy="75" r="3" fill="#52c41a" />
+                </g>
+                {/* 粗选 -> 精选 */}
+                <line x1="730" y1="100" x2="800" y2="100" stroke="#00bcd4" strokeWidth="2" markerEnd="url(#arrowhead)" />
+                <text x="765" y="95" textAnchor="middle" fontSize="10" fill="#00bcd4">35 t/h</text>
+                {/* 粗选 -> 扫选 */}
+                <line x1="680" y1="130" x2="680" y2="180" stroke="#999" strokeWidth="2" markerEnd="url(#arrowhead)" />
+                <text x="690" y="160" textAnchor="middle" fontSize="10" fill="#999">90 t/h</text>
+
+                {/* 7. 精选I */}
+                <g onClick={() => setSelectedEquipment('flotation-cleaner-1')} style={{ cursor: 'pointer' }}>
+                  <rect x="800" y="75" width="90" height="50" rx="6" fill={selectedEquipment === 'flotation-cleaner-1' ? '#e6f7ff' : '#fff'} stroke="#4caf50" strokeWidth="2" />
+                  <text x="845" y="98" textAnchor="middle" fontSize="11" fontWeight="600" fill="#333">精选 I</text>
+                  <text x="845" y="113" textAnchor="middle" fontSize="9" fill="#666">18.5% Cu</text>
+                  <circle cx="885" cy="80" r="3" fill="#52c41a" />
+                </g>
+                <line x1="890" y1="100" x2="950" y2="100" stroke="#4caf50" strokeWidth="2" markerEnd="url(#arrowhead)" />
+
+                {/* 8. 精选II */}
+                <g onClick={() => setSelectedEquipment('flotation-cleaner-2')} style={{ cursor: 'pointer' }}>
+                  <rect x="950" y="75" width="90" height="50" rx="6" fill={selectedEquipment === 'flotation-cleaner-2' ? '#e6f7ff' : '#fff'} stroke="#4caf50" strokeWidth="2" />
+                  <text x="995" y="98" textAnchor="middle" fontSize="11" fontWeight="600" fill="#333">精选 II</text>
+                  <text x="995" y="113" textAnchor="middle" fontSize="9" fill="#666">24.5% Cu</text>
+                  <circle cx="1035" cy="80" r="3" fill="#52c41a" />
+                </g>
+                <line x1="1040" y1="100" x2="1100" y2="100" stroke="#4caf50" strokeWidth="2" markerEnd="url(#arrowhead)" />
+                <text x="1070" y="95" textAnchor="middle" fontSize="10" fill="#4caf50">7.5 t/h</text>
+
+                {/* 9. 精矿浓密机 */}
+                <g onClick={() => setSelectedEquipment('thickener-concentrate')} style={{ cursor: 'pointer' }}>
+                  <circle cx="1150" cy="100" r="40" fill={selectedEquipment === 'thickener-concentrate' ? '#e6f7ff' : '#fff'} stroke="#4caf50" strokeWidth="2" />
+                  <text x="1150" y="98" textAnchor="middle" fontSize="11" fontWeight="600" fill="#333">精矿</text>
+                  <text x="1150" y="110" textAnchor="middle" fontSize="11" fontWeight="600" fill="#333">浓密机</text>
+                  <circle cx="1180" cy="75" r="3" fill="#52c41a" />
+                </g>
+                <line x1="1190" y1="100" x2="1250" y2="100" stroke="#4caf50" strokeWidth="2" markerEnd="url(#arrowhead)" />
+
+                {/* 10. 精矿压滤机 */}
+                <g onClick={() => setSelectedEquipment('filter-press')} style={{ cursor: 'pointer' }}>
+                  <rect x="1250" y="70" width="90" height="60" rx="6" fill={selectedEquipment === 'filter-press' ? '#e6f7ff' : '#fff'} stroke="#4caf50" strokeWidth="2" />
+                  <text x="1295" y="95" textAnchor="middle" fontSize="11" fontWeight="600" fill="#333">压滤机</text>
+                  <text x="1295" y="110" textAnchor="middle" fontSize="9" fill="#666">7.5 t/h</text>
+                  <text x="1295" y="122" textAnchor="middle" fontSize="9" fill="#4caf50">精矿产品</text>
+                  <circle cx="1335" cy="75" r="3" fill="#52c41a" />
+                </g>
+
+                {/* 11. 扫选 I */}
+                <g onClick={() => setSelectedEquipment('flotation-scavenger-1')} style={{ cursor: 'pointer' }}>
+                  <rect x="630" y="200" width="100" height="50" rx="6" fill={selectedEquipment === 'flotation-scavenger-1' ? '#e6f7ff' : '#fff'} stroke="#999" strokeWidth="2" />
+                  <text x="680" y="223" textAnchor="middle" fontSize="11" fontWeight="600" fill="#333">扫选 I</text>
+                  <text x="680" y="238" textAnchor="middle" fontSize="9" fill="#666">90 t/h</text>
+                  <circle cx="725" cy="205" r="3" fill="#52c41a" />
+                </g>
+                <line x1="680" y1="250" x2="680" y2="300" stroke="#999" strokeWidth="2" markerEnd="url(#arrowhead)" />
+
+                {/* 12. 扫选 II */}
+                <g onClick={() => setSelectedEquipment('flotation-scavenger-2')} style={{ cursor: 'pointer' }}>
+                  <rect x="630" y="320" width="100" height="50" rx="6" fill={selectedEquipment === 'flotation-scavenger-2' ? '#e6f7ff' : '#fff'} stroke="#999" strokeWidth="2" />
+                  <text x="680" y="343" textAnchor="middle" fontSize="11" fontWeight="600" fill="#333">扫选 II</text>
+                  <text x="680" y="358" textAnchor="middle" fontSize="9" fill="#666">68 t/h</text>
+                  <circle cx="725" cy="325" r="3" fill="#52c41a" />
+                </g>
+                <line x1="680" y1="370" x2="680" y2="420" stroke="#999" strokeWidth="2" markerEnd="url(#arrowhead)" />
+
+                {/* 13. 尾矿浓密机 */}
+                <g onClick={() => setSelectedEquipment('thickener-tailings')} style={{ cursor: 'pointer' }}>
+                  <circle cx="680" cy="470" r="40" fill={selectedEquipment === 'thickener-tailings' ? '#e6f7ff' : '#fff'} stroke="#999" strokeWidth="2" />
+                  <text x="680" y="468" textAnchor="middle" fontSize="11" fontWeight="600" fill="#333">尾矿</text>
+                  <text x="680" y="480" textAnchor="middle" fontSize="11" fontWeight="600" fill="#333">浓密机</text>
+                  <circle cx="710" cy="445" r="3" fill="#52c41a" />
+                </g>
+                <line x1="720" y1="470" x2="800" y2="470" stroke="#999" strokeWidth="2" markerEnd="url(#arrowhead)" />
+                <text x="760" y="465" textAnchor="middle" fontSize="10" fill="#999">92.5 t/h</text>
+
+                {/* 14. 尾矿泵站 */}
+                <g onClick={() => setSelectedEquipment('pump-tailings')} style={{ cursor: 'pointer' }}>
+                  <rect x="800" y="445" width="80" height="50" rx="6" fill={selectedEquipment === 'pump-tailings' ? '#e6f7ff' : '#fff'} stroke="#999" strokeWidth="2" />
+                  <text x="840" y="468" textAnchor="middle" fontSize="11" fontWeight="600" fill="#333">尾矿泵</text>
+                  <text x="840" y="483" textAnchor="middle" fontSize="9" fill="#666">325 m³/h</text>
+                  <circle cx="875" cy="450" r="3" fill="#52c41a" />
+                </g>
+                <line x1="880" y1="470" x2="950" y2="470" stroke="#999" strokeWidth="2" markerEnd="url(#arrowhead)" />
+                <text x="915" y="465" textAnchor="middle" fontSize="10" fill="#999">尾矿库</text>
+
+                {/* 15. 回水系统 */}
+                <g onClick={() => setSelectedEquipment('water-recycle')} style={{ cursor: 'pointer' }}>
+                  <rect x="600" y="550" width="100" height="50" rx="6" fill={selectedEquipment === 'water-recycle' ? '#e6f7ff' : '#2196f3'} stroke="#2196f3" strokeWidth="2" />
+                  <text x="650" y="573" textAnchor="middle" fontSize="11" fontWeight="600" fill="#fff">回水系统</text>
+                  <text x="650" y="588" textAnchor="middle" fontSize="9" fill="#fff">195 m³/h</text>
+                  <circle cx="695" cy="555" r="3" fill="#52c41a" />
+                </g>
+                {/* 浓密机溢流 -> 回水 */}
+                <line x1="680" y1="510" x2="650" y2="550" stroke="#2196f3" strokeWidth="2" markerEnd="url(#arrowhead)" strokeDasharray="3,3" />
+
+                {/* 16. 新水供给 */}
+                <g onClick={() => setSelectedEquipment('water-fresh')} style={{ cursor: 'pointer' }}>
+                  <rect x="250" y="350" width="90" height="50" rx="6" fill={selectedEquipment === 'water-fresh' ? '#e6f7ff' : '#2196f3'} stroke="#2196f3" strokeWidth="2" />
+                  <text x="295" y="373" textAnchor="middle" fontSize="11" fontWeight="600" fill="#fff">新水</text>
+                  <text x="295" y="388" textAnchor="middle" fontSize="9" fill="#fff">81 m³/h</text>
+                  <circle cx="335" cy="355" r="3" fill="#52c41a" />
+                </g>
+                {/* 新水 -> SAG磨 */}
+                <line x1="340" y1="375" x2="360" y2="230" stroke="#2196f3" strokeWidth="1.5" markerEnd="url(#arrowhead)" strokeDasharray="3,3" />
+
+                {/* 图例 */}
+                <g transform="translate(50, 650)">
+                  <text x="0" y="0" fontSize="12" fontWeight="600" fill="#333">图例：</text>
+                  <circle cx="50" cy="-4" r="4" fill="#52c41a" />
+                  <text x="60" y="0" fontSize="11" fill="#666">运行中</text>
+                  <circle cx="120" cy="-4" r="4" fill="#faad14" />
+                  <text x="130" y="0" fontSize="11" fill="#666">警告</text>
+                  <circle cx="180" cy="-4" r="4" fill="#ff4d4f" />
+                  <text x="190" y="0" fontSize="11" fill="#666">报警</text>
+                  
+                  <rect x="260" y="-10" width="15" height="15" fill="#4caf50" />
+                  <text x="280" y="0" fontSize="11" fill="#666">精矿流程</text>
+                  <rect x="350" y="-10" width="15" height="15" fill="#999" />
+                  <text x="370" y="0" fontSize="11" fill="#666">尾矿流程</text>
+                  <rect x="440" y="-10" width="15" height="15" fill="#2196f3" />
+                  <text x="460" y="0" fontSize="11" fill="#666">水系统</text>
+                </g>
+              </svg>
+            </div>
+
+            {/* 选中设备参数显示 */}
+            {selectedEquipment && (() => {
+              const equipment = digitalTwinMock.processNodes.find(n => n.id === selectedEquipment);
+              if (!equipment) return null;
+              return (
+                <div style={{ marginTop: 16, padding: 16, background: '#f8f9fa', borderRadius: 8, border: '1px solid #e8e8e8' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                    <h4 style={{ margin: 0 }}>{equipment.name} - 实时参数</h4>
+                    <span style={{ 
+                      padding: '4px 12px', 
+                      borderRadius: 12, 
+                      fontSize: 12,
+                      background: equipment.status === 'running' ? '#f6ffed' : equipment.status === 'warning' ? '#fffbe6' : '#fff1f0',
+                      color: equipment.status === 'running' ? '#52c41a' : equipment.status === 'warning' ? '#faad14' : '#ff4d4f',
+                      border: `1px solid ${equipment.status === 'running' ? '#b7eb8f' : equipment.status === 'warning' ? '#ffe58f' : '#ffccc7'}`
+                    }}>
+                      {equipment.status === 'running' ? '✅ 运行中' : equipment.status === 'warning' ? '⚠️ 警告' : '🚨 报警'}
+                    </span>
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 12 }}>
+                    {equipment.parameters.map((param, idx) => (
+                      <div key={idx} style={{ 
+                        padding: 12, 
+                        background: '#fff', 
+                        borderRadius: 6,
+                        border: `1px solid ${param.status === 'normal' ? '#e8e8e8' : param.status === 'warning' ? '#ffe58f' : '#ffccc7'}`
+                      }}>
+                        <div style={{ fontSize: 11, color: '#999', marginBottom: 4 }}>{param.name}</div>
+                        <div style={{ fontSize: 18, fontWeight: 600, color: '#333' }}>
+                          {param.value}
+                          {param.unit && <span style={{ fontSize: 12, marginLeft: 4, color: '#666' }}>{param.unit}</span>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
+          </div>
+        </div>
+      )}
+
       {subTab === 'ledger' && (
         <div>
           <h3 style={{ marginTop: 16, marginBottom: 8 }}>工艺段运行概况</h3>
