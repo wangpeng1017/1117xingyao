@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import {
   iotNavItems,
   iotMock,
@@ -9,6 +10,7 @@ import {
   type IoTDevice,
   type IoTProtocol,
   type DataSubscription,
+  type MonitoringPoint,
 } from "@/lib/iotMockData";
 
 function BasicTable({
@@ -308,11 +310,55 @@ function SectionDeviceMonitoring() {
   const [selectedDevice, setSelectedDevice] = useState<string | null>(
     iotMock.deviceMonitoring[0]?.id || null
   );
+  const [pointsData, setPointsData] = useState<Record<string, MonitoringPoint[]>>(
+    iotMock.monitoringPoints
+  );
 
-  const currentPoints = selectedDevice
-    ? iotMock.monitoringPoints[selectedDevice] || []
-    : [];
+  // 实时更新数据（每3秒更新一次）
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPointsData((prevData) => {
+        const newData = { ...prevData };
+        Object.keys(newData).forEach((deviceId) => {
+          newData[deviceId] = newData[deviceId].map((point) => {
+            if (!point.history) return point;
+            
+            // 移除第一个数据点，添加新的数据点
+            const newHistory = [...point.history.slice(1)];
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('zh-CN', { hour12: false });
+            
+            // 生成新的数据点（在原值基础上波动）
+            const baseValue = typeof point.value === 'number' ? point.value : 0;
+            const variance = baseValue * 0.05; // 5%波动
+            const newValue = Number((baseValue + (Math.random() - 0.5) * variance).toFixed(2));
+            
+            newHistory.push({ time: timeStr, value: newValue });
+            
+            return {
+              ...point,
+              value: newValue,
+              updateTime: now.toLocaleString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+              }).replace(/\//g, '-'),
+              history: newHistory,
+            };
+          });
+        });
+        return newData;
+      });
+    }, 3000);
 
+    return () => clearInterval(interval);
+  }, []);
+
+  const currentPoints = selectedDevice ? pointsData[selectedDevice] || [] : [];
   const selectedDeviceInfo = iotMock.deviceMonitoring.find(
     (d) => d.id === selectedDevice
   );
@@ -450,8 +496,8 @@ function SectionDeviceMonitoring() {
                 <div
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-                    gap: 12,
+                    gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
+                    gap: 16,
                   }}
                 >
                   {currentPoints.map((point, idx) => (
@@ -463,47 +509,85 @@ function SectionDeviceMonitoring() {
                             ? "#fff7e6"
                             : point.status === "alarm"
                             ? "#fff1f0"
-                            : "#f5f5f5",
-                        borderLeft:
+                            : "#fff",
+                        border:
                           point.status === "warning"
-                            ? "3px solid #faad14"
+                            ? "1px solid #faad14"
                             : point.status === "alarm"
-                            ? "3px solid #ff4d4f"
-                            : "3px solid #52c41a",
-                        borderRadius: 4,
+                            ? "1px solid #ff4d4f"
+                            : "1px solid #eee",
+                        borderRadius: 8,
                         padding: 12,
                       }}
                     >
-                      <div
-                        style={{
-                          fontSize: 12,
-                          color: "#999",
-                          marginBottom: 4,
-                        }}
-                      >
-                        {point.name}
-                      </div>
-                      <div
-                        style={{
-                          fontSize: 20,
-                          fontWeight: 600,
-                          color: "#333",
-                          marginBottom: 4,
-                        }}
-                      >
-                        {point.value}
-                        <span
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+                        <div>
+                          <div style={{ fontSize: 13, color: "#666", marginBottom: 2 }}>
+                            {point.name}
+                          </div>
+                          <div style={{ fontSize: 20, fontWeight: 600, color: "#333" }}>
+                            {point.value}
+                            <span style={{ fontSize: 13, fontWeight: 400, color: "#666", marginLeft: 4 }}>
+                              {point.unit}
+                            </span>
+                          </div>
+                        </div>
+                        <div
                           style={{
-                            fontSize: 12,
-                            fontWeight: 400,
-                            color: "#666",
-                            marginLeft: 4,
+                            width: 8,
+                            height: 8,
+                            borderRadius: "50%",
+                            background:
+                              point.status === "warning"
+                                ? "#faad14"
+                                : point.status === "alarm"
+                                ? "#ff4d4f"
+                                : "#52c41a",
                           }}
-                        >
-                          {point.unit}
-                        </span>
+                        />
                       </div>
-                      <div style={{ fontSize: 10, color: "#999" }}>
+                      
+                      {point.history && point.history.length > 0 ? (
+                        <ResponsiveContainer width="100%" height={120}>
+                          <LineChart data={point.history}>
+                            <XAxis 
+                              dataKey="time" 
+                              tick={{ fontSize: 10 }} 
+                              stroke="#ccc"
+                              interval="preserveStartEnd"
+                            />
+                            <YAxis 
+                              tick={{ fontSize: 10 }} 
+                              stroke="#ccc"
+                              domain={['auto', 'auto']}
+                              width={40}
+                            />
+                            <Tooltip 
+                              contentStyle={{ fontSize: 12, background: '#fff', border: '1px solid #ddd', borderRadius: 4 }}
+                            />
+                            <Line 
+                              type="monotone" 
+                              dataKey="value" 
+                              stroke={
+                                point.status === "warning"
+                                  ? "#faad14"
+                                  : point.status === "alarm"
+                                  ? "#ff4d4f"
+                                  : "#1677ff"
+                              }
+                              strokeWidth={2}
+                              dot={false}
+                              animationDuration={300}
+                            />
+                          </LineChart>
+                        </ResponsiveContainer>
+                      ) : (
+                        <div style={{ height: 120, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999', fontSize: 12 }}>
+                          无历史数据
+                        </div>
+                      )}
+                      
+                      <div style={{ fontSize: 10, color: "#999", marginTop: 4, textAlign: 'right' }}>
                         {point.updateTime}
                       </div>
                     </div>
