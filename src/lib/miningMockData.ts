@@ -290,6 +290,8 @@ export const undergroundMock = {
     { name: '本月累计掘进', value: 1320, unit: 'm', trend: 'up', vsYesterday: 2.1 },
     { name: '本月采出矿量', value: 96500, unit: 't', trend: 'up', vsYesterday: 1.7 },
     { name: '采掘比', value: 0.73, unit: 't/m', trend: 'flat', vsYesterday: 0.0 },
+    { name: '地下零事故天数', value: 15, unit: '天', trend: 'up', vsYesterday: 1.0 },
+    { name: '当日高风险作业票数', value: 3, unit: '张', trend: 'flat', vsYesterday: 0.0 },
   ] as Kpi[],
   drivageLedger: [
     {
@@ -1212,8 +1214,9 @@ export const analyticsMock = {
 // 8. 安全环保管理
 export const safetyMock = {
   kpis: [
-    { name: '本月零事故天数', value: 15, unit: '天', trend: 'up', vsYesterday: 1 },
-    { name: '重大隐患整改完成率', value: 92.0, unit: '%', trend: 'up', vsYesterday: 2.0 },
+    { name: '地下零事故天数', value: 15, unit: '天', trend: 'up', vsYesterday: 1 },
+    { name: '地下高风险作业票闭环率', value: 95.0, unit: '%', trend: 'up', vsYesterday: 1.5 },
+    { name: '地下重大隐患整改完成率', value: 92.0, unit: '%', trend: 'up', vsYesterday: 2.0 },
   ] as Kpi[],
   tailingsMonitoring: [
     {
@@ -1225,11 +1228,45 @@ export const safetyMock = {
       lastUpdate: '2025-11-15 10:30',
     },
   ],
+  undergroundPermits: [
+    {
+      id: 'WP-20251115-01',
+      type: '高处作业',
+      area: '3501-1101 采场',
+      level: '高风险',
+      status: '执行中',
+      issuedAt: '2025-11-15 08:30',
+      closedAt: null,
+    },
+    {
+      id: 'WP-20251115-02',
+      type: '动火作业',
+      area: '3501 运输巷',
+      level: '高风险',
+      status: '已关闭',
+      issuedAt: '2025-11-14 14:20',
+      closedAt: '2025-11-14 18:45',
+    },
+  ],
+  stopeRisks: [
+    {
+      stope: '3501-1101 采场',
+      riskLevel: '高',
+      mainHazards: '顶板掉块、爆破飞石',
+      lastAssessment: '2025-11-14',
+    },
+    {
+      stope: '3502-1301 采场',
+      riskLevel: '中',
+      mainHazards: '溜井堵塞、车辆干扰',
+      lastAssessment: '2025-11-13',
+    },
+  ],
   hazards: [
     {
       id: 'HZ-20251115-01',
-      type: '高处作业防护缺失',
-      area: '磨矿车间',
+      type: '采场梯段支护不到位',
+      area: '3501-1101 采场',
       level: '重大',
       status: '整改中',
       createdAt: '2025-11-14 16:20',
@@ -1238,8 +1275,8 @@ export const safetyMock = {
     },
     {
       id: 'HZ-20251115-02',
-      type: '劳保穿戴不规范',
-      area: '浮选车间',
+      type: '巷道积水影响行走',
+      area: '3501 运输巷',
       level: '一般',
       status: '已整改',
       createdAt: '2025-11-15 08:50',

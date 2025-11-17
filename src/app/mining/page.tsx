@@ -609,7 +609,7 @@ function SectionUnderground() {
     <div>
       <h2>地采生产管理</h2>
       <p style={{ fontSize: 12, color: "#666", marginBottom: 12 }}>
-        管理掘进、采矿、充填任务与台账，监控采掘比等运营指标。
+        管理掘进、采矿、充填任务与台账，监控采掘比等运营指标，并与安全环保管理联动关注地下作业风险和高风险作业票执行情况。
       </p>
       <KpiCards items={undergroundMock.kpis} />
 
@@ -2446,7 +2446,7 @@ function SectionSafety() {
     <div>
       <h2>安全环保管理</h2>
       <p style={{ fontSize: 12, color: "#666", marginBottom: 12 }}>
-        集成尾矿库监测、特殊作业票和隐患排查，实现安全环保一体化管理。
+        集成尾矿库监测、地下特殊作业票和隐患排查，实现露采/地采一体化的安全环保管理。
       </p>
       <KpiCards items={safetyMock.kpis} />
 
@@ -2460,6 +2460,31 @@ function SectionSafety() {
           t.ph,
           t.turbidity,
           t.lastUpdate,
+        ])}
+      />
+
+      <h3 style={{ marginTop: 16, marginBottom: 8 }}>地下特殊作业票</h3>
+      <BasicTable
+        headers={["作业票号", "作业类型", "地下区域", "风险等级", "状态", "签发时间", "闭环时间"]}
+        rows={safetyMock.undergroundPermits.map((p) => [
+          p.id,
+          p.type,
+          p.area,
+          p.level,
+          p.status,
+          p.issuedAt,
+          p.closedAt ?? '-',
+        ])}
+      />
+
+      <h3 style={{ marginTop: 16, marginBottom: 8 }}>地下采场风险概况</h3>
+      <BasicTable
+        headers={["采场", "风险等级", "主要风险", "最近评估日期"]}
+        rows={safetyMock.stopeRisks.map((s) => [
+          s.stope,
+          s.riskLevel,
+          s.mainHazards,
+          s.lastAssessment,
         ])}
       />
 
