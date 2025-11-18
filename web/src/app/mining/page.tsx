@@ -4115,9 +4115,22 @@ function SectionSafety() {
     <div>
       <h2>安全环保管理</h2>
       <p style={{ fontSize: 12, color: "#666", marginBottom: 12 }}>
-        集成尾矿库监测、地下特殊作业票和隐患排查，实现露采/地采一体化的安全环保管理。
+        集成重大危险源、尾矿库监测、环保指标、地下特殊作业票和隐患排查，实现露采/地采一体化的智慧安全保障与安全管理中心。
       </p>
       <KpiCards items={safetyMock.kpis} />
+      <h3 style={{ marginTop: 16, marginBottom: 8 }}>重大危险源一览</h3>
+      <BasicTable
+        headers={["编号", "名称", "所属区域", "类型", "等级", "状态", "监控手段"]}
+        rows={safetyMock.dangerSources.map((d) => [
+          d.id,
+          d.name,
+          d.area,
+          d.type,
+          d.level,
+          d.status,
+          d.monitor,
+        ])}
+      />
 
       <h3 style={{ marginTop: 16, marginBottom: 8 }}>尾矿库监测</h3>
       <BasicTable
@@ -4129,6 +4142,19 @@ function SectionSafety() {
           t.ph,
           t.turbidity,
           t.lastUpdate,
+        ])}
+      />
+
+      <h3 style={{ marginTop: 16, marginBottom: 8 }}>环保指标监测</h3>
+      <BasicTable
+        headers={["指标", "监测位置", "当前值", "限值", "状态", "更新时间"]}
+        rows={safetyMock.envIndicators.map((e) => [
+          e.indicator,
+          e.location,
+          `${e.value} ${e.unit}`,
+          `${e.limit} ${e.unit}`,
+          e.status,
+          e.lastUpdate,
         ])}
       />
 
@@ -4154,6 +4180,21 @@ function SectionSafety() {
           s.riskLevel,
           s.mainHazards,
           s.lastAssessment,
+        ])}
+      />
+
+      <h3 style={{ marginTop: 16, marginBottom: 8 }}>安全巡检任务</h3>
+      <BasicTable
+        headers={["任务编号", "类型", "区域", "频次", "状态", "执行人", "上次执行时间", "下次执行时间"]}
+        rows={safetyMock.inspectionTasks.map((t) => [
+          t.id,
+          t.type,
+          t.area,
+          t.frequency,
+          t.status,
+          t.executor,
+          t.lastExecution,
+          t.nextExecution,
         ])}
       />
 
