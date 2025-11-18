@@ -127,19 +127,163 @@ function SimpleModal({
 }
 
 function SectionAlarmCenter() {
-  const alarmRows: (string | number | null)[][] = [
-    ['2025-11-15 08:32', '露采生产', '工艺超标', 'Ⅱ级', '采剥比偏高', '生产调度室', '张工', 'APP + 大屏', '已推送，待确认'],
-    ['2025-11-15 09:05', '选矿生产', '工艺超标', 'Ⅱ级', '精矿品位低于下限', '选矿厂中控', '李班长', 'APP', '处理中'],
-    ['2025-11-15 09:48', '设备管理', '设备异常', 'Ⅰ级', 'SAG 磨振动异常', '机修车间', '王主任', '短信 + APP', '已接单'],
-    ['2025-11-15 10:12', '安全环保', '安全风险', 'Ⅰ级', '井下 CO 浓度接近上限', '安环科', '赵安监', '短信 + 电话', '已联络现场'],
-    ['2025-11-15 10:36', '尾矿库', '环保风险', 'Ⅱ级', '尾矿库水位接近警戒', '尾矿库管理所', '陈值班', 'APP + 大屏', '已启动加高排水'],
-    ['2025-11-15 11:05', '地采生产', '采场贫化', 'Ⅲ级', '3503-1401 采场贫化率偏高', '采矿工区', '刘工', 'APP', '已下达调整方案'],
-    ['2025-11-15 11:42', '移动端待办', '审批超时', 'Ⅲ级', '高风险作业票待审批超 30min', '安环科', '周主管', 'APP + 企业微信', '已催办'],
-    ['2025-11-15 12:10', '设备管理', '停机异常', 'Ⅱ级', '主皮带停机超过 15min', '机电队', '孙班长', 'APP', '处理中'],
-    ['2025-11-15 13:25', '选矿能耗', '能耗异常', 'Ⅲ级', '磨矿段单耗高于目标 8%', '工艺室', '钱工', 'APP', '分析中'],
-    ['2025-11-15 14:03', '人员定位', '人员滞留', 'Ⅱ级', '井下东翼作业面有人超时未出井', '调度室', '值班调度', '短信 + APP', '已联系班组'],
-    ['2025-11-15 14:40', '露采边坡', '边坡位移', 'Ⅰ级', '西帮边坡位移速率异常', '安监室', '邓工', '短信 + 大屏', '已启动应急预案'],
-  ];
+  type AlarmLevel = '全部' | 'Ⅰ级' | 'Ⅱ级' | 'Ⅲ级';
+
+  const [alarms, setAlarms] = React.useState(
+    () =>
+      [
+        {
+          time: '2025-11-15 08:32',
+          module: '露采生产',
+          type: '工艺超标',
+          level: 'Ⅱ级',
+          content: '采剥比偏高',
+          dept: '生产调度室',
+          owner: '张工',
+          channel: 'APP + 大屏',
+          status: '已推送，待确认',
+        },
+        {
+          time: '2025-11-15 09:05',
+          module: '选矿生产',
+          type: '工艺超标',
+          level: 'Ⅱ级',
+          content: '精矿品位低于下限',
+          dept: '选矿厂中控',
+          owner: '李班长',
+          channel: 'APP',
+          status: '处理中',
+        },
+        {
+          time: '2025-11-15 09:48',
+          module: '设备管理',
+          type: '设备异常',
+          level: 'Ⅰ级',
+          content: 'SAG 磨振动异常',
+          dept: '机修车间',
+          owner: '王主任',
+          channel: '短信 + APP',
+          status: '已接单',
+        },
+        {
+          time: '2025-11-15 10:12',
+          module: '安全环保',
+          type: '安全风险',
+          level: 'Ⅰ级',
+          content: '井下 CO 浓度接近上限',
+          dept: '安环科',
+          owner: '赵安监',
+          channel: '短信 + 电话',
+          status: '已联络现场',
+        },
+        {
+          time: '2025-11-15 10:36',
+          module: '尾矿库',
+          type: '环保风险',
+          level: 'Ⅱ级',
+          content: '尾矿库水位接近警戒',
+          dept: '尾矿库管理所',
+          owner: '陈值班',
+          channel: 'APP + 大屏',
+          status: '已启动加高排水',
+        },
+        {
+          time: '2025-11-15 11:05',
+          module: '地采生产',
+          type: '采场贫化',
+          level: 'Ⅲ级',
+          content: '3503-1401 采场贫化率偏高',
+          dept: '采矿工区',
+          owner: '刘工',
+          channel: 'APP',
+          status: '已下达调整方案',
+        },
+        {
+          time: '2025-11-15 11:42',
+          module: '移动端待办',
+          type: '审批超时',
+          level: 'Ⅲ级',
+          content: '高风险作业票待审批超 30min',
+          dept: '安环科',
+          owner: '周主管',
+          channel: 'APP + 企业微信',
+          status: '已催办',
+        },
+        {
+          time: '2025-11-15 12:10',
+          module: '设备管理',
+          type: '停机异常',
+          level: 'Ⅱ级',
+          content: '主皮带停机超过 15min',
+          dept: '机电队',
+          owner: '孙班长',
+          channel: 'APP',
+          status: '处理中',
+        },
+        {
+          time: '2025-11-15 13:25',
+          module: '选矿能耗',
+          type: '能耗异常',
+          level: 'Ⅲ级',
+          content: '磨矿段单耗高于目标 8%',
+          dept: '工艺室',
+          owner: '钱工',
+          channel: 'APP',
+          status: '分析中',
+        },
+        {
+          time: '2025-11-15 14:03',
+          module: '人员定位',
+          type: '人员滞留',
+          level: 'Ⅱ级',
+          content: '井下东翼作业面有人超时未出井',
+          dept: '调度室',
+          owner: '值班调度',
+          channel: '短信 + APP',
+          status: '已联系班组',
+        },
+        {
+          time: '2025-11-15 14:40',
+          module: '露采边坡',
+          type: '边坡位移',
+          level: 'Ⅰ级',
+          content: '西帮边坡位移速率异常',
+          dept: '安监室',
+          owner: '邓工',
+          channel: '短信 + 大屏',
+          status: '已启动应急预案',
+        },
+      ] as const,
+  );
+
+  const [levelFilter, setLevelFilter] = React.useState<AlarmLevel>('全部');
+  const [moduleFilter, setModuleFilter] = React.useState<string>('全部');
+
+  const modules = Array.from(new Set(alarms.map((a) => a.module)));
+
+  const filtered = alarms.filter((a) => {
+    if (levelFilter !== '全部' && a.level !== levelFilter) return false;
+    if (moduleFilter !== '全部' && a.module !== moduleFilter) return false;
+    return true;
+  });
+
+  const handleConfirm = (time: string) => {
+    setAlarms((prev) =>
+      prev.map((a) =>
+        a.time === time
+          ? { ...a, status: a.status.startsWith('已关闭') ? a.status : '已确认，待处置' }
+          : a,
+      ),
+    );
+  };
+
+  const handleClose = (time: string) => {
+    setAlarms((prev) =>
+      prev.map((a) =>
+        a.time === time ? { ...a, status: '已关闭' } : a,
+      ),
+    );
+  };
 
   return (
     <div>
@@ -150,18 +294,146 @@ function SectionAlarmCenter() {
 
       <KpiCards
         items={[
-          { name: '今日报警总数', value: 42, unit: '条' },
-          { name: 'Ⅰ级报警', value: 5, unit: '条' },
-          { name: '未处理报警', value: 7, unit: '条' },
+          { name: '今日报警总数', value: alarms.length, unit: '条' },
+          { name: 'Ⅰ级报警', value: alarms.filter((a) => a.level === 'Ⅰ级').length, unit: '条' },
+          { name: '未处理报警', value: alarms.filter((a) => !a.status.startsWith('已关闭')).length, unit: '条' },
           { name: '平均响应时间', value: '6.5', unit: 'min' },
         ]}
       />
 
+      <div
+        style={{
+          display: 'flex',
+          gap: 12,
+          alignItems: 'center',
+          marginTop: 8,
+          marginBottom: 8,
+          fontSize: 12,
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+          <span>按等级筛选：</span>
+          <select
+            value={levelFilter}
+            onChange={(e) => setLevelFilter(e.target.value as AlarmLevel)}
+            style={{ padding: '4px 8px', fontSize: 12, borderRadius: 4, border: '1px solid #d9d9d9' }}
+          >
+            <option value="全部">全部</option>
+            <option value="Ⅰ级">Ⅰ级</option>
+            <option value="Ⅱ级">Ⅱ级</option>
+            <option value="Ⅲ级">Ⅲ级</option>
+          </select>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+          <span>按模块筛选：</span>
+          <select
+            value={moduleFilter}
+            onChange={(e) => setModuleFilter(e.target.value)}
+            style={{ padding: '4px 8px', fontSize: 12, borderRadius: 4, border: '1px solid #d9d9d9' }}
+          >
+            <option value="全部">全部</option>
+            {modules.map((m) => (
+              <option key={m} value={m}>
+                {m}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
       <h3 style={{ marginTop: 8, marginBottom: 8 }}>集中报警列表</h3>
-      <BasicTable
-        headers={['触发时间', '来源模块', '报警类型', '等级', '报警内容', '责任部门', '责任人', '推送渠道', '当前状态']}
-        rows={alarmRows}
-      />
+      <div
+        style={{
+          borderRadius: 8,
+          border: '1px solid #eee',
+          overflow: 'hidden',
+          background: '#fff',
+        }}
+      >
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
+          <thead style={{ background: '#fafafa' }}>
+            <tr>
+              {['触发时间', '来源模块', '报警类型', '等级', '报警内容', '责任部门', '责任人', '推送渠道', '当前状态', '操作'].map((h) => (
+                <th
+                  key={h}
+                  style={{
+                    textAlign: 'left',
+                    padding: '8px 12px',
+                    borderBottom: '1px solid #eee',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.map((a) => (
+              <tr key={`${a.time}-${a.module}-${a.type}`}>
+                <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0', whiteSpace: 'nowrap' }}>{a.time}</td>
+                <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0', whiteSpace: 'nowrap' }}>{a.module}</td>
+                <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0', whiteSpace: 'nowrap' }}>{a.type}</td>
+                <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0', whiteSpace: 'nowrap' }}>{a.level}</td>
+                <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0', whiteSpace: 'nowrap' }}>{a.content}</td>
+                <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0', whiteSpace: 'nowrap' }}>{a.dept}</td>
+                <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0', whiteSpace: 'nowrap' }}>{a.owner}</td>
+                <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0', whiteSpace: 'nowrap' }}>{a.channel}</td>
+                <td style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0', whiteSpace: 'nowrap' }}>{a.status}</td>
+                <td
+                  style={{
+                    padding: '8px 12px',
+                    borderBottom: '1px solid #f0f0f0',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  <button
+                    type="button"
+                    onClick={() => handleConfirm(a.time)}
+                    style={{
+                      padding: '4px 8px',
+                      fontSize: 12,
+                      marginRight: 8,
+                      borderRadius: 4,
+                      border: '1px solid #1677ff',
+                      background: '#1677ff',
+                      color: '#fff',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    确认
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleClose(a.time)}
+                    style={{
+                      padding: '4px 8px',
+                      fontSize: 12,
+                      borderRadius: 4,
+                      border: '1px solid #52c41a',
+                      background: '#fff',
+                      color: '#52c41a',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    关闭
+                  </button>
+                </td>
+              </tr>
+            ))}
+            {filtered.length === 0 && (
+              <tr>
+                <td
+                  colSpan={10}
+                  style={{ padding: '12px 0', textAlign: 'center', color: '#999' }}
+                >
+                  当前筛选条件下暂无报警记录。
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
 
       <p style={{ fontSize: 12, color: '#666', marginTop: 8 }}>
         后续可与短信平台、企业微信、移动 App 联动，实现按岗位、班组、专业实时推送，并支持报警确认、处置记录和效果评估等全流程管理。
