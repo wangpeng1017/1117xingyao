@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <style>
+      .title { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #333333; }
+      .subtitle { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 14px; fill: #666666; }
+      .layer-title { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #333333; }
+      .section-title { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #333333; }
+      .item-text { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 11px; fill: #333333; }
+    </style>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="100%" height="100%" fill="#FFFFFF"/>
+
+  <!-- 标题 -->
+  <text x="700" y="40" text-anchor="middle" class="title">矿山数字化功能架构</text>
+  <text x="700" y="65" text-anchor="middle" class="subtitle">应用功能 → 平台能力 → 资源基础 → 数据采集的四层技术架构</text>
+
+  <!-- ====== 应用功能层 ====== -->
+  <rect x="40" y="100" width="1320" height="170" rx="12" ry="12" fill="#FAFAFA" stroke="#D9D9D9" stroke-width="1.5"/>
+  <text x="700" y="125" class="layer-title" text-anchor="middle">应用功能层</text>
+
+  <rect x="60" y="140" width="195" height="115" rx="8" ry="8" fill="#E8F3FF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="157" y="158" class="section-title" text-anchor="middle">地质管理</text>
+  <text x="72" y="174" class="item-text">钻孔数据库/编录成图</text>
+  <text x="72" y="187" class="item-text">AI岩性识别/QAQC</text>
+  <text x="72" y="200" class="item-text">三维模型/资源储量</text>
+  <text x="72" y="213" class="item-text">地质成果/文档归档</text>
+  <text x="72" y="226" class="item-text">PAD离线/移动应用</text>
+  <text x="72" y="239" class="item-text">项目进度/费用管理</text>
+
+  <rect x="270" y="140" width="195" height="115" rx="8" ry="8" fill="#F7F6FF" stroke="#9270CA" stroke-width="1"/>
+  <text x="367" y="158" class="section-title" text-anchor="middle">采矿管理</text>
+  <text x="282" y="174" class="item-text">地下/露天计划编制</text>
+  <text x="282" y="187" class="item-text">爆破设计/布孔装药</text>
+  <text x="282" y="200" class="item-text">测量应用/空区模型</text>
+  <text x="282" y="213" class="item-text">露采/地采生产管理</text>
+  <text x="282" y="226" class="item-text">配矿方案/三级矿量</text>
+  <text x="282" y="239" class="item-text">看板管理/指标分析</text>
+
+  <rect x="480" y="140" width="195\" height="115" rx="8" ry="8" fill="#FFF7E6" stroke="#FA8C16" stroke-width="1"/>
+  <text x="577" y="158" class="section-title" text-anchor="middle">选矿生产</text>
+  <text x="492" y="174" class="item-text">碎矿/磨浮/脱水</text>
+  <text x="492" y="187" class="item-text">样品管理/金属平衡</text>
+  <text x="492" y="200" class="item-text">处理量/能耗统计</text>
+  <text x="492" y="213" class="item-text">精矿库存与发运</text>
+  <text x="492" y="226" class="item-text">质检化验/化验报表</text>
+  <text x="492" y="239" class="item-text">经济指标输出</text>
+
+  <rect x="690" y="140" width="195" height="115" rx="8" ry="8" fill="#FFF1F0" stroke="#F5222D" stroke-width="1"/>
+  <text x="787" y="158" class="section-title" text-anchor="middle">设备管理</text>
+  <text x="702" y="174" class="item-text">设备档案/点巡检</text>
+  <text x="702" y="187" class="item-text">运行保养/维修管理</text>
+  <text x="702" y="200" class="item-text">备件与修旧利废</text>
+  <text x="702" y="213" class="item-text">传感器预测故障</text>
+  <text x="702" y="226" class="item-text">设备效率统计</text>
+  <text x="702" y="239" class="item-text">故障预警告警</text>
+
+  <rect x="900" y="140" width="215" height="115" rx="8" ry="8" fill="#E6FFFB" stroke="#13C2C2" stroke-width="1"/>
+  <text x="1007" y="158" class="section-title" text-anchor="middle">决策分析</text>
+  <text x="912" y="174" class="item-text">生产日报/周报/月报</text>
+  <text x="912" y="187" class="item-text">资源储量/供矿品位</text>
+  <text x="912" y="200" class="item-text">矿石流/设备运行</text>
+  <text x="912" y="213" class="item-text">能耗成本/财务分析</text>
+  <text x="912" y="226" class="item-text">数据驾驶舱</text>
+  <text x="912" y="239" class="item-text">智能决策支持</text>
+
+  <rect x="1130" y="140" width="210" height="115" rx="8" ry="8" fill="#F0F5FF" stroke="#2F54EB" stroke-width="1"/>
+  <text x="1235" y="158" class="section-title" text-anchor="middle">安环/移动端</text>
+  <text x="1142" y="174" class="item-text">尾矿库/危化品监测</text>
+  <text x="1142" y="187" class="item-text">隐患整改/环保指标</text>
+  <text x="1142" y="200" class="item-text">劳保违章识别</text>
+  <text x="1142" y="213" class="item-text">台账填报/审批</text>
+  <text x="1142" y="226" class="item-text">移动端离线作业</text>
+  <text x="1142" y="239" class="item-text">数据同步</text>
+
+  <!-- ====== 平台能力层 ====== -->
+  <rect x="40" y="290" width="1320" height="220" rx="12" ry="12" fill="#FAFAFA" stroke="#D9D9D9" stroke-width="1.5"/>
+  <text x="700" y="315" class="layer-title" text-anchor="middle">平台能力层（工业互联网平台）</text>
+
+  <rect x="60" y="335" width="310" height="160" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="215" y="353" class="section-title" text-anchor="middle">数据中台 + IoT平台</text>
+  <text x="72" y="370" class="item-text">数据接入/数据标准/元数据管理</text>
+  <text x="72" y="383" class="item-text">数据建模/数据市场/数据检索</text>
+  <text x="72" y="396" class="item-text">数据质控/数据服务/数据资产</text>
+  <text x="72" y="409" class="item-text">设备管理/设备拓扑/MQTT接入</text>
+  <text x="72" y="422" class="item-text">实时监控/传感器数据采集</text>
+  <text x="72" y="435" class="item-text">预警告警/规则引擎</text>
+  <text x="72" y="448" class="item-text">时序数据库/流式处理</text>
+  <text x="72" y="461" class="item-text">边缘计算/协议转换</text>
+  <text x="72" y="474" class="item-text">IoT设备管理/OTA升级</text>
+  <text x="72" y="487" class="item-text">数据孪生/三维场景</text>
+
+  <rect x="385" y="335" width="310" height="160" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="540" y="353" class="section-title" text-anchor="middle">技术组件 + 数字孪生</text>
+  <text x="397" y="370" class="item-text">微服务框架/消息队列/缓存</text>
+  <text x="397" y="383" class="item-text">任务调度/分布式事务/工作流</text>
+  <text x="397" y="396" class="item-text">全文索引/文件服务/对象存储</text>
+  <text x="397" y="409" class="item-text">Hadoop/Hive/Spark流处理</text>
+  <text x="397" y="422" class="item-text">数据融合/三维场景引擎</text>
+  <text x="397" y="435" class="item-text">业务对接/零代码交付</text>
+  <text x="397" y="448" class="item-text">特效渲染/多平台发布</text>
+  <text x="397" y="461" class="item-text">实时同步/状态展示</text>
+  <text x="397" y="474" class="item-text">虚拟仿真/模拟推演</text>
+  <text x="397" y="487" class="item-text">地质模型/工艺流程可视化</text>
+
+  <rect x="710" y="335" width="310" height="160" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="865" y="353" class="section-title" text-anchor="middle">低代码平台 + 统一支撑</text>
+  <text x="722" y="370" class="item-text">大屏服务/报表服务/表单服务</text>
+  <text x="722" y="383" class="item-text">流程管理/零代码配置</text>
+  <text x="722" y="396" class="item-text">组件拖拽/可视化编排</text>
+  <text x="722" y="409" class="item-text">业务建模/规则引擎</text>
+  <text x="722" y="422" class="item-text">统一安全/访问控制/SSO</text>
+  <text x="722" y="435" class="item-text">统一运维/服务监控</text>
+  <text x="722" y="448" class="item-text">日志系统/链路追踪</text>
+  <text x="722" y="461" class="item-text">云上部署/弹性伸缩</text>
+  <text x="722" y="474" class="item-text">容器编排/DevOps</text>
+  <text x="722" y="487" class="item-text">灰度发布/自动化运维</text>
+
+  <rect x="1035" y="335" width="305" height="160" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="1187" y="353" class="section-title" text-anchor="middle">统一门户 + 业务中台</text>
+  <text x="1047" y="370" class="item-text">统一账号认证/集中鉴权</text>
+  <text x="1047" y="383" class="item-text">消息中心/移动端门户</text>
+  <text x="1047" y="396" class="item-text">多租户管理/集中审计</text>
+  <text x="1047" y="409" class="item-text">单点登录/权限管理</text>
+  <text x="1047" y="422" class="item-text">操作审计服务/日志分析</text>
+  <text x="1047" y="435" class="item-text">统一部署/在线发布</text>
+  <text x="1047" y="448" class="item-text">弹性资源调配/服务编排</text>
+  <text x="1047" y="461" class="item-text">API网关/配置中心</text>
+  <text x="1047" y="474" class="item-text">服务注册与发现</text>
+  <text x="1047" y="487" class="item-text">统一监控告警平台</text>
+
+  <!-- ====== 资源基础层 ====== -->
+  <rect x="40" y="530" width="1320" height="140" rx="12" ry="12" fill="#FAFAFA" stroke="#D9D9D9" stroke-width="1.5"/>
+  <text x="700" y="555" class="layer-title" text-anchor="middle">资源基础层（计算/存储/网络）</text>
+
+  <rect x="60" y="575" width="405" height="80" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="262" y="593" class="section-title" text-anchor="middle">计算资源</text>
+  <text x="72" y="609" class="item-text">超融合一体机×3（256G内存/8T×5数据盘/NVME SSD缓存）</text>
+  <text x="72" y="622" class="item-text">应用服务器（CPU/内存/硬盘/阵列卡/网口）</text>
+  <text x="72" y="635" class="item-text">虚拟化平台（X86/ARM异构虚拟化平台纳管）</text>
+  <text x="72" y="648" class="item-text">智能数采设备/工控机/边缘计算节点</text>
+
+  <rect x="480" y="575" width="405" height="80" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="682" y="593" class="section-title" text-anchor="middle">网络资源</text>
+  <text x="492" y="609" class="item-text">超融合管理与业务交换机（2.56Tbps/1260Mpps）</text>
+  <text x="492" y="622" class="item-text">超融合存储交换机（6.4Tbps/2400Mpps）</text>
+  <text x="492" y="635" class="item-text">矿山项目局域网（千兆电口+10G光口）</text>
+  <text x="492" y="648" class="item-text">网络安全/防火墙/VPN/网络隔离</text>
+
+  <rect x="900" y="575" width="440" height="80" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="1120" y="593" class="section-title" text-anchor="middle">云管理服务</text>
+  <text x="912" y="609" class="item-text">云管理平台（运维/运营/资源/产品服务中心）</text>
+  <text x="912" y="622" class="item-text">租户管理/VPC网络/镜像库/计量计费/弹性扩容</text>
+  <text x="912" y="635" class="item-text">静默升级/工单审批/资源管理与运营服务</text>
+  <text x="912" y="648" class="item-text">多租户管理/资源池化/按需分配/自动化编排</text>
+
+  <!-- ====== 数据采集层 ====== -->
+  <rect x="40" y="690" width="1320" height="185" rx="12" ry="12" fill="#FAFAFA" stroke="#D9D9D9" stroke-width="1.5"/>
+  <text x="700" y="715" class="layer-title" text-anchor="middle">数据采集层（现场设备与传感器）</text>
+
+  <rect x="60" y="735" width="315" height="125" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="217" y="753" class="section-title" text-anchor="middle">智能数采设备</text>
+  <text x="72" y="769" class="item-text">三合一无线传感器/电流传感器</text>
+  <text x="72" y="782" class="item-text">采集终端/数采工控机</text>
+  <text x="72" y="795" class="item-text">温度/压力/振动传感器</text>
+  <text x="72" y="808" class="item-text">能耗监测设备/智能电表</text>
+  <text x="72" y="821" class="item-text">实时数据采集/边缘计算</text>
+  <text x="72" y="834" class="item-text">MQTT/Modbus/OPC UA协议</text>
+  <text x="72" y="847" class="item-text">数据预处理/本地缓存</text>
+
+  <rect x="390" y="735" width="300" height="125" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="540" y="753" class="section-title" text-anchor="middle">生产设备系统对接</text>
+  <text x="402" y="769" class="item-text">DCS系统/PLC控制/变频器</text>
+  <text x="402" y="782" class="item-text">地磅称重系统/化验系统</text>
+  <text x="402" y="795" class="item-text">视频监控/SCADA系统</text>
+  <text x="402" y="808" class="item-text">设备运行数据/工况参数</text>
+  <text x="402" y="821" class="item-text">生产线监控/工艺参数</text>
+  <text x="402" y="834" class="item-text">实时数据流/历史数据</text>
+  <text x="402" y="847" class="item-text">协议转换/数据标准化</text>
+
+  <rect x="705" y="735" width="300" height="125" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="855" y="753" class="section-title" text-anchor="middle">安全环保监测</text>
+  <text x="717" y="769" class="item-text">尾矿库监测/危化品监测</text>
+  <text x="717" y="782" class="item-text">环保指标监测/排放监控</text>
+  <text x="717" y="795" class="item-text">安全传感器/气体检测</text>
+  <text x="717" y="808" class="item-text">水质监测/粉尘监测</text>
+  <text x="717" y="821" class="item-text">噪声监测/振动监测</text>
+  <text x="717" y="834" class="item-text">实时告警/超标预警</text>
+  <text x="717" y="847" class="item-text">数据上报/监管平台对接</text>
+
+  <rect x="1020" y="735" width="320" height="125" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="1180" y="753" class="section-title" text-anchor="middle">集团系统集成</text>
+  <text x="1032" y="769" class="item-text">金蝶ERP系统/OA办公系统</text>
+  <text x="1032" y="782" class="item-text">业财系统/主数据管理</text>
+  <text x="1032" y="795" class="item-text">人力资源系统/供应链系统</text>
+  <text x="1032" y="808" class="item-text">资产管理系统/合同管理</text>
+  <text x="1032" y="821" class="item-text">API/ESB/WebService集成</text>
+  <text x="1032" y="834" class="item-text">数据交换/主数据同步</text>
+  <text x="1032" y="847" class="item-text">统一身份认证/权限对接</text>
+</svg>

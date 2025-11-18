@@ -1,0 +1,61 @@
+<svg width="260" height="720" viewBox="0 0 260 720" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 16px; fill: #264478; font-weight: bold; }
+      .step { fill: #f7f2e8; stroke: #b57300; stroke-width: 1.5; rx: 6; ry: 6; }
+      .step-text { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 13px; fill: #1f1f1f; text-anchor: middle; }
+      .sub { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 11px; fill: #555555; text-anchor: middle; }
+      .border { fill: #ffffff; stroke: #e1d4b8; stroke-width: 1; }
+      .arrow { stroke: #b57300; stroke-width: 2; fill: none; }
+      .arrow-head { fill: #b57300; }
+    </style>
+  </defs>
+
+  <!-- 外框 -->
+  <rect x="0.5" y="0.5" width="259" height="719" class="border" />
+
+  <!-- 标题 -->
+  <text x="130" y="40" class="title">设备管理与预测性维护</text>
+  <text x="130" y="62" class="sub">从台账管理到健康评估与优化</text>
+
+  <!-- 步骤框（自下而上） -->
+  <!-- 1 设备台账与档案管理 -->
+  <rect x="30" y="620" width="200" height="50" class="step" />
+  <text x="130" y="643" class="step-text">设备台账与档案管理</text>
+
+  <!-- 2 巡检点检与缺陷记录 -->
+  <rect x="30" y="520" width="200" height="50" class="step" />
+  <text x="130" y="543" class="step-text">巡检点检与缺陷记录</text>
+
+  <!-- 3 在线监测数据采集 -->
+  <rect x="30" y="420" width="200" height="50" class="step" />
+  <text x="130" y="443" class="step-text">在线监测数据采集</text>
+
+  <!-- 4 设备健康评估与故障预测 -->
+  <rect x="30" y="320" width="200" height="50" class="step" />
+  <text x="130" y="343" class="step-text">设备健康评估与故障预测</text>
+
+  <!-- 5 维修工单与备件管理 -->
+  <rect x="30" y="220" width="200" height="50" class="step" />
+  <text x="130" y="243" class="step-text">维修工单与备件管理</text>
+
+  <!-- 6 设备绩效分析与优化策略 -->
+  <rect x="30" y="120" width="200" height="50" class="step" />
+  <text x="130" y="143" class="step-text">设备绩效分析与优化策略</text>
+
+  <!-- 箭头（自下向上） -->
+  <line x1="130" y1="620" x2="130" y2="580" class="arrow" />
+  <polygon points="130,570 125,580 135,580" class="arrow-head" />
+
+  <line x1="130" y1="520" x2="130" y2="480" class="arrow" />
+  <polygon points="130,470 125,480 135,480" class="arrow-head" />
+
+  <line x1="130" y1="420" x2="130" y2="380" class="arrow" />
+  <polygon points="130,370 125,380 135,380" class="arrow-head" />
+
+  <line x1="130" y1="320" x2="130" y2="280" class="arrow" />
+  <polygon points="130,270 125,280 135,280" class="arrow-head" />
+
+  <line x1="130" y1="220" x2="130" y2="180" class="arrow" />
+  <polygon points="130,170 125,180 135,180" class="arrow-head" />
+</svg>

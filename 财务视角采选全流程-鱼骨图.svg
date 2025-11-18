@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <style>
+      .title { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #333333; }
+      .subtitle { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 14px; fill: #666666; }
+      .label { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 12px; fill: #333333; }
+      .section-title { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #333333; }
+      .item-text { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 11px; fill: #333333; }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#999999" />
+    </marker>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="100%" height="100%" fill="#FFFFFF"/>
+
+  <!-- 标题 -->
+  <text x="700" y="40" text-anchor="middle" class="title">铜矿采选全流程 鱼骨图（投入-产出财务监控）</text>
+  <text x="700" y="65" text-anchor="middle" class="subtitle">工艺主干：采矿/运输配矿 → 破碎 → 磨矿/分级/返砂 → 浮选 → 浓缩/脱水/尾矿/回水 → 质检/金属平衡/销售</text>
+
+  <!-- 鱼骨主干 -->
+  <line x1="140" y1="460" x2="1220" y2="460" stroke="#888888" stroke-width="3" marker-end="url(#arrow)" />
+  <text x="150" y="485" class="subtitle">工艺主干方向 →</text>
+
+
+
+  <!-- 分组锚点（主干上的工艺节点，6组，每组对应上下骨刺） -->
+  <!-- 中心x坐标分别与上/下框对应：160, 360, 560, 760, 960, 1160 -->
+
+  <!-- 工艺节点标签 -->
+  <text x="160" y="450" text-anchor="middle" class="label">采矿 / 运输配矿</text>
+  <text x="420" y="450" text-anchor="middle" class="label">破碎</text>
+  <text x="680" y="450" text-anchor="middle" class="label">磨矿 / 分级 / 返砂</text>
+  <text x="940" y="450" text-anchor="middle" class="label">浮选</text>
+  <text x="1200" y="450" text-anchor="middle" class="label">浓缩 / 脱水 / 尾矿 / 回水</text>
+  <text x="1460" y="450" text-anchor="middle" class="label">质检 / 金属平衡 / 销售</text>
+
+  <!-- ========== 1. 采矿 / 运输配矿 ========== -->
+  <!-- 上骨：投入 -->
+  <line x1="160" y1="460" x2="120" y2="340" stroke="#999999" stroke-width="2" />
+  <rect x="40" y="230" width="240" height="90" rx="8" ry="8" fill="#E8F3FF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="160" y="250" text-anchor="middle" class="section-title">投入</text>
+  <text x="50" y="270" class="item-text">钻爆工程：炸药 / 雷管 / 起爆器</text>
+  <text x="50" y="286" class="item-text">采装运输：卡车油耗 / 轮胎 / 配件</text>
+  <text x="50" y="302" class="item-text">采矿设备工时、电耗、人工</text>
+
+  <!-- 下骨：产出 / KPI -->
+  <line x1="160" y1="460" x2="120" y2="580" stroke="#999999" stroke-width="2" />
+  <rect x="40" y="580" width="240" height="90" rx="8" ry="8" fill="#FFF7E6" stroke="#FA8C16" stroke-width="1"/>
+  <text x="160" y="600" text-anchor="middle" class="section-title">产出 / KPI</text>
+  <text x="50" y="620" class="item-text">入选铜金属量 = 原矿吨位 × Cu品位</text>
+  <text x="50" y="636" class="item-text">剥采比、贫化率 / 损失率</text>
+  <text x="50" y="652" class="item-text">采矿成本（元/t矿、元/t Cu）</text>
+
+  <!-- ========== 2. 破碎 ========== -->
+  <!-- 上骨：投入 -->
+  <line x1="420" y1="460" x2="380" y2="340" stroke="#999999" stroke-width="2" />
+  <rect x="300" y="230" width="240" height="90" rx="8" ry="8" fill="#E8F3FF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="420" y="250" text-anchor="middle" class="section-title">投入</text>
+  <text x="310" y="270" class="item-text">破碎机电耗、传送带电耗</text>
+  <text x="310" y="286" class="item-text">衬板 / 锤头 / 皮带等备件</text>
+  <text x="310" y="302" class="item-text">点检检修工时与外委检修</text>
+
+  <!-- 下骨：产出 / KPI -->
+  <line x1="420" y1="460" x2="380" y2="580" stroke="#999999" stroke-width="2" />
+  <rect x="300" y="580" width="240" height="90" rx="8" ry="8" fill="#FFF7E6" stroke="#FA8C16" stroke-width="1"/>
+  <text x="420" y="600" text-anchor="middle" class="section-title">产出 / KPI</text>
+  <text x="310" y="620" class="item-text">破碎能力 (t/h)、粒度 P80</text>
+  <text x="310" y="636" class="item-text">破碎单耗 (kWh/t 矿)</text>
+  <text x="310" y="652" class="item-text">设备利用率 / 开动率</text>
+
+  <!-- ========== 3. 磨矿 / 分级 / 返砂 ========== -->
+  <!-- 上骨：投入 -->
+  <line x1="680" y1="460" x2="640" y2="340" stroke="#999999" stroke-width="2" />
+  <rect x="560" y="230" width="240" height="90" rx="8" ry="8" fill="#E8F3FF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="680" y="250" text-anchor="middle" class="section-title">投入</text>
+  <text x="570" y="270" class="item-text">球磨机 / 半自磨机电耗</text>
+  <text x="570" y="286" class="item-text">钢球 / 衬板消耗</text>
+  <text x="570" y="302" class="item-text">分级设备维护、水量与返砂循环</text>
+
+  <!-- 下骨：产出 / KPI -->
+  <line x1="680" y1="460" x2="640" y2="580" stroke="#999999" stroke-width="2" />
+  <rect x="560" y="580" width="240" height="90" rx="8" ry="8" fill="#FFF7E6" stroke="#FA8C16" stroke-width="1"/>
+  <text x="680" y="600" text-anchor="middle" class="section-title">产出 / KPI</text>
+  <text x="570" y="620" class="item-text">磨矿细度（-200目% 或 P80）</text>
+  <text x="570" y="636" class="item-text">单位铜磨矿能耗 (kWh/t 矿)</text>
+  <text x="570" y="652" class="item-text">分级效率、返砂比</text>
+
+  <!-- ========== 4. 浮选（铜矿专用） ========== -->
+  <!-- 上骨：投入 -->
+  <line x1="940" y1="460" x2="900" y2="340" stroke="#999999" stroke-width="2" />
+  <rect x="820" y="230" width="240" height="90" rx="8" ry="8" fill="#E8F3FF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="940" y="250" text-anchor="middle" class="section-title">投入</text>
+  <text x="830" y="270" class="item-text">药剂：黄药 / 黑药 / 起泡剂 / 调整剂</text>
+  <text x="830" y="286" class="item-text">石灰 / 硫酸等 pH 调节剂</text>
+  <text x="830" y="302" class="item-text">压缩空气、电耗、浮选机维护</text>
+
+  <!-- 下骨：产出 / KPI -->
+  <line x1="940" y1="460" x2="900" y2="580" stroke="#999999" stroke-width="2" />
+  <rect x="820" y="580" width="240" height="90" rx="8" ry="8" fill="#FFF7E6" stroke="#FA8C16" stroke-width="1"/>
+  <text x="940" y="600" text-anchor="middle" class="section-title">产出 / KPI</text>
+  <text x="830" y="620" class="item-text">铜精矿品位 (%Cu)</text>
+  <text x="830" y="636" class="item-text">铜回收率 (%), 金属回收量 (t Cu)</text>
+  <text x="830" y="652" class="item-text">药剂单耗与药剂成本（元/t 矿、元/t Cu）</text>
+
+  <!-- ========== 5. 浓缩 / 脱水 / 尾矿 / 回水 ========== -->
+  <!-- 上骨：投入 -->
+  <line x1="1200" y1="460" x2="1160" y2="340" stroke="#999999" stroke-width="2" />
+  <rect x="1080" y="230" width="240" height="90" rx="8" ry="8" fill="#E6FFFB" stroke="#13C2C2" stroke-width="1"/>
+  <text x="1200" y="250" text-anchor="middle" class="section-title">投入</text>
+  <text x="1090" y="270" class="item-text">絮凝剂 / 助滤剂</text>
+  <text x="1090" y="286" class="item-text">浓缩机 / 过滤机 / 尾砂泵电耗</text>
+  <text x="1090" y="302" class="item-text">尾矿库运行、环保与安全投入</text>
+
+  <!-- 下骨：产出 / KPI -->
+  <line x1="1200" y1="460" x2="1160" y2="580" stroke="#999999" stroke-width="2" />
+  <rect x="1080" y="580" width="240" height="90" rx="8" ry="8" fill="#FFF7E6" stroke="#FA8C16" stroke-width="1"/>
+  <text x="1200" y="600" text-anchor="middle" class="section-title">产出 / KPI</text>
+  <text x="1090" y="620" class="item-text">铜精矿水分；可销售精矿量</text>
+  <text x="1090" y="636" class="item-text">尾矿 Cu 品位与尾矿量</text>
+  <text x="1090" y="652" class="item-text">回水率、水耗 (m³/t 矿)</text>
+
+  <!-- ========== 6. 质检 / 金属平衡 / 销售 ========== -->
+  <!-- 上骨：投入 -->
+  <line x1="1460" y1="460" x2="1420" y2="340" stroke="#999999" stroke-width="2" />
+  <rect x="1340" y="230" width="240" height="90" rx="8" ry="8" fill="#F7F6FF" stroke="#9270CA" stroke-width="1"/>
+  <text x="1460" y="250" text-anchor="middle" class="section-title">投入</text>
+  <text x="1350" y="270" class="item-text">采样 / 化验 / 标样与质控耗材</text>
+  <text x="1350" y="286" class="item-text">金属平衡建模与报表工作量</text>
+  <text x="1350" y="302" class="item-text">销售合同/物流/营销费用</text>
+
+  <!-- 下骨：产出 / KPI -->
+  <line x1="1460" y1="460" x2="1420" y2="580" stroke="#999999" stroke-width="2" />
+  <rect x="1340" y="580" width="240" height="90" rx="8" ry="8" fill="#FFF1F0" stroke="#F5222D" stroke-width="1"/>
+  <text x="1460" y="600" text-anchor="middle" class="section-title">产出 / KPI</text>
+  <text x="1350" y="620" class="item-text">铜金属产量 (t Cu)、金属平衡差异 (%)</text>
+  <text x="1350" y="636" class="item-text">销售收入、结算 Cu 品位与扣减</text>
+  <text x="1350" y="652" class="item-text">单位铜现金成本、利润</text>
+
+  <!-- ========== 模块与金蝶ERP对接说明（每个工艺段对应一个功能模块） ========== -->
+  <!-- 1. 采矿 / 运输配矿 模块说明 -->
+  <rect x="40" y="710" width="240" height="90" rx="8" ry="8" fill="#FFFFFF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="160" y="730" text-anchor="middle" class="item-text">模块：采矿生产管理</text>
+  <text x="160" y="745" text-anchor="middle" class="item-text">（露采/地采台账、设备数据）</text>
+  <text x="160" y="760" text-anchor="middle" class="item-text">ERP：采矿成本中心——</text>
+  <text x="160" y="775" text-anchor="middle" class="item-text">材料/人工/制造费用凭证</text>
+  <!-- 采矿模块连线：投入上方模块、产出到底部模块 -->
+  <line x1="160" y1="230" x2="160" y2="190" stroke="#AAAAAA" stroke-width="1.5"/>
+  <rect x="40" y="115" width="240" height="75" rx="8" ry="8" fill="#FFFFFF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="160" y="130" text-anchor="middle" class="item-text">模块：采矿生产管理</text>
+  <text x="160" y="145" text-anchor="middle" class="item-text">（露采/地采台账、设备数据）</text>
+  <text x="160" y="160" text-anchor="middle" class="item-text">ERP：采矿成本中心——材料/人工/</text>
+  <text x="160" y="175" text-anchor="middle" class="item-text">制造费用凭证</text>
+  <line x1="160" y1="670" x2="160" y2="710" stroke="#AAAAAA" stroke-width="1.5"/>
+
+  <!-- 2. 破碎 模块说明 -->
+  <rect x="300" y="710" width="240" height="90" rx="8" ry="8" fill="#FFFFFF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="420" y="730" text-anchor="middle" class="item-text">模块：选矿生产管理</text>
+  <text x="420" y="745" text-anchor="middle" class="item-text">（破碎工段台账、设备能耗）</text>
+  <text x="420" y="760" text-anchor="middle" class="item-text">ERP：选矿成本中心——</text>
+  <text x="420" y="775" text-anchor="middle" class="item-text">电费、备件、检修费用</text>
+  <line x1="420" y1="230" x2="420" y2="190" stroke="#AAAAAA" stroke-width="1.5"/>
+  <rect x="300" y="115" width="240" height="75" rx="8" ry="8" fill="#FFFFFF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="420" y="130" text-anchor="middle" class="item-text">模块：选矿生产管理</text>
+  <text x="420" y="145" text-anchor="middle" class="item-text">（破碎工段台账、设备能耗）</text>
+  <text x="420" y="160" text-anchor="middle" class="item-text">ERP：选矿成本中心——电费、</text>
+  <text x="420" y="175" text-anchor="middle" class="item-text">备件、检修费用</text>
+  <line x1="420" y1="670" x2="420" y2="710" stroke="#AAAAAA" stroke-width="1.5"/>
+
+  <!-- 3. 磨矿 / 分级 / 返砂 模块说明 -->
+  <rect x="560" y="710" width="240" height="90" rx="8" ry="8" fill="#FFFFFF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="680" y="730" text-anchor="middle" class="item-text">模块：选矿生产管理</text>
+  <text x="680" y="745" text-anchor="middle" class="item-text">（磨矿/分级能耗与钢球消耗）</text>
+  <text x="680" y="760" text-anchor="middle" class="item-text">ERP：选矿成本中心——</text>
+  <text x="680" y="775" text-anchor="middle" class="item-text">钢球、衬板、电费凭证</text>
+  <line x1="680" y1="230" x2="680" y2="190" stroke="#AAAAAA" stroke-width="1.5"/>
+  <rect x="560" y="115" width="240" height="75" rx="8" ry="8" fill="#FFFFFF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="680" y="130" text-anchor="middle" class="item-text">模块：选矿生产管理</text>
+  <text x="680" y="145" text-anchor="middle" class="item-text">（磨矿/分级能耗与钢球消耗）</text>
+  <text x="680" y="160" text-anchor="middle" class="item-text">ERP：选矿成本中心——钢球、</text>
+  <text x="680" y="175" text-anchor="middle" class="item-text">衬板、电费凭证</text>
+  <line x1="680" y1="670" x2="680" y2="710" stroke="#AAAAAA" stroke-width="1.5"/>
+
+  <!-- 4. 浮选 模块说明 -->
+  <rect x="820" y="710" width="240" height="90" rx="8" ry="8" fill="#FFFFFF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="940" y="730" text-anchor="middle" class="item-text">模块：选矿生产管理 + 质检化验管理</text>
+  <text x="940" y="745" text-anchor="middle" class="item-text">（浮选药剂与化验数据）</text>
+  <text x="940" y="760" text-anchor="middle" class="item-text">ERP：药剂采购入库、</text>
+  <text x="940" y="775" text-anchor="middle" class="item-text">领用结转到选矿成本中心</text>
+  <line x1="940" y1="230" x2="940" y2="190" stroke="#AAAAAA" stroke-width="1.5"/>
+  <rect x="820" y="115" width="240" height="75" rx="8" ry="8" fill="#FFFFFF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="940" y="130" text-anchor="middle" class="item-text">模块：选矿生产管理 + 质检化验管理</text>
+  <text x="940" y="145" text-anchor="middle" class="item-text">（浮选药剂与化验数据）</text>
+  <text x="940" y="160" text-anchor="middle" class="item-text">ERP：药剂采购入库、</text>
+  <text x="940" y="175" text-anchor="middle" class="item-text">领用结转到选矿成本中心</text>
+  <line x1="940" y1="670" x2="940" y2="710" stroke="#AAAAAA" stroke-width="1.5"/>
+
+  <!-- 5. 浓缩 / 脱水 / 尾矿 / 回水 模块说明 -->
+  <rect x="1080" y="710" width="240" height="90" rx="8" ry="8" fill="#FFFFFF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="1200" y="730" text-anchor="middle" class="item-text">模块：选矿生产管理 + 安全环保管理</text>
+  <text x="1200" y="745" text-anchor="middle" class="item-text">+ 能耗成本管理</text>
+  <text x="1200" y="760" text-anchor="middle" class="item-text">ERP：尾矿库运行费、水电费、</text>
+  <text x="1200" y="775" text-anchor="middle" class="item-text">环保费归集到成本中心</text>
+  <line x1="1200" y1="230" x2="1200" y2="190" stroke="#AAAAAA" stroke-width="1.5"/>
+  <rect x="1080" y="115" width="240" height="75" rx="8" ry="8" fill="#FFFFFF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="1200" y="130" text-anchor="middle" class="item-text">模块：选矿生产管理 + 安全环保管理</text>
+  <text x="1200" y="145" text-anchor="middle" class="item-text">+ 能耗成本管理</text>
+  <text x="1200" y="160" text-anchor="middle" class="item-text">ERP：尾矿库运行费、水电费、</text>
+  <text x="1200" y="175" text-anchor="middle" class="item-text">环保费归集到成本中心</text>
+  <line x1="1200" y1="670" x2="1200" y2="710" stroke="#AAAAAA" stroke-width="1.5"/>
+
+  <!-- 6. 质检 / 金属平衡 / 销售 模块说明 -->
+  <rect x="1340" y="710" width="240" height="90" rx="8" ry="8" fill="#FFFFFF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="1460" y="730" text-anchor="middle" class="item-text">模块：质检化验管理 + 矿山决策分析</text>
+  <text x="1460" y="745" text-anchor="middle" class="item-text">+ 财务经营分析</text>
+  <text x="1460" y="760" text-anchor="middle" class="item-text">ERP：销售合同/发票/应收、</text>
+  <text x="1460" y="775" text-anchor="middle" class="item-text">库存与成本结转数据</text>
+  <line x1="1460" y1="230" x2="1460" y2="190" stroke="#AAAAAA" stroke-width="1.5"/>
+  <rect x="1340" y="115" width="240" height="75" rx="8" ry="8" fill="#FFFFFF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="1460" y="130" text-anchor="middle" class="item-text">模块：质检化验管理 + 矿山决策分析</text>
+  <text x="1460" y="145" text-anchor="middle" class="item-text">+ 财务经营分析</text>
+  <text x="1460" y="160" text-anchor="middle" class="item-text">ERP：销售合同/发票/应收、</text>
+  <text x="1460" y="175" text-anchor="middle" class="item-text">库存与成本结转数据</text>
+  <line x1="1460" y1="670" x2="1460" y2="710" stroke="#AAAAAA" stroke-width="1.5"/>
+
+  </svg>

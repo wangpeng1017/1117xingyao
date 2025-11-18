@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="850" viewBox="0 0 1400 850">
+  <defs>
+    <style>
+      .title { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #333333; }
+      .subtitle { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 14px; fill: #666666; }
+      .layer-title { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #333333; }
+      .section-title { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #333333; }
+      .item-text { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 10px; fill: #333333; }
+    </style>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="100%" height="100%" fill="#FFFFFF"/>
+
+  <!-- 标题 -->
+  <text x="700" y="40" text-anchor="middle" class="title">矿山数字化数据架构</text>
+  <text x="700" y="65" text-anchor="middle" class="subtitle">数据源 → 数据存储 → 数据中台 → 应用数据的全链路数据治理</text>
+
+  <!-- ====== 应用数据层 ====== -->
+  <rect x="40" y="100" width="1320" height="145" rx="12" ry="12" fill="#FAFAFA" stroke="#D9D9D9" stroke-width="1.5"/>
+  <text x="700" y="125" class="layer-title" text-anchor="middle">应用数据层</text>
+
+  <rect x="60" y="140" width="210" height="90" rx="8" ry="8" fill="#E8F3FF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="165" y="156" class="section-title" text-anchor="middle">地质数据</text>
+  <text x="70" y="170" class="item-text">钻孔数据：孔信息/编录/样品/分析</text>
+  <text x="70" y="182" class="item-text">三维模型：地层/矿体/品位模型</text>
+  <text x="70" y="194" class="item-text">资源储量：矿量/品位/经济评价</text>
+  <text x="70" y="206" class="item-text">地质文档：报告/图纸/附件</text>
+  <text x="70" y="218" class="item-text">项目管理：进度/费用/合同</text>
+
+  <rect x="285" y="140" width="210" height="90" rx="8" ry="8" fill="#F7F6FF" stroke="#9270CA" stroke-width="1"/>
+  <text x="390" y="156" class="section-title" text-anchor="middle">采矿数据</text>
+  <text x="295" y="170" class="item-text">设计数据：采剥计划/爆破设计</text>
+  <text x="295" y="182" class="item-text">生产数据：日报/班报/工作面</text>
+  <text x="295" y="194" class="item-text">测量数据：测点/空区/坐标</text>
+  <text x="295" y="206" class="item-text">配矿数据：矿量/品位/配比</text>
+  <text x="295" y="218" class="item-text">看板数据：生产/成本/效率</text>
+
+  <rect x="510" y="140" width="210" height="90" rx="8" ry="8" fill="#FFF7E6" stroke="#FA8C16" stroke-width="1"/>
+  <text x="615" y="156" class="section-title" text-anchor="middle">选矿数据</text>
+  <text x="520" y="170" class="item-text">流程数据：碎磨浮脱全流程</text>
+  <text x="520" y="182" class="item-text">化验数据：样品/指标/金属平衡</text>
+  <text x="520" y="194" class="item-text">生产数据：处理量/能耗/产量</text>
+  <text x="520" y="206" class="item-text">精矿数据：库存/品位/发运</text>
+  <text x="520" y="218" class="item-text">经济数据：成本/收入/利润</text>
+
+  <rect x="735" y="140" width="210" height="90" rx="8" ry="8" fill="#FFF1F0" stroke="#F5222D" stroke-width="1"/>
+  <text x="840" y="156" class="section-title" text-anchor="middle">设备数据</text>
+  <text x="745" y="170" class="item-text">设备台账：档案/分类/BOM</text>
+  <text x="745" y="182" class="item-text">运维数据：巡检/保养/维修</text>
+  <text x="745" y="194" class="item-text">监测数据：实时运行/预警</text>
+  <text x="745" y="206" class="item-text">效率数据：OEE/MTBF/MTTR</text>
+  <text x="745" y="218" class="item-text">备件数据：库存/消耗/再生</text>
+
+  <rect x="960" y="140" width="190" height="90" rx="8" ry="8" fill="#E6FFFB" stroke="#13C2C2" stroke-width="1"/>
+  <text x="1055" y="156" class="section-title" text-anchor="middle">安全环保</text>
+  <text x="970" y="170" class="item-text">隐患/事故/违章记录</text>
+  <text x="970" y="182" class="item-text">尾矿库/危化品监测</text>
+  <text x="970" y="194" class="item-text">水/气/尘/噪声监测</text>
+  <text x="970" y="206" class="item-text">台账/审批/整改</text>
+  <text x="970" y="218" class="item-text">应急预案/演练</text>
+
+  <rect x="1165" y="140" width="175" height="90" rx="8" ry="8" fill="#F0F5FF" stroke="#2F54EB" stroke-width="1"/>
+  <text x="1252" y="156" class="section-title" text-anchor="middle">决策分析</text>
+  <text x="1175" y="170" class="item-text">生产指标/品位/回收率</text>
+  <text x="1175" y="182" class="item-text">成本收入/利润分析</text>
+  <text x="1175" y="194" class="item-text">综合分析/对标</text>
+  <text x="1175" y="206" class="item-text">预测数据/趋势</text>
+  <text x="1175" y="218" class="item-text">AI推荐/决策支持</text>
+
+  <!-- ====== 数据中台层 ====== -->
+  <rect x="40" y="265" width="1320" height="190" rx="12" ry="12" fill="#FAFAFA" stroke="#D9D9D9" stroke-width="1.5"/>
+  <text x="700" y="290" class="layer-title" text-anchor="middle">数据中台层</text>
+
+  <rect x="60" y="305" width="315" height="135" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="217" y="323" class="section-title" text-anchor="middle">数据治理</text>
+  <text x="70" y="338" class="item-text">元数据：数据字典/血缘/影响分析/版本管理</text>
+  <text x="70" y="351" class="item-text">数据标准：命名规范/编码标准/主数据/MDM</text>
+  <text x="70" y="364" class="item-text">数据质量：完整性/准确性/一致性/质量评分</text>
+  <text x="70" y="377" class="item-text">数据安全：访问控制/脱敏/加密/审计日志</text>
+  <text x="70" y="390" class="item-text">数据资产：数据地图/数据目录/价值评估</text>
+  <text x="70" y="403" class="item-text">数据血缘：上下游追踪/影响分析/知识图谱</text>
+  <text x="70" y="416" class="item-text">合规管理：隐私保护/合规检查/备份恢复</text>
+  <text x="70" y="429" class="item-text">分类分级：敏感级别/权限管理/标签体系</text>
+
+  <rect x="390" y="305" width="315" height="135" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="547" y="323" class="section-title" text-anchor="middle">数据服务</text>
+  <text x="400" y="338" class="item-text">数据接入：批量ETL/实时CDC/API/IoT/MQTT</text>
+  <text x="400" y="351" class="item-text">数据处理：建模/融合/计算/流式/离线批量</text>
+  <text x="400" y="364" class="item-text">数据清洗：格式转换/数据验证/异常处理</text>
+  <text x="400" y="377" class="item-text">数据服务API：RESTful/GraphQL/WebSocket</text>
+  <text x="400" y="390" class="item-text">数据市场：共享交换/服务发布/订阅管理</text>
+  <text x="400" y="403" class="item-text">数据开发：SQL/ETL工具/调度/监控告警</text>
+  <text x="400" y="416" class="item-text">查询服务：即席查询/统计分析/导出订阅</text>
+  <text x="400" y="429" class="item-text">API网关：限流熔断/认证鉴权/统一入口</text>
+
+  <rect x="720" y="305" width="305" height="135" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="872" y="323" class="section-title" text-anchor="middle">大数据分析 + AI</text>
+  <text x="730" y="338" class="item-text">离线分析：Hadoop/Hive/Spark批处理</text>
+  <text x="730" y="351" class="item-text">实时分析：Flink/Storm/Kafka流计算</text>
+  <text x="730" y="364" class="item-text">MPP数据库：ClickHouse/Greenplum查询</text>
+  <text x="730" y="377" class="item-text">多维分析：OLAP/Kylin/Druid聚合</text>
+  <text x="730" y="390" class="item-text">机器学习：特征工程/AutoML/预测分析</text>
+  <text x="730" y="403" class="item-text">深度学习：CNN/RNN/LSTM/时序预测</text>
+  <text x="730" y="416" class="item-text">计算机视觉：岩性识别/违章检测/OCR</text>
+  <text x="730" y="429" class="item-text">知识图谱：实体识别/关系抽取/智能问答</text>
+
+  <rect x="1040" y="305" width="300" height="135" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="1190" y="323" class="section-title" text-anchor="middle">商业智能BI</text>
+  <text x="1050" y="338" class="item-text">多维数据集：Cube立方体/Star/Snowflake</text>
+  <text x="1050" y="351" class="item-text">报表服务：固定报表/参数报表/自助报表</text>
+  <text x="1050" y="364" class="item-text">可视化：Dashboard/驾驶舱/大屏展示</text>
+  <text x="1050" y="377" class="item-text">自助分析：Ad-Hoc查询/拖拽式分析</text>
+  <text x="1050" y="390" class="item-text">移动BI：手机端看板/订阅推送/分享</text>
+  <text x="1050" y="403" class="item-text">指标管理：指标定义/计算/监控/预警</text>
+  <text x="1050" y="416" class="item-text">数据挖掘：关联分析/聚类/分类预测</text>
+  <text x="1050" y="429" class="item-text">推荐系统：协同过滤/内容推荐/决策支持</text>
+
+  <!-- ====== 数据存储层 ====== -->
+  <rect x="40" y="475" width="1320" height="125" rx="12" ry="12" fill="#FAFAFA" stroke="#D9D9D9" stroke-width="1.5"/>
+  <text x="700" y="500" class="layer-title" text-anchor="middle">数据存储层</text>
+
+  <rect x="60" y="515" width="320" height="70" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="220" y="531" class="section-title" text-anchor="middle">关系型数据库</text>
+  <text x="70" y="545" class="item-text">PostgreSQL/PostGIS（地质/空间数据）</text>
+  <text x="70" y="557" class="item-text">MySQL（业务应用数据）</text>
+  <text x="70" y="569" class="item-text">分库分表/读写分离/主从复制/事务ACID</text>
+  <text x="70" y="581" class="item-text">SQL Server（遗留系统集成）</text>
+
+  <rect x="395" y="515" width="300" height="70" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="545" y="531" class="section-title" text-anchor="middle">NoSQL + 时序数据库</text>
+  <text x="405" y="545" class="item-text">InfluxDB/TDEngine（IoT时序数据）</text>
+  <text x="405" y="557" class="item-text">Redis（缓存/会话/队列）MongoDB（文档）</text>
+  <text x="405" y="569" class="item-text">HBase（宽表/日志）ElasticSearch（检索）</text>
+  <text x="405" y="581" class="item-text">Neo4j/JanusGraph（知识图谱/关系网络）</text>
+
+  <rect x="710" y="515" width="300" height="70" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="860" y="531" class="section-title" text-anchor="middle">分析型数据库</text>
+  <text x="720" y="545" class="item-text">ClickHouse（OLAP实时分析/列式存储）</text>
+  <text x="720" y="557" class="item-text">Greenplum（海量数据仓库/MPP并行）</text>
+  <text x="720" y="569" class="item-text">Druid（多维聚合/实时查询/向量化）</text>
+  <text x="720" y="581" class="item-text">Doris/StarRocks（实时数仓/湖仓一体）</text>
+
+  <rect x="1025" y="515" width="315" height="70" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="1182" y="531" class="section-title" text-anchor="middle">对象与文件存储</text>
+  <text x="1035" y="545" class="item-text">MinIO/Ceph（对象存储S3协议/分布式）</text>
+  <text x="1035" y="557" class="item-text">HDFS（大数据分布式存储/文件/模型）</text>
+  <text x="1035" y="569" class="item-text">NFS/CIFS（文件共享/文档/图纸/视频）</text>
+  <text x="1035" y="581" class="item-text">冷热数据分层/生命周期管理/成本优化</text>
+
+  <!-- ====== 数据源层 ====== -->
+  <rect x="40" y="620" width="1320" height="205" rx="12" ry="12" fill="#FAFAFA" stroke="#D9D9D9" stroke-width="1.5"/>
+  <text x="700" y="645" class="layer-title" text-anchor="middle">数据源层</text>
+
+  <rect x="60" y="660" width="255" height="150" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="187" y="678" class="section-title" text-anchor="middle">IoT设备数据</text>
+  <text x="70" y="693" class="item-text">三合一无线传感器</text>
+  <text x="70" y="705" class="item-text">电流/温度/压力/振动传感器</text>
+  <text x="70" y="717" class="item-text">采集终端/数采工控机</text>
+  <text x="70" y="729" class="item-text">DCS/PLC/SCADA</text>
+  <text x="70" y="741" class="item-text">地磅/化验/视频监控</text>
+  <text x="70" y="753" class="item-text">能耗/安全/环保监测</text>
+  <text x="70" y="765" class="item-text">MQTT/Modbus/OPC UA</text>
+  <text x="70" y="777" class="item-text">实时数据流/设备状态</text>
+  <text x="70" y="789" class="item-text">边缘计算/协议转换</text>
+  <text x="70" y="801" class="item-text">数据预处理/本地缓存</text>
+
+  <rect x="330" y="660" width="255" height="150" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="457" y="678" class="section-title" text-anchor="middle">业务系统数据</text>
+  <text x="340" y="693" class="item-text">地质/采矿/选矿系统</text>
+  <text x="340" y="705" class="item-text">设备管理/预测维护</text>
+  <text x="340" y="717" class="item-text">生产管理/安全环保</text>
+  <text x="340" y="729" class="item-text">决策分析/看板报表</text>
+  <text x="340" y="741" class="item-text">业务数据库/日志数据</text>
+  <text x="340" y="753" class="item-text">用户行为/审计日志</text>
+  <text x="340" y="765" class="item-text">API接口/ETL批量</text>
+  <text x="340" y="777" class="item-text">CDC增量同步</text>
+  <text x="340" y="789" class="item-text">消息队列/事件驱动</text>
+  <text x="340" y="801" class="item-text">实时采集/定时调度</text>
+
+  <rect x="600" y="660" width="255" height="150" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="727" y="678" class="section-title" text-anchor="middle">外部系统数据</text>
+  <text x="610" y="693" class="item-text">金蝶ERP（财务/采购/销售）</text>
+  <text x="610" y="705" class="item-text">OA办公（审批/流程/文档）</text>
+  <text x="610" y="717" class="item-text">业财系统（资金/预算）</text>
+  <text x="610" y="729" class="item-text">主数据管理（编码/标准）</text>
+  <text x="610" y="741" class="item-text">人力资源/供应链</text>
+  <text x="610" y="753" class="item-text">资产管理系统</text>
+  <text x="610" y="765" class="item-text">API/ESB/WebService</text>
+  <text x="610" y="777" class="item-text">定时同步/事件驱动</text>
+  <text x="610" y="789" class="item-text">数据映射/格式转换</text>
+  <text x="610" y="801" class="item-text">统一身份认证对接</text>
+
+  <rect x="870" y="660" width="230" height="150" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="985" y="678" class="section-title" text-anchor="middle">非结构化数据</text>
+  <text x="880" y="693" class="item-text">地质报告/图纸/扫描件</text>
+  <text x="880" y="705" class="item-text">设计图纸/CAD/PDF</text>
+  <text x="880" y="717" class="item-text">三维模型/数字孪生</text>
+  <text x="880" y="729" class="item-text">视频监控/图像识别</text>
+  <text x="880" y="741" class="item-text">办公文档/邮件/附件</text>
+  <text x="880" y="753" class="item-text">语音/社交/移动数据</text>
+  <text x="880" y="765" class="item-text">文件采集/OCR识别</text>
+  <text x="880" y="777" class="item-text">对象存储/索引建立</text>
+  <text x="880" y="789" class="item-text">全文检索/向量化</text>
+  <text x="880" y="801" class="item-text">版本管理/权限控制</text>
+
+  <rect x="1115" y="660" width="225" height="150" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="1227" y="678" class="section-title" text-anchor="middle">外部数据源</text>
+  <text x="1125" y="693" class="item-text">气象数据/地质资料</text>
+  <text x="1125" y="705" class="item-text">市场价格/金属行情</text>
+  <text x="1125" y="717" class="item-text">政策法规/行业标准</text>
+  <text x="1125" y="729" class="item-text">供应商/客户数据</text>
+  <text x="1125" y="741" class="item-text">对标企业/行业报告</text>
+  <text x="1125" y="753" class="item-text">公共数据集/开放数据</text>
+  <text x="1125" y="765" class="item-text">API/爬虫/订阅</text>
+  <text x="1125" y="777" class="item-text">定期更新/版本管理</text>
+  <text x="1125" y="789" class="item-text">数据清洗/格式化</text>
+  <text x="1125" y="801" class="item-text">质量验证/异常检测</text>
+</svg>

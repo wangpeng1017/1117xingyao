@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 1400 800">
+  <defs>
+    <style>
+      .title { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #333333; }
+      .subtitle { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 14px; fill: #666666; }
+      .big-title { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #333333; }
+      .section-title { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 15px; font-weight: bold; fill: #333333; }
+      .subsection-title { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #333333; }
+      .item-text { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 11px; fill: #333333; }
+      .benefit-text { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #059669; }
+      .highlight-text { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #333333; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#999999" />
+    </marker>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="100%" height="100%" fill="#FFFFFF"/>
+
+  <!-- 标题 -->
+  <text x="700" y="40" text-anchor="middle" class="title">矿山数字化智能财务分析系统</text>
+  <text x="700" y="65" text-anchor="middle" class="subtitle">成本实时监控 + 收入精准追踪 = 投资回报最大化</text>
+
+  <!-- ====== 顶部：智能财务分析 ====== -->
+  <rect x="40" y="90" width="1320" height="110" rx="12" ry="12" fill="#FAFAFA" stroke="#D9D9D9" stroke-width="1.5"/>
+  <text x="700" y="115" class="big-title" text-anchor="middle">智能财务分析与决策支持</text>
+
+  <rect x="60" y="130" width="305" height="55" rx="8" ry="8" fill="#E8F3FF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="212" y="150" class="subsection-title" text-anchor="middle">成本收入实时对比</text>
+  <text x="72" y="166" class="item-text">成本-收入动态分析看板</text>
+  <text x="72" y="179" class="item-text">利润率趋势预测与预警</text>
+
+  <rect x="380" y="130" width="305" height="55" rx="8" ry="8" fill="#F7F6FF" stroke="#9270CA" stroke-width="1"/>
+  <text x="532" y="150" class="subsection-title" text-anchor="middle">异常智能识别</text>
+  <text x="392" y="166" class="item-text">盈亏平衡点实时分析</text>
+  <text x="392" y="179" class="item-text">异常成本/收入自动预警</text>
+
+  <rect x="700" y="130" width="305" height="55" rx="8" ry="8" fill="#FFF7E6" stroke="#FA8C16" stroke-width="1"/>
+  <text x="852" y="150" class="subsection-title" text-anchor="middle">现金流监控</text>
+  <text x="712" y="166" class="item-text">现金流动态监控与预测</text>
+  <text x="712" y="179" class="item-text">成本细化归集与追溯</text>
+
+  <rect x="1020" y="130" width="300" height="55" rx="8" ry="8" fill="#FFF1F0" stroke="#F5222D" stroke-width="1"/>
+  <text x="1170" y="150" class="subsection-title" text-anchor="middle">决策优化</text>
+  <text x="1032" y="166" class="item-text">产销协同优化建议</text>
+  <text x="1032" y="179" class="item-text">决策效率提升50%</text>
+
+  <!-- ====== 成本监控与控制（左侧）====== -->
+  <rect x="40" y="220" width="660" height="380" rx="12" ry="12" fill="#FAFAFA" stroke="#D9D9D9" stroke-width="1.5"/>
+  <text x="370" y="245" class="section-title" text-anchor="middle">成本实时监控与控制</text>
+
+  <!-- 固定投资 -->
+  <rect x="60" y="260" width="310" height="100" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="215" y="278" class="subsection-title" text-anchor="middle">固定投资 - 设备</text>
+  <text x="70" y="294" class="item-text">超融合一体机×3 + 应用服务器</text>
+  <text x="70" y="307" class="item-text">网络与交换设备</text>
+  <text x="70" y="320" class="item-text">数采工控设备与传感器</text>
+  <text x="70" y="333" class="item-text">虚拟化平台与计算资源</text>
+  <text x="70" y="346" class="item-text">智能数采终端与边缘设备</text>
+
+  <rect x="385" y="260" width="295" height="100" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="532" y="278" class="subsection-title" text-anchor="middle">固定投资 - 软件</text>
+  <text x="395" y="294" class="item-text">软件平台部署与实施</text>
+  <text x="395" y="307" class="item-text">云管理服务与运维平台</text>
+  <text x="395" y="320" class="item-text">数据中台 + IoT平台</text>
+  <text x="395" y="333" class="item-text">数字孪生与三维可视化</text>
+  <text x="395" y="346" class="item-text">AI算法与知识图谱</text>
+
+  <!-- 生产成本 -->
+  <rect x="60" y="375" width="310" height="110" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="215" y="393" class="subsection-title" text-anchor="middle">运营成本 - 人员</text>
+  <text x="70" y="409" class="item-text">人员工资与薪酬</text>
+  <text x="70" y="422" class="item-text">人员安全与保险</text>
+  <text x="70" y="435" class="item-text">培训投资与技能提升</text>
+  <text x="70" y="448" class="item-text">绩效奖金与激励</text>
+  <text x="70" y="461" class="item-text">团队建设与组织费用</text>
+  <text x="70" y="474" class="item-text">劳动保护与福利支出</text>
+
+  <rect x="385" y="375" width="295" height="110" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="532" y="393" class="subsection-title" text-anchor="middle">运营成本 - 能耗物料</text>
+  <text x="395" y="409" class="item-text">燃油/电力/水资源</text>
+  <text x="395" y="422" class="item-text">轮胎/钻具/衬板/球磨介质</text>
+  <text x="395" y="435" class="item-text">磨耗材料与备件消耗</text>
+  <text x="395" y="448" class="item-text">浮选药剂与化学品</text>
+  <text x="395" y="461" class="item-text">脱水与干燥设备能耗</text>
+  <text x="395" y="474" class="item-text">环保处理与排放成本</text>
+
+  <!-- 成本控制价值 -->
+  <rect x="60" y="500" width="620" height="85" rx="8" ry="8" fill="#F6FFED" stroke="#52C41A" stroke-width="1"/>
+  <text x="370" y="520" class="highlight-text" text-anchor="middle">成本控制核心价值</text>
+  <text x="70" y="538" class="benefit-text">✓ 能耗实时监控优化降低15-20%  ✓ 人员配置优化效率提升18%</text>
+  <text x="70" y="552" class="benefit-text">✓ 智能物料管理减少浪费10-12%  ✓ 预测维护减少停机损失30%</text>
+  <text x="70" y="566" class="benefit-text">✓ 精准成本核算决策准确提升  ✓ 异常预警避免超支风险</text>
+  <text x="70" y="580" class="benefit-text">✓ 各环节成本透明可追溯  ✓ 历史数据对比持续优化</text>
+
+  <!-- ====== 收入追踪与优化（右侧）====== -->
+  <rect x="720" y="220" width="660" height="380" rx="12" ry="12" fill="#FAFAFA" stroke="#D9D9D9" stroke-width="1.5"/>
+  <text x="1050" y="245" class="section-title" text-anchor="middle">收入精准追踪与优化</text>
+
+  <!-- 产量监控 -->
+  <rect x="740" y="260" width="300" height="100" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="890" y="278" class="subsection-title" text-anchor="middle">产量实时监控</text>
+  <text x="750" y="294" class="item-text">铜矿产量实时跟踪</text>
+  <text x="750" y="307" class="item-text">精矿品位在线监测</text>
+  <text x="750" y="320" class="item-text">金/银副产品统计</text>
+  <text x="750" y="333" class="item-text">地磅称重自动采集</text>
+  <text x="750" y="346" class="item-text">实时库存动态管理</text>
+
+  <rect x="1060" y="260" width="300" height="100" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="1210" y="278" class="subsection-title" text-anchor="middle">品质追溯系统</text>
+  <text x="1070" y="294" class="item-text">化验系统品位检测</text>
+  <text x="1070" y="307" class="item-text">化验独立验证机制</text>
+  <text x="1070" y="320" class="item-text">质量报表自动生成</text>
+  <text x="1070" y="333" class="item-text">金属平衡智能分析</text>
+  <text x="1070" y="346" class="item-text">全程质量可追溯</text>
+
+  <!-- 销售优化 -->
+  <rect x="740" y="375" width="620" height="110" rx="8" ry="8" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/>
+  <text x="1050" y="393" class="subsection-title" text-anchor="middle">销售与定价智能优化</text>
+  <text x="750" y="409" class="item-text">采挖选矿模型实时调整优化</text>
+  <text x="750" y="422" class="item-text">市场价格联动预测与销售时机智能把握</text>
+  <text x="750" y="435" class="item-text">库存周转优化，减少积压与资金占用</text>
+  <text x="750" y="448" class="item-text">配矿方案智能推荐，品位稳定性保证</text>
+  <text x="750" y="461" class="item-text">多维度销售数据分析与决策支持</text>
+  <text x="750" y="474" class="item-text">客户信用评估与账期优化管理</text>
+
+  <!-- 收入提升价值 -->
+  <rect x="740" y="500" width="620" height="85" rx="8" ry="8" fill="#E6F7FF" stroke="#1890FF" stroke-width="1"/>
+  <text x="1050" y="520" class="highlight-text" text-anchor="middle">收入提升核心价值</text>
+  <text x="750" y="538" class="benefit-text">✓ 实时监控快速响应市场  ✓ 品位精准追溯提升单价3-5%</text>
+  <text x="750" y="552" class="benefit-text">✓ 金属平衡优化回收率提升3-5%  ✓ 库存智能管理减少积压</text>
+  <text x="750" y="566" class="benefit-text">✓ 配矿方案优化品位稳定  ✓ 销售时机把握利润最大化</text>
+  <text x="750" y="580" class="benefit-text">✓ 数据透明增强客户信任  ✓ 合规保证避免罚款损失</text>
+
+  <!-- 连接箭头 -->
+  <line x1="370" y1="600" x2="370" y2="620" stroke="#999999" stroke-width="2" marker-end="url(#arrow)" />
+  <line x1="1050" y1="600" x2="1050" y2="620" stroke="#999999" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- ====== 底部：投资回报预期 ====== -->
+  <rect x="40" y="620" width="1320" height="160" rx="12" ry="12" fill="#FAFAFA" stroke="#D9D9D9" stroke-width="1.5"/>
+  <text x="700" y="650" class="big-title" text-anchor="middle">投资回报预期 (ROI)</text>
+
+  <rect x="60" y="670" width="640" height="95" rx="8" ry="8" fill="#FFF1F0" stroke="#F5222D" stroke-width="1"/>
+  <text x="380" y="690" class="section-title" text-anchor="middle">成本降低效益</text>
+  <text x="75" y="710" class="item-text">能耗优化降低15-20%（智能监控+实时优化+负荷平衡）</text>
+  <text x="75" y="725" class="item-text">物料管理减少浪费10-12%（精准库存+智能预测+需求匹配）</text>
+  <text x="75" y="740" class="item-text">人员效率提升18%（合理配置+智能调度+协同优化）</text>
+  <text x="75" y="755" class="item-text">预测维护减少停机损失30%（故障预警+寿命预测+计划检修）</text>
+
+  <rect x="720" y="670" width="640" height="95" rx="8" ry="8" fill="#E6FFFB" stroke="#13C2C2" stroke-width="1"/>
+  <text x="1040" y="690" class="section-title" text-anchor="middle">收入提升效益</text>
+  <text x="735" y="710" class="item-text">回收率提升3-5%（金属平衡优化+工艺改进+损失控制）</text>
+  <text x="735" y="725" class="item-text">品质优化提升单价3-5%（品位稳定+质量追溯+客户信任）</text>
+  <text x="735" y="740" class="item-text">销售时机优化增收2-3%（市场预测+价格联动+库存优化）</text>
+  <text x="735" y="755" class="item-text">决策效率提升50%（实时数据+智能分析+快速响应）</text>
+
+  <!-- 底部总结 -->
+  <text x="700" y="790" style="font-family: 'Microsoft YaHei', Arial, sans-serif; font-size: 15px; font-weight: bold; fill: #1890FF;" text-anchor="middle">预期投资回收期：18-24个月 | 综合效益：成本降低15-20% + 收入提升3-8%</text>
+</svg>

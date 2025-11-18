@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <style>
+      .title { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #333; }
+      .subtitle { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 13px; fill: #666; }
+      .layer-title { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #333; }
+      .section-title { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #333; }
+      .item-text { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 11px; fill: #333; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#999" />
+    </marker>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="100%" height="100%" fill="#FFF"/>
+
+  <!-- 标题 -->
+  <text x="600" y="40" text-anchor="middle" class="title">采矿选矿全流程财务调度监控（自下而上）</text>
+  <text x="600" y="62" text-anchor="middle" class="subtitle">采选执行 → 金属平衡 → 智能调度 → 集团财务（箭头向上汇聚）</text>
+
+  <!-- 顶层：集团财务管控与决策中心 -->
+  <rect x="40" y="90" width="1120" height="150" rx="12" ry="12" fill="#F0F5FF" stroke="#2F54EB" stroke-width="1.5"/>
+  <text x="600" y="115" class="layer-title" text-anchor="middle">集团财务管控与决策中心</text>
+
+  <rect x="60" y="130" width="340" height="90" rx="8" ry="8" fill="#FFF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="230" y="150" class="section-title" text-anchor="middle">集团财务监控</text>
+  <text x="75" y="168" class="item-text">成本/利润中心 | 预算/资金 | 风险与合规</text>
+
+  <rect x="430" y="130" width="340" height="90" rx="8" ry="8" fill="#FFF" stroke="#9270CA" stroke-width="1"/>
+  <text x="600" y="150" class="section-title" text-anchor="middle">经营分析与决策</text>
+  <text x="445" y="168" class="item-text">对标分析 | ROI/IRR | 资源配置与策略</text>
+
+  <rect x="800" y="130" width="340" height="90" rx="8" ry="8" fill="#FFF" stroke="#FA8C16" stroke-width="1"/>
+  <text x="970" y="150" class="section-title" text-anchor="middle">数据驾驶舱与中台对接</text>
+  <text x="815" y="168" class="item-text">KPI看板/移动端 | ERP/数据中台/IoT/AI</text>
+
+  <!-- 中层：智能调度与财务决策支持 -->
+  <rect x="40" y="270" width="1120" height="130" rx="12" ry="12" fill="#FAFAFA" stroke="#D9D9D9" stroke-width="1.2"/>
+  <text x="600" y="295" class="layer-title" text-anchor="middle">智能调度与财务决策支持</text>
+
+  <rect x="60" y="305" width="340" height="80" rx="8" ry="8" fill="#E8F3FF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="230" y="325" class="section-title" text-anchor="middle">实时看板</text>
+  <text x="75" y="343" class="item-text">产量/处理量/能耗/单耗 | 预算执行/预警</text>
+
+  <rect x="430" y="305" width="340" height="80" rx="8" ry="8" fill="#F7F6FF" stroke="#9270CA" stroke-width="1"/>
+  <text x="600" y="325" class="section-title" text-anchor="middle">预警与差异分析</text>
+  <text x="445" y="343" class="item-text">超预算/单耗异常 | 根因/趋势分析</text>
+
+  <rect x="800" y="305" width="340" height="80" rx="8" ry="8" fill="#FFF7E6" stroke="#FA8C16" stroke-width="1"/>
+  <text x="970" y="325" class="section-title" text-anchor="middle">调度优化</text>
+  <text x="815" y="343" class="item-text">配矿/计划/设备/工艺的经济性优化</text>
+
+  <!-- 中下层：金属平衡与收益核算 -->
+  <rect x="40" y="430" width="1120" height="130" rx="12" ry="12" fill="#FAFAFA" stroke="#D9D9D9" stroke-width="1.2"/>
+  <text x="600" y="455" class="layer-title" text-anchor="middle">金属平衡与收益核算</text>
+
+  <rect x="60" y="465" width="520" height="80" rx="8" ry="8" fill="#E6FFFB" stroke="#13C2C2" stroke-width="1"/>
+  <text x="320" y="485" class="section-title" text-anchor="middle">金属平衡</text>
+  <text x="75" y="503" class="item-text">原矿→精矿金属量 | 回收率/损失 | 平衡表</text>
+
+  <rect x="640" y="465" width="520" height="80" rx="8" ry="8" fill="#F0F5FF" stroke="#2F54EB" stroke-width="1"/>
+  <text x="900" y="485" class="section-title" text-anchor="middle">销售与收入</text>
+  <text x="655" y="503" class="item-text">库存/合同/发运 | 收入确认 | 价格跟踪</text>
+
+  <!-- 底层：采选执行与成本归集 -->
+  <rect x="40" y="590" width="1120" height="150" rx="12" ry="12" fill="#FAFAFA" stroke="#D9D9D9" stroke-width="1.2"/>
+  <text x="600" y="615" class="layer-title" text-anchor="middle">采选执行与成本归集</text>
+
+  <rect x="60" y="625" width="520" height="95" rx="8" ry="8" fill="#FFF" stroke="#5B8FF9" stroke-width="1"/>
+  <text x="320" y="645" class="section-title" text-anchor="middle">采矿执行</text>
+  <text x="75" y="663" class="item-text">产量/材料/能耗/工时/设备 | 吨矿成本</text>
+
+  <rect x="640" y="625" width="520" height="95" rx="8" ry="8" fill="#FFF" stroke="#9270CA" stroke-width="1"/>
+  <text x="900" y="645" class="section-title" text-anchor="middle">选矿执行</text>
+  <text x="655" y="663" class="item-text">处理量/药剂/能耗 | 回收率/品位 | 处理成本</text>
+
+  <!-- 自下而上汇聚箭头 -->
+  <line x1="600" y1="590" x2="600" y2="560" stroke="#999" stroke-width="2" marker-end="url(#arrow)" />
+  <line x1="600" y1="430" x2="600" y2="400" stroke="#999" stroke-width="2" marker-end="url(#arrow)" />
+  <line x1="600" y1="270" x2="600" y2="240" stroke="#999" stroke-width="2" marker-end="url(#arrow)" />
+</svg>

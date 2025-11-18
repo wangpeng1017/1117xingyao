@@ -1,0 +1,61 @@
+<svg width="260" height="720" viewBox="0 0 260 720" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 16px; fill: #1f4e79; font-weight: bold; }
+      .step { fill: #e8f6f0; stroke: #2b8060; stroke-width: 1.5; rx: 6; ry: 6; }
+      .step-text { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 13px; fill: #1f1f1f; text-anchor: middle; }
+      .sub { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 11px; fill: #555555; text-anchor: middle; }
+      .border { fill: #ffffff; stroke: #c8e0d6; stroke-width: 1; }
+      .arrow { stroke: #2b8060; stroke-width: 2; fill: none; }
+      .arrow-head { fill: #2b8060; }
+    </style>
+  </defs>
+
+  <!-- 外框 -->
+  <rect x="0.5" y="0.5" width="259" height="719" class="border" />
+
+  <!-- 标题 -->
+  <text x="130" y="40" class="title">质检化验管理流程</text>
+  <text x="130" y="62" class="sub">从采样计划到结果反馈生产</text>
+
+  <!-- 步骤框（自下而上） -->
+  <!-- 1 采样计划与任务下达 -->
+  <rect x="30" y="620" width="200" height="50" class="step" />
+  <text x="130" y="643" class="step-text">采样计划与任务下达</text>
+
+  <!-- 2 现场自动/人工采样 -->
+  <rect x="30" y="520" width="200" height="50" class="step" />
+  <text x="130" y="543" class="step-text">现场自动/人工采样</text>
+
+  <!-- 3 样品制备与编码流转 -->
+  <rect x="30" y="420" width="200" height="50" class="step" />
+  <text x="130" y="443" class="step-text">样品制备与编码流转</text>
+
+  <!-- 4 实验室化验检测 -->
+  <rect x="30" y="320" width="200" height="50" class="step" />
+  <text x="130" y="343" class="step-text">实验室化学/粒度检测</text>
+
+  <!-- 5 结果审核与异常复检 -->
+  <rect x="30" y="220" width="200" height="50" class="step" />
+  <text x="130" y="243" class="step-text">结果审核与异常复检</text>
+
+  <!-- 6 报告出具与生产反馈 -->
+  <rect x="30" y="120" width="200" height="50" class="step" />
+  <text x="130" y="143" class="step-text">质检报告出具与生产反馈</text>
+
+  <!-- 箭头（自下向上） -->
+  <line x1="130" y1="620" x2="130" y2="580" class="arrow" />
+  <polygon points="130,570 125,580 135,580" class="arrow-head" />
+
+  <line x1="130" y1="520" x2="130" y2="480" class="arrow" />
+  <polygon points="130,470 125,480 135,480" class="arrow-head" />
+
+  <line x1="130" y1="420" x2="130" y2="380" class="arrow" />
+  <polygon points="130,370 125,380 135,380" class="arrow-head" />
+
+  <line x1="130" y1="320" x2="130" y2="280" class="arrow" />
+  <polygon points="130,270 125,280 135,280" class="arrow-head" />
+
+  <line x1="130" y1="220" x2="130" y2="180" class="arrow" />
+  <polygon points="130,170 125,180 135,180" class="arrow-head" />
+</svg>

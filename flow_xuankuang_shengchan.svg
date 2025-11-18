@@ -1,0 +1,61 @@
+<svg width="260" height="720" viewBox="0 0 260 720" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 16px; fill: #1f4e79; font-weight: bold; }
+      .step { fill: #e6f0fa; stroke: #1f4e79; stroke-width: 1.5; rx: 6; ry: 6; }
+      .step-text { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 13px; fill: #1f1f1f; text-anchor: middle; }
+      .sub { font-family: "Microsoft YaHei", Arial, sans-serif; font-size: 11px; fill: #555555; text-anchor: middle; }
+      .border { fill: #ffffff; stroke: #d0d7e5; stroke-width: 1; }
+      .arrow { stroke: #1f4e79; stroke-width: 2; fill: none; }
+      .arrow-head { fill: #1f4e79; }
+    </style>
+  </defs>
+
+  <!-- 外框 -->
+  <rect x="0.5" y="0.5" width="259" height="719" class="border" />
+
+  <!-- 标题 -->
+  <text x="130" y="40" class="title">选矿生产管理流程</text>
+  <text x="130" y="62" class="sub">从原矿入厂到精矿/尾矿发运</text>
+
+  <!-- 步骤框（自下而上） -->
+  <!-- 1 原矿入厂与库存管理 -->
+  <rect x="30" y="620" width="200" height="50" class="step" />
+  <text x="130" y="643" class="step-text">原矿入厂与库存管理</text>
+
+  <!-- 2 破碎筛分 -->
+  <rect x="30" y="520" width="200" height="50" class="step" />
+  <text x="130" y="543" class="step-text">破碎、筛分作业</text>
+
+  <!-- 3 磨矿分级 -->
+  <rect x="30" y="420" width="200" height="50" class="step" />
+  <text x="130" y="443" class="step-text">磨矿、分级控制</text>
+
+  <!-- 4 选别作业 -->
+  <rect x="30" y="320" width="200" height="50" class="step" />
+  <text x="130" y="343" class="step-text">浮选/磁选等选别作业</text>
+
+  <!-- 5 浓缩过滤 -->
+  <rect x="30" y="220" width="200" height="50" class="step" />
+  <text x="130" y="243" class="step-text">精矿浓缩与过滤</text>
+
+  <!-- 6 精矿/尾矿发运与调度 -->
+  <rect x="30" y="120" width="200" height="50" class="step" />
+  <text x="130" y="143" class="step-text">精矿/尾矿发运与调度</text>
+
+  <!-- 箭头（自下向上） -->
+  <line x1="130" y1="620" x2="130" y2="580" class="arrow" />
+  <polygon points="130,570 125,580 135,580" class="arrow-head" />
+
+  <line x1="130" y1="520" x2="130" y2="480" class="arrow" />
+  <polygon points="130,470 125,480 135,480" class="arrow-head" />
+
+  <line x1="130" y1="420" x2="130" y2="380" class="arrow" />
+  <polygon points="130,370 125,380 135,380" class="arrow-head" />
+
+  <line x1="130" y1="320" x2="130" y2="280" class="arrow" />
+  <polygon points="130,270 125,280 135,280" class="arrow-head" />
+
+  <line x1="130" y1="220" x2="130" y2="180" class="arrow" />
+  <polygon points="130,170 125,180 135,180" class="arrow-head" />
+</svg>
