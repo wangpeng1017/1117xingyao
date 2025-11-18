@@ -59,6 +59,73 @@ function KpiCards({
   );
 }
 
+function SimpleModal({
+  open,
+  title,
+  onClose,
+  children,
+}: {
+  open: boolean;
+  title: string;
+  onClose: () => void;
+  children: React.ReactNode;
+}) {
+  if (!open) return null;
+
+  return (
+    <div
+      style={{
+        position: 'fixed',
+        inset: 0,
+        background: 'rgba(0,0,0,0.35)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1000,
+      }}
+      onClick={onClose}
+    >
+      <div
+        style={{
+          width: 480,
+          maxWidth: '90%',
+          background: '#fff',
+          borderRadius: 8,
+          boxShadow: '0 12px 24px rgba(0,0,0,0.18)',
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div
+          style={{
+            padding: '12px 16px',
+            borderBottom: '1px solid #f0f0f0',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <span style={{ fontSize: 14, fontWeight: 500 }}>{title}</span>
+          <button
+            type="button"
+            onClick={onClose}
+            style={{
+              border: 'none',
+              background: 'transparent',
+              cursor: 'pointer',
+              fontSize: 18,
+              lineHeight: 1,
+              padding: 0,
+            }}
+          >
+            ×
+          </button>
+        </div>
+        <div style={{ padding: 16 }}>{children}</div>
+      </div>
+    </div>
+  );
+}
+
 function BasicTable({
   headers,
   rows,
@@ -495,54 +562,75 @@ function SectionGeoInfo() {
 function SectionOpenPit() {
   const [dailyProduction, setDailyProduction] = React.useState(openPitMock.dailyProduction);
   const [subTab, setSubTab] = React.useState<'ledger' | 'plan' | 'design' | 'data'>('ledger');
+  const [recordModalMode, setRecordModalMode] = React.useState<'create' | 'edit' | null>(null);
+  const [recordForm, setRecordForm] = React.useState({
+    date: '2025-11-16',
+    bench: '',
+    oreTonnage: '',
+    wasteTonnage: '',
+    avgGradeFe: '',
+    dilutionRate: '',
+    powderFactor: '',
+  });
+  const [editingKey, setEditingKey] = React.useState<{ date: string; bench: string } | null>(null);
 
   const handleAddRecord = () => {
-    const date = window.prompt('日期', '2025-11-16');
-    if (!date) return;
-    const bench = window.prompt('台阶', '') || '';
-    const oreTonnageInput = window.prompt('矿量(t)', '0');
-    const wasteTonnageInput = window.prompt('剥离量(m³)', '0');
-    const avgGradeFeInput = window.prompt('平均品位(Fe, %)', '0');
-    const dilutionRateInput = window.prompt('贫化率(%)', '0');
-    const powderFactorInput = window.prompt('单耗(kg炸药/t)', '0');
-
-    setDailyProduction((prev) => [
-      ...prev,
-      {
-        date,
-        bench,
-        oreTonnage: oreTonnageInput ? Number(oreTonnageInput) || 0 : 0,
-        wasteTonnage: wasteTonnageInput ? Number(wasteTonnageInput) || 0 : 0,
-        avgGradeFe: avgGradeFeInput ? Number(avgGradeFeInput) || 0 : 0,
-        dilutionRate: dilutionRateInput ? Number(dilutionRateInput) || 0 : 0,
-        powderFactor: powderFactorInput ? Number(powderFactorInput) || 0 : 0,
-      },
-    ]);
+    setRecordModalMode('create');
+    setEditingKey(null);
+    setRecordForm({
+      date: '2025-11-16',
+      bench: '',
+      oreTonnage: '',
+      wasteTonnage: '',
+      avgGradeFe: '',
+      dilutionRate: '',
+      powderFactor: '',
+    });
   };
 
   const handleEditRecord = (record: (typeof openPitMock.dailyProduction)[number]) => {
-    const bench = window.prompt('台阶', record.bench) || record.bench;
-    const oreTonnageInput = window.prompt('矿量(t)', String(record.oreTonnage));
-    const wasteTonnageInput = window.prompt('剥离量(m³)', String(record.wasteTonnage));
-    const avgGradeFeInput = window.prompt('平均品位(Fe, %)', String(record.avgGradeFe));
-    const dilutionRateInput = window.prompt('贫化率(%)', String(record.dilutionRate));
-    const powderFactorInput = window.prompt('单耗(kg炸药/t)', String(record.powderFactor));
+    setRecordModalMode('edit');
+    setEditingKey({ date: record.date, bench: record.bench });
+    setRecordForm({
+      date: record.date,
+      bench: record.bench,
+      oreTonnage: String(record.oreTonnage),
+      wasteTonnage: String(record.wasteTonnage),
+      avgGradeFe: String(record.avgGradeFe),
+      dilutionRate: String(record.dilutionRate),
+      powderFactor: String(record.powderFactor),
+    });
+  };
 
-    setDailyProduction((prev) =>
-      prev.map((r) =>
-        r.date === record.date && r.bench === record.bench
-          ? {
-              ...r,
-              bench,
-              oreTonnage: oreTonnageInput ? Number(oreTonnageInput) || record.oreTonnage : record.oreTonnage,
-              wasteTonnage: wasteTonnageInput ? Number(wasteTonnageInput) || record.wasteTonnage : record.wasteTonnage,
-              avgGradeFe: avgGradeFeInput ? Number(avgGradeFeInput) || record.avgGradeFe : record.avgGradeFe,
-              dilutionRate: dilutionRateInput ? Number(dilutionRateInput) || record.dilutionRate : record.dilutionRate,
-              powderFactor: powderFactorInput ? Number(powderFactorInput) || record.powderFactor : record.powderFactor,
-            }
-          : r,
-      ),
-    );
+  const handleSubmitRecord = () => {
+    if (!recordForm.date || !recordForm.bench) {
+      alert('请填写日期和台阶');
+      return;
+    }
+    const nextRecord = {
+      date: recordForm.date,
+      bench: recordForm.bench,
+      oreTonnage: recordForm.oreTonnage ? Number(recordForm.oreTonnage) || 0 : 0,
+      wasteTonnage: recordForm.wasteTonnage ? Number(recordForm.wasteTonnage) || 0 : 0,
+      avgGradeFe: recordForm.avgGradeFe ? Number(recordForm.avgGradeFe) || 0 : 0,
+      dilutionRate: recordForm.dilutionRate ? Number(recordForm.dilutionRate) || 0 : 0,
+      powderFactor: recordForm.powderFactor ? Number(recordForm.powderFactor) || 0 : 0,
+    };
+
+    if (recordModalMode === 'create') {
+      setDailyProduction((prev) => [...prev, nextRecord]);
+    } else if (recordModalMode === 'edit' && editingKey) {
+      setDailyProduction((prev) =>
+        prev.map((r) =>
+          r.date === editingKey.date && r.bench === editingKey.bench
+            ? nextRecord
+            : r,
+        ),
+      );
+    }
+
+    setRecordModalMode(null);
+    setEditingKey(null);
   };
 
   const handleDeleteRecord = (record: (typeof openPitMock.dailyProduction)[number]) => {
@@ -832,6 +920,123 @@ function SectionOpenPit() {
           </ul>
         </div>
       )}
+      <SimpleModal
+        open={recordModalMode !== null}
+        title={recordModalMode === 'create' ? '新增采剥记录' : '编辑采剥记录'}
+        onClose={() => {
+          setRecordModalMode(null);
+          setEditingKey(null);
+        }}
+      >
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+            gap: 12,
+            marginBottom: 16,
+          }}
+        >
+          <div>
+            <div style={{ fontSize: 12, marginBottom: 4 }}>日期</div>
+            <input
+              type="text"
+              value={recordForm.date}
+              onChange={(e) => setRecordForm((prev) => ({ ...prev, date: e.target.value }))}
+              style={{ width: '100%', padding: '6px 8px', fontSize: 12, borderRadius: 4, border: '1px solid #d9d9d9' }}
+            />
+          </div>
+          <div>
+            <div style={{ fontSize: 12, marginBottom: 4 }}>台阶</div>
+            <input
+              type="text"
+              value={recordForm.bench}
+              onChange={(e) => setRecordForm((prev) => ({ ...prev, bench: e.target.value }))}
+              style={{ width: '100%', padding: '6px 8px', fontSize: 12, borderRadius: 4, border: '1px solid #d9d9d9' }}
+            />
+          </div>
+          <div>
+            <div style={{ fontSize: 12, marginBottom: 4 }}>矿量(t)</div>
+            <input
+              type="number"
+              value={recordForm.oreTonnage}
+              onChange={(e) => setRecordForm((prev) => ({ ...prev, oreTonnage: e.target.value }))}
+              style={{ width: '100%', padding: '6px 8px', fontSize: 12, borderRadius: 4, border: '1px solid #d9d9d9' }}
+            />
+          </div>
+          <div>
+            <div style={{ fontSize: 12, marginBottom: 4 }}>剥离量(m³)</div>
+            <input
+              type="number"
+              value={recordForm.wasteTonnage}
+              onChange={(e) => setRecordForm((prev) => ({ ...prev, wasteTonnage: e.target.value }))}
+              style={{ width: '100%', padding: '6px 8px', fontSize: 12, borderRadius: 4, border: '1px solid #d9d9d9' }}
+            />
+          </div>
+          <div>
+            <div style={{ fontSize: 12, marginBottom: 4 }}>平均品位(Fe, %)</div>
+            <input
+              type="number"
+              value={recordForm.avgGradeFe}
+              onChange={(e) => setRecordForm((prev) => ({ ...prev, avgGradeFe: e.target.value }))}
+              style={{ width: '100%', padding: '6px 8px', fontSize: 12, borderRadius: 4, border: '1px solid #d9d9d9' }}
+            />
+          </div>
+          <div>
+            <div style={{ fontSize: 12, marginBottom: 4 }}>贫化率(%)</div>
+            <input
+              type="number"
+              value={recordForm.dilutionRate}
+              onChange={(e) => setRecordForm((prev) => ({ ...prev, dilutionRate: e.target.value }))}
+              style={{ width: '100%', padding: '6px 8px', fontSize: 12, borderRadius: 4, border: '1px solid #d9d9d9' }}
+            />
+          </div>
+          <div>
+            <div style={{ fontSize: 12, marginBottom: 4 }}>单耗(kg炸药/t)</div>
+            <input
+              type="number"
+              value={recordForm.powderFactor}
+              onChange={(e) => setRecordForm((prev) => ({ ...prev, powderFactor: e.target.value }))}
+              style={{ width: '100%', padding: '6px 8px', fontSize: 12, borderRadius: 4, border: '1px solid #d9d9d9' }}
+            />
+          </div>
+        </div>
+        <div style={{ textAlign: 'right' }}>
+          <button
+            type="button"
+            onClick={() => {
+              setRecordModalMode(null);
+              setEditingKey(null);
+            }}
+            style={{
+              padding: '6px 12px',
+              fontSize: 12,
+              borderRadius: 4,
+              border: '1px solid #d9d9d9',
+              background: '#fff',
+              color: '#595959',
+              cursor: 'pointer',
+              marginRight: 8,
+            }}
+          >
+            取消
+          </button>
+          <button
+            type="button"
+            onClick={handleSubmitRecord}
+            style={{
+              padding: '6px 12px',
+              fontSize: 12,
+              borderRadius: 4,
+              border: '1px solid #1677ff',
+              background: '#1677ff',
+              color: '#fff',
+              cursor: 'pointer',
+            }}
+          >
+            保存
+          </button>
+        </div>
+      </SimpleModal>
     </div>
   );
 }
@@ -840,54 +1045,96 @@ function SectionUnderground() {
   const [drivageLedger, setDrivageLedger] = React.useState(undergroundMock.drivageLedger);
   const [stopingLedger, setStopingLedger] = React.useState(undergroundMock.stopingLedger);
   const [subTab, setSubTab] = React.useState<'drivage' | 'stoping' | 'plan' | 'dilution' | 'safety'>('drivage');
+  const [drivageModalMode, setDrivageModalMode] = React.useState<'create' | 'edit' | null>(null);
+  const [drivageForm, setDrivageForm] = React.useState({
+    date: '2025-11-16',
+    roadway: '',
+    shift: '白班',
+    length: '',
+    rockClass: '',
+    drillingMethod: '',
+    remark: '',
+  });
+  const [drivageEditingKey, setDrivageEditingKey] = React.useState<{
+    date: string;
+    roadway: string;
+    shift: string;
+  } | null>(null);
+
+  const [stopingModalMode, setStopingModalMode] = React.useState<'create' | 'edit' | null>(null);
+  const [stopingForm, setStopingForm] = React.useState({
+    stope: '',
+    method: '充填法',
+    date: '2025-11-16',
+    oreTonnage: '',
+    avgGradeFe: '',
+    dilutionRate: '',
+    filling: '是',
+  });
+  const [stopingEditingKey, setStopingEditingKey] = React.useState<{
+    stope: string;
+    date: string;
+  } | null>(null);
 
   const handleAddDrivage = () => {
-    const date = window.prompt('日期', '2025-11-16');
-    if (!date) return;
-    const roadway = window.prompt('巷道', '') || '';
-    const shift = window.prompt('班次', '白班') || '白班';
-    const lengthInput = window.prompt('进尺(m)', '0');
-    const rockClass = window.prompt('岩性', '') || '';
-    const drillingMethod = window.prompt('施工方法', '') || '';
-    const remark = window.prompt('备注', '') || '';
-
-    setDrivageLedger((prev) => [
-      ...prev,
-      {
-        date,
-        roadway,
-        shift,
-        length: lengthInput ? Number(lengthInput) || 0 : 0,
-        rockClass,
-        drillingMethod,
-        remark,
-      },
-    ]);
+    setDrivageModalMode('create');
+    setDrivageEditingKey(null);
+    setDrivageForm({
+      date: '2025-11-16',
+      roadway: '',
+      shift: '白班',
+      length: '',
+      rockClass: '',
+      drillingMethod: '',
+      remark: '',
+    });
   };
 
   const handleEditDrivage = (row: (typeof undergroundMock.drivageLedger)[number]) => {
-    const roadway = window.prompt('巷道', row.roadway) || row.roadway;
-    const shift = window.prompt('班次', row.shift) || row.shift;
-    const lengthInput = window.prompt('进尺(m)', String(row.length));
-    const rockClass = window.prompt('岩性', row.rockClass) || row.rockClass;
-    const drillingMethod = window.prompt('施工方法', row.drillingMethod) || row.drillingMethod;
-    const remark = window.prompt('备注', row.remark) || row.remark;
+    setDrivageModalMode('edit');
+    setDrivageEditingKey({ date: row.date, roadway: row.roadway, shift: row.shift });
+    setDrivageForm({
+      date: row.date,
+      roadway: row.roadway,
+      shift: row.shift,
+      length: String(row.length),
+      rockClass: row.rockClass,
+      drillingMethod: row.drillingMethod,
+      remark: row.remark,
+    });
+  };
 
-    setDrivageLedger((prev) =>
-      prev.map((r) =>
-        r.date === row.date && r.roadway === row.roadway && r.shift === row.shift
-          ? {
-              ...r,
-              roadway,
-              shift,
-              length: lengthInput ? Number(lengthInput) || row.length : row.length,
-              rockClass,
-              drillingMethod,
-              remark,
-            }
-          : r,
-      ),
-    );
+  const handleSubmitDrivage = () => {
+    if (!drivageForm.date || !drivageForm.roadway || !drivageForm.shift) {
+      alert('请填写日期、巷道和班次');
+      return;
+    }
+    const nextRow = {
+      date: drivageForm.date,
+      roadway: drivageForm.roadway,
+      shift: drivageForm.shift,
+      length: drivageForm.length ? Number(drivageForm.length) || 0 : 0,
+      rockClass: drivageForm.rockClass,
+      drillingMethod: drivageForm.drillingMethod,
+      remark: drivageForm.remark,
+    };
+
+    if (drivageModalMode === 'create') {
+      setDrivageLedger((prev) => [...prev, nextRow]);
+    } else if (drivageModalMode === 'edit' && drivageEditingKey) {
+      setDrivageLedger((prev) =>
+        prev.map((r) =>
+          r.date === drivageEditingKey.date &&
+          r.roadway === drivageEditingKey.roadway &&
+          r.shift === drivageEditingKey.shift
+            ? nextRow
+            : r,
+        ),
+      );
+    }
+
+    setDrivageModalMode(null);
+    setDrivageEditingKey(null);
   };
 
   const handleDeleteDrivage = (row: (typeof undergroundMock.drivageLedger)[number]) => {
@@ -900,52 +1147,62 @@ function SectionUnderground() {
   };
 
   const handleAddStoping = () => {
-    const stope = window.prompt('采场', '') || '';
-    if (!stope) return;
-    const method = window.prompt('方法', '充填法') || '充填法';
-    const date = window.prompt('日期', '2025-11-16') || '2025-11-16';
-    const oreTonnageInput = window.prompt('采出矿量(t)', '0');
-    const avgGradeFeInput = window.prompt('平均品位(Fe, %)', '0');
-    const dilutionRateInput = window.prompt('贫化率(%)', '0');
-    const fillingInput = window.prompt('是否充填(是/否)', '是') || '是';
-
-    setStopingLedger((prev) => [
-      ...prev,
-      {
-        stope,
-        method,
-        date,
-        oreTonnage: oreTonnageInput ? Number(oreTonnageInput) || 0 : 0,
-        avgGradeFe: avgGradeFeInput ? Number(avgGradeFeInput) || 0 : 0,
-        dilutionRate: dilutionRateInput ? Number(dilutionRateInput) || 0 : 0,
-        filling: fillingInput === '是',
-      },
-    ]);
+    setStopingModalMode('create');
+    setStopingEditingKey(null);
+    setStopingForm({
+      stope: '',
+      method: '充填法',
+      date: '2025-11-16',
+      oreTonnage: '',
+      avgGradeFe: '',
+      dilutionRate: '',
+      filling: '是',
+    });
   };
 
   const handleEditStoping = (row: (typeof undergroundMock.stopingLedger)[number]) => {
-    const method = window.prompt('方法', row.method) || row.method;
-    const date = window.prompt('日期', row.date) || row.date;
-    const oreTonnageInput = window.prompt('采出矿量(t)', String(row.oreTonnage));
-    const avgGradeFeInput = window.prompt('平均品位(Fe, %)', String(row.avgGradeFe));
-    const dilutionRateInput = window.prompt('贫化率(%)', String(row.dilutionRate));
-    const fillingInput = window.prompt('是否充填(是/否)', row.filling ? '是' : '否') || (row.filling ? '是' : '否');
+    setStopingModalMode('edit');
+    setStopingEditingKey({ stope: row.stope, date: row.date });
+    setStopingForm({
+      stope: row.stope,
+      method: row.method,
+      date: row.date,
+      oreTonnage: String(row.oreTonnage),
+      avgGradeFe: String(row.avgGradeFe),
+      dilutionRate: String(row.dilutionRate),
+      filling: row.filling ? '是' : '否',
+    });
+  };
 
-    setStopingLedger((prev) =>
-      prev.map((r) =>
-        r.stope === row.stope && r.date === row.date
-          ? {
-              ...r,
-              method,
-              date,
-              oreTonnage: oreTonnageInput ? Number(oreTonnageInput) || row.oreTonnage : row.oreTonnage,
-              avgGradeFe: avgGradeFeInput ? Number(avgGradeFeInput) || row.avgGradeFe : row.avgGradeFe,
-              dilutionRate: dilutionRateInput ? Number(dilutionRateInput) || row.dilutionRate : row.dilutionRate,
-              filling: fillingInput === '是',
-            }
-          : r,
-      ),
-    );
+  const handleSubmitStoping = () => {
+    if (!stopingForm.stope || !stopingForm.date) {
+      alert('请填写采场和日期');
+      return;
+    }
+    const nextRow = {
+      stope: stopingForm.stope,
+      method: stopingForm.method,
+      date: stopingForm.date,
+      oreTonnage: stopingForm.oreTonnage ? Number(stopingForm.oreTonnage) || 0 : 0,
+      avgGradeFe: stopingForm.avgGradeFe ? Number(stopingForm.avgGradeFe) || 0 : 0,
+      dilutionRate: stopingForm.dilutionRate ? Number(stopingForm.dilutionRate) || 0 : 0,
+      filling: stopingForm.filling === '是',
+    };
+
+    if (stopingModalMode === 'create') {
+      setStopingLedger((prev) => [...prev, nextRow]);
+    } else if (stopingModalMode === 'edit' && stopingEditingKey) {
+      setStopingLedger((prev) =>
+        prev.map((r) =>
+          r.stope === stopingEditingKey.stope && r.date === stopingEditingKey.date
+            ? nextRow
+            : r,
+        ),
+      );
+    }
+
+    setStopingModalMode(null);
+    setStopingEditingKey(null);
   };
 
   const handleDeleteStoping = (row: (typeof undergroundMock.stopingLedger)[number]) => {
