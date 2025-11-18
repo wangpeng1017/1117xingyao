@@ -7,6 +7,7 @@ export type NavKey =
   | 'equipment'
   | 'analytics'
   | 'safety'
+  | 'alarmCenter'
   | 'mobile';
 
 export const navItems: { key: NavKey; label: string }[] = [
@@ -18,6 +19,7 @@ export const navItems: { key: NavKey; label: string }[] = [
   { key: 'equipment', label: '设备管理与预测性维护' },
   { key: 'analytics', label: '矿山决策分析' },
   { key: 'safety', label: '安全环保管理' },
+  { key: 'alarmCenter', label: '集中报警管理' },
   { key: 'mobile', label: '移动端' },
 ];
 
