@@ -780,7 +780,7 @@ function SectionOpenPit() {
 
       {subTab === 'plan' && (
         <div style={{ marginTop: 8 }}>
-          <h3 style={{ margin: '0 0 8px 0' }}>生产规划（露采阶段示例）</h3>
+          <h3 style={{ margin: '0 0 8px 0' }}>生产规划（露采阶段）</h3>
           <BasicTable
             headers={['计划类型', '期间/阶段', '对象', '计划矿石量(t)', '计划剥离量(m³)', '关键说明']}
             rows={planRows}
@@ -790,7 +790,7 @@ function SectionOpenPit() {
 
       {subTab === 'design' && (
         <div style={{ marginTop: 8 }}>
-          <h3 style={{ margin: '0 0 8px 0' }}>钻爆设计（露天示例）</h3>
+          <h3 style={{ margin: '0 0 8px 0' }}>钻爆设计（露天）</h3>
           <BasicTable
             headers={['设计名称', '孔网参数', '孔深', '装药结构', '单位炸药单耗']}
             rows={designRows}
@@ -803,7 +803,7 @@ function SectionOpenPit() {
 
       {subTab === 'data' && (
         <div style={{ marginTop: 8 }}>
-          <h3 style={{ margin: '0 0 8px 0' }}>数据采集与实时监控（示意）</h3>
+          <h3 style={{ margin: '0 0 8px 0' }}>数据采集与实时监控</h3>
           <ul style={{ margin: 0, paddingLeft: 18, fontSize: 12, color: '#595959' }}>
             <li>日生产数据：按班次录入挖掘、运输、钻爆等数据，与采剥计划自动勾稽。</li>
             <li>实时数据：接入卡车称重、GPS、边坡监测等 IoT 数据，形成采场实时看板。</li>
@@ -1309,7 +1309,7 @@ function SectionUnderground() {
       )}
       {subTab === 'plan' && (
         <div style={{ marginTop: 8 }}>
-          <h3 style={{ margin: '0 0 8px 0' }}>生产规划（井下掘进/采矿/充填示例）</h3>
+          <h3 style={{ margin: '0 0 8px 0' }}>生产规划（井下掘进/采矿/充填）</h3>
           <BasicTable
             headers={['计划类型', '期间/阶段', '对象', '计划工作量', '单位', '关键说明']}
             rows={planRows}
@@ -1321,7 +1321,7 @@ function SectionUnderground() {
       )}
       {subTab === 'dilution' && (
         <div style={{ marginTop: 8 }}>
-          <h3 style={{ margin: '0 0 8px 0' }}>井下贫化控制（采场对比示例）</h3>
+          <h3 style={{ margin: '0 0 8px 0' }}>井下贫化控制（采场对比）</h3>
           <BasicTable
             headers={['采场', '平均品位(Fe, %)', '贫化率(%)', '评价', '控制要点']}
             rows={dilutionRows}
@@ -1333,7 +1333,7 @@ function SectionUnderground() {
       )}
       {subTab === 'safety' && (
         <div style={{ marginTop: 8 }}>
-          <h3 style={{ margin: '0 0 8px 0' }}>安全与监控指标看板（示例）</h3>
+          <h3 style={{ margin: '0 0 8px 0' }}>安全与监控指标看板</h3>
           <BasicTable
             headers={['日期', '系统', '指标', '数值', '状态', '说明']}
             rows={safetyRows}
