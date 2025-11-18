@@ -7,6 +7,7 @@ export type NavKey =
   | 'equipment'
   | 'analytics'
   | 'safety'
+  | 'qualityCost'
   | 'alarmCenter'
   | 'mobile';
 
@@ -19,6 +20,7 @@ export const navItems: { key: NavKey; label: string }[] = [
   { key: 'equipment', label: '设备管理与预测性维护' },
   { key: 'analytics', label: '矿山决策分析' },
   { key: 'safety', label: '安全环保管理' },
+  { key: 'qualityCost', label: '质量与成本管控' },
   { key: 'alarmCenter', label: '集中报警管理' },
   { key: 'mobile', label: '移动端' },
 ];
@@ -1940,5 +1942,59 @@ export const mobileMock = {
       status: '待审批',
       submittedAt: '2025-11-15 09:10',
     },
+  ],
+};
+
+// 10. 质量与成本管控
+export const qualityCostMock = {
+  kpis: [
+    { name: '产品一次交检合格率', value: 98.5, unit: '%' },
+    { name: '本月选矿单位成本', value: 48.6, unit: '元/t' },
+    { name: '药剂成本占比', value: 19.4, unit: '%' },
+  ] as Kpi[],
+  qualityTrace: [
+    {
+      batchId: 'CON-20251115-01',
+      product: '铜精矿',
+      customer: '冶炼厂 A',
+      issue: '水分偏高',
+      status: '已关闭',
+      responsible: '质量工程师 张伟',
+      createdAt: '2025-11-15 09:30',
+      closedAt: '2025-11-15 15:20',
+    },
+    {
+      batchId: 'CON-20251114-03',
+      product: '铜精矿',
+      customer: '冶炼厂 B',
+      issue: '品位波动偏大',
+      status: '跟踪中',
+      responsible: '工艺工程师 李强',
+      createdAt: '2025-11-14 10:15',
+      closedAt: null,
+    },
+    {
+      batchId: 'CON-20251113-02',
+      product: '铁精矿',
+      customer: '钢厂 C',
+      issue: '粒度偏粗',
+      status: '已关闭',
+      responsible: '质量工程师 王敏',
+      createdAt: '2025-11-13 14:05',
+      closedAt: '2025-11-13 18:40',
+    },
+  ],
+  costItems: [
+    { category: '电力成本', amount: 1_068_000, percentage: 41.3 },
+    { category: '药剂材料', amount: 502_000, percentage: 19.4 },
+    { category: '人工成本', amount: 610_000, percentage: 23.6 },
+    { category: '维修备件', amount: 180_000, percentage: 7.0 },
+    { category: '折旧摊销', amount: 212_000, percentage: 8.2 },
+  ],
+  realtimeCost: [
+    { time: '08:00', oreTonnage: 3200, totalCost: 155_000, unitCost: 48.4 },
+    { time: '10:00', oreTonnage: 6400, totalCost: 311_000, unitCost: 48.6 },
+    { time: '12:00', oreTonnage: 9600, totalCost: 466_000, unitCost: 48.5 },
+    { time: '14:00', oreTonnage: 12_800, totalCost: 620_000, unitCost: 48.4 },
   ],
 };

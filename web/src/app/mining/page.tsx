@@ -18,6 +18,7 @@ import {
   equipmentMock,
   analyticsMock,
   safetyMock,
+  qualityCostMock,
   mobileMock,
 } from "@/lib/miningMockData";
 import { digitalTwinMock } from "@/lib/digitalTwinMockData";
@@ -4344,6 +4345,54 @@ function SectionSafety() {
   );
 }
 
+function SectionQualityCost() {
+  return (
+    <div>
+      <h2>质量与成本管控</h2>
+      <p style={{ fontSize: 12, color: "#666", marginBottom: 12 }}>
+        围绕精矿产品质量和选矿成本，从质量问题追溯、成本结构分析和实时单位成本三个维度进行综合管控。
+      </p>
+      <KpiCards items={qualityCostMock.kpis} />
+
+      <h3 style={{ marginTop: 16, marginBottom: 8 }}>质量问题追溯</h3>
+      <BasicTable
+        headers={["批次号", "产品", "客户", "问题描述", "状态", "责任人", "创建时间", "关闭时间"]}
+        rows={qualityCostMock.qualityTrace.map((q) => [
+          q.batchId,
+          q.product,
+          q.customer,
+          q.issue,
+          q.status,
+          q.responsible,
+          q.createdAt,
+          q.closedAt ?? '-',
+        ])}
+      />
+
+      <h3 style={{ marginTop: 16, marginBottom: 8 }}>成本结构分析</h3>
+      <BasicTable
+        headers={["成本类别", "金额(元)", "占比(%)"]}
+        rows={qualityCostMock.costItems.map((c) => [
+          c.category,
+          c.amount.toLocaleString(),
+          c.percentage,
+        ])}
+      />
+
+      <h3 style={{ marginTop: 16, marginBottom: 8 }}>实时单位成本（当班）</h3>
+      <BasicTable
+        headers={["时间", "累计处理矿量(t)", "累计成本(元)", "单位成本(元/t)"]}
+        rows={qualityCostMock.realtimeCost.map((r) => [
+          r.time,
+          r.oreTonnage,
+          r.totalCost.toLocaleString(),
+          r.unitCost,
+        ])}
+      />
+    </div>
+  );
+}
+
 function SectionMobile() {
   const [todos, setTodos] = React.useState(mobileMock.todoList);
   const [approvals, setApprovals] = React.useState(mobileMock.approvals);
@@ -4707,6 +4756,8 @@ function renderSection(key: NavKey) {
       return <SectionAnalytics />;
     case "safety":
       return <SectionSafety />;
+    case "qualityCost":
+      return <SectionQualityCost />;
     case "alarmCenter":
       return <SectionAlarmCenter />;
     case "mobile":
@@ -4725,6 +4776,7 @@ const navIcons: Record<NavKey, string> = {
   equipment: '⚙️',
   analytics: '📈',
   safety: '🛡️',
+  qualityCost: '💰',
   alarmCenter: '🚨',
   mobile: '📱',
 };
