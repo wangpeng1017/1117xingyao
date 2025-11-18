@@ -183,6 +183,191 @@ export const geoInfoMock = {
   ],
 };
 
+// 钻孔数据库 demo（用于地质信息管理模块中“钻孔数据库”视图）
+export const drillholeDbMock = {
+  kpis: [
+    { name: '钻孔总数', value: 3, unit: '口' },
+    { name: '累计进尺', value: 1550, unit: 'm' },
+    { name: '平均孔深', value: 516.7, unit: 'm' },
+    { name: '已完工钻孔', value: 3, unit: '口' },
+  ] as Kpi[],
+  drillholes: [
+    {
+      holeId: 'ZK001',
+      collarX: 450123.45,
+      collarY: 3421567.89,
+      collarZ: 1250.5,
+      depth: 500,
+      azimuth: 45,
+      dip: -60,
+      coordinateSystem: 'CGCS2000',
+      projectId: 'GEO-2025-01',
+      contractor: '地质勘探公司A',
+      startDate: '2024-01-15',
+      endDate: '2024-02-28',
+      status: '已完工',
+    },
+    {
+      holeId: 'ZK002',
+      collarX: 450223.15,
+      collarY: 3421667.32,
+      collarZ: 1245.8,
+      depth: 450,
+      azimuth: 90,
+      dip: -55,
+      coordinateSystem: 'CGCS2000',
+      projectId: 'GEO-2025-01',
+      contractor: '地质勘探公司A',
+      startDate: '2024-02-10',
+      endDate: '2024-03-15',
+      status: '已完工',
+    },
+    {
+      holeId: 'ZK003',
+      collarX: 450323.78,
+      collarY: 3421467.55,
+      collarZ: 1255.2,
+      depth: 600,
+      azimuth: 135,
+      dip: -65,
+      coordinateSystem: 'CGCS2000',
+      projectId: 'GEO-2025-03',
+      contractor: '地质勘探公司B',
+      startDate: '2024-03-01',
+      endDate: '2024-04-20',
+      status: '已完工',
+    },
+  ],
+};
+
+// 三维地质模型 demo（地层 / 构造 / DEM 概要）
+export const geology3DMock = {
+  kpis: [
+    {
+      name: '建模范围',
+      value: 'X:450000-451000 / Y:3421000-3422000 / Z:800-1300m',
+    },
+    { name: '地层单元数', value: 3, unit: '个' },
+    { name: '主要断层条数', value: 2, unit: '条' },
+  ] as Kpi[],
+  layers: [
+    {
+      code: 'Q',
+      name: '第四系覆盖层',
+      age: '第四纪',
+      lithology: '粘土、砂砾',
+      thicknessRange: '5-20m',
+      avgThickness: 12.5,
+      color: '#D2B48C',
+    },
+    {
+      code: 'γ',
+      name: '燕山期花岗岩',
+      age: '侏罗纪-白垩纪',
+      lithology: '中粒花岗岩',
+      thicknessRange: '>500m',
+      avgThickness: 500,
+      color: '#F5F5DC',
+    },
+    {
+      code: 'γ-Cu',
+      name: '铜矿化蚀变带',
+      age: '侏罗纪-白垩纪',
+      lithology: '蚀变花岗岩、铜矿化',
+      thicknessRange: '50-150m',
+      avgThickness: 85,
+      color: '#90EE90',
+    },
+  ],
+  faults: [
+    {
+      id: 'F1',
+      name: '星耀主断层',
+      type: '正断层',
+      strike: 45,
+      dip: 70,
+      throwDesc: '50-80m',
+      remark: '主要控矿构造，矿体沿断层带分布',
+    },
+    {
+      id: 'F2',
+      name: '次级断层',
+      type: '逆断层',
+      strike: 120,
+      dip: 65,
+      throwDesc: '20-30m',
+      remark: '次要控矿构造',
+    },
+  ],
+};
+
+// 三维资源模型 demo（矿体 & 品位分布概要）
+export const resource3DMock = {
+  kpis: [
+    { name: '矿体数量', value: 2, unit: '个' },
+    { name: '资源量合计', value: 28_500_000, unit: 't' },
+    { name: 'Cu 金属量合计', value: 484_510, unit: 't' },
+  ] as Kpi[],
+  oreBodies: [
+    {
+      id: 'KT-I',
+      name: '主矿体',
+      type: '浸染型铜矿',
+      category: '控制 + 推断',
+      tonnage: 24_300_000,
+      avgGradeCu: 1.82,
+      avgGradeAu: 0.5,
+    },
+    {
+      id: 'KT-II',
+      name: '次要矿体',
+      type: '细脉浸染型铜矿',
+      category: '推断',
+      tonnage: 4_200_000,
+      avgGradeCu: 1.35,
+      avgGradeAu: 0.35,
+    },
+  ],
+  gradeBands: [
+    { range: '0.5-1.0% Cu', tonnage: 3_500_000, percentage: 12.3 },
+    { range: '1.0-1.5% Cu', tonnage: 9_800_000, percentage: 34.4 },
+    { range: '1.5-2.0% Cu', tonnage: 10_200_000, percentage: 35.8 },
+    { range: '2.0-2.5% Cu', tonnage: 3_800_000, percentage: 13.3 },
+    { range: '>2.5% Cu', tonnage: 1_200_000, percentage: 4.2 },
+  ],
+};
+
+// 地质经济联动分析 demo（钻探进尺与资源价值联动）
+export const geoEconomicMock = {
+  kpis: [
+    { name: '本年度地勘投资', value: 1_792_500, unit: '元' },
+    { name: '新增资源价值', value: 13_240_532_000, unit: '元' },
+    { name: '勘探投入产出比', value: 7387.18, unit: '倍' },
+  ] as Kpi[],
+  byProject: [
+    {
+      projectId: 'GEO-2025-01',
+      name: '东翼深部挖潜勘探项目',
+      drillMeters: 3000,
+      invest: 780_000,
+      newResourceTonnage: 5_200_000,
+      newCuMetal: 94_640,
+      newValue: 8_003_472_000,
+      roi: 10_260,
+    },
+    {
+      projectId: 'GEO-2025-03',
+      name: '北山边界详查项目',
+      drillMeters: 2000,
+      invest: 580_000,
+      newResourceTonnage: 3_800_000,
+      newCuMetal: 62_700,
+      newValue: 5_237_060_000,
+      roi: 9_025,
+    },
+  ],
+};
+
 // 2. 露采生产管理（采剥量 & 采剥比）
 export const openPitMock = {
   kpis: [

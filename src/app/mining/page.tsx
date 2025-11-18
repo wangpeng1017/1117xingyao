@@ -7,6 +7,10 @@ import {
   type NavKey,
   type ProductionPlan,
   geoInfoMock,
+  drillholeDbMock,
+  geology3DMock,
+  resource3DMock,
+  geoEconomicMock,
   openPitMock,
   undergroundMock,
   concentratorMock,
@@ -114,6 +118,9 @@ function BasicTable({
 
 function SectionGeoInfo() {
   const [projects, setProjects] = React.useState(geoInfoMock.projects);
+  const [subTab, setSubTab] = React.useState<
+    'projects' | 'drillholes' | 'geology3d' | 'resource3d' | 'economy'
+  >('projects');
 
   const handleAddProject = () => {
     const id = window.prompt('项目编号', '');
@@ -152,8 +159,12 @@ function SectionGeoInfo() {
     const plannedMetersInput = window.prompt('设计进尺(m)', String(project.plannedMeters));
     const completedMetersInput = window.prompt('完成进尺(m)', String(project.completedMeters));
 
-    const plannedMeters = plannedMetersInput ? Number(plannedMetersInput) || project.plannedMeters : project.plannedMeters;
-    const completedMeters = completedMetersInput ? Number(completedMetersInput) || project.completedMeters : project.completedMeters;
+    const plannedMeters = plannedMetersInput
+      ? Number(plannedMetersInput) || project.plannedMeters
+      : project.plannedMeters;
+    const completedMeters = completedMetersInput
+      ? Number(completedMetersInput) || project.completedMeters
+      : project.completedMeters;
 
     setProjects((prev) =>
       prev.map((p) =>
@@ -181,125 +192,302 @@ function SectionGeoInfo() {
     <div>
       <h2>地质信息管理</h2>
       <p style={{ fontSize: 12, color: "#666", marginBottom: 12 }}>
-        管理地勘项目、钻孔进度等基础地质信息，支撑生产运营一体化。
+        管理地勘项目、钻孔数据库、三维模型和地质经济指标联动，为集团决策提供支撑。
       </p>
+
+      {/* 子 Tab 导航 */}
       <div
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
+          display: 'flex',
+          gap: 8,
           marginTop: 16,
-          marginBottom: 8,
+          marginBottom: 16,
+          borderBottom: '1px solid #eee',
         }}
       >
-        <h3 style={{ margin: 0 }}>勘探项目</h3>
-        <button
-          type="button"
-          onClick={handleAddProject}
-          style={{
-            padding: "6px 12px",
-            fontSize: 12,
-            borderRadius: 4,
-            border: "1px solid #1677ff",
-            background: "#1677ff",
-            color: "#fff",
-            cursor: "pointer",
-          }}
-        >
-          新建项目
-        </button>
+        {[
+          { key: 'projects', label: '📁 项目与进度' },
+          { key: 'drillholes', label: '🕳️ 钻孔数据库' },
+          { key: 'geology3d', label: '🗺️ 三维地质模型' },
+          { key: 'resource3d', label: '💎 三维资源模型' },
+          { key: 'economy', label: '📊 地质经济联动分析' },
+        ].map((t) => (
+          <div
+            key={t.key}
+            onClick={() => setSubTab(t.key as typeof subTab)}
+            style={{
+              padding: '8px 16px',
+              cursor: 'pointer',
+              borderBottom:
+                subTab === t.key ? '2px solid #1677ff' : '2px solid transparent',
+              color: subTab === t.key ? '#1677ff' : '#666',
+              fontWeight: subTab === t.key ? 600 : 400,
+              fontSize: 13,
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {t.label}
+          </div>
+        ))}
       </div>
 
-      <div
-        style={{
-          borderRadius: 8,
-          border: "1px solid #eee",
-          overflow: "hidden",
-          background: "#fff",
-        }}
-      >
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
-          <thead style={{ background: "#fafafa" }}>
-            <tr>
-              {["项目编号", "项目名称", "业主", "施工单位", "阶段", "设计进尺(m)", "完成进尺(m)", "操作"].map((h) => (
-                <th
-                  key={h}
-                  style={{
-                    textAlign: "left",
-                    padding: "8px 12px",
-                    borderBottom: "1px solid #eee",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {h}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {projects.map((p) => (
-              <tr key={p.id}>
-                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{p.id}</td>
-                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{p.name}</td>
-                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{p.owner}</td>
-                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{p.contractor}</td>
-                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{p.stage}</td>
-                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{p.plannedMeters}</td>
-                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{p.completedMeters}</td>
-                <td
-                  style={{
-                    padding: "8px 12px",
-                    borderBottom: "1px solid #f0f0f0",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  <button
-                    type="button"
-                    onClick={() => handleEditProject(p)}
-                    style={{
-                      padding: "4px 8px",
-                      fontSize: 12,
-                      marginRight: 8,
-                      borderRadius: 4,
-                      border: "1px solid #1677ff",
-                      background: "#1677ff",
-                      color: "#fff",
-                      cursor: "pointer",
-                    }}
-                  >
-                    编辑
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleDeleteProject(p.id)}
-                    style={{
-                      padding: "4px 8px",
-                      fontSize: 12,
-                      borderRadius: 4,
-                      border: "1px solid #ff4d4f",
-                      background: "#fff",
-                      color: "#ff4d4f",
-                      cursor: "pointer",
-                    }}
-                  >
-                    删除
-                  </button>
-                </td>
-              </tr>
-            ))}
-            {projects.length === 0 && (
-              <tr>
-                <td
-                  colSpan={8}
-                  style={{ padding: "12px 0", textAlign: "center", color: "#999" }}
-                >
-                  暂无项目，请先新建。
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+      {/* 1）项目与钻探进度 */}
+      {subTab === 'projects' && (
+        <div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginTop: 8,
+              marginBottom: 8,
+            }}
+          >
+            <h3 style={{ margin: 0 }}>勘探项目</h3>
+            <button
+              type="button"
+              onClick={handleAddProject}
+              style={{
+                padding: "6px 12px",
+                fontSize: 12,
+                borderRadius: 4,
+                border: "1px solid #1677ff",
+                background: "#1677ff",
+                color: "#fff",
+                cursor: "pointer",
+              }}
+            >
+              新建项目
+            </button>
+          </div>
+
+          <div
+            style={{
+              borderRadius: 8,
+              border: "1px solid #eee",
+              overflow: "hidden",
+              background: "#fff",
+            }}
+          >
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
+              <thead style={{ background: "#fafafa" }}>
+                <tr>
+                  {["项目编号", "项目名称", "业主", "施工单位", "阶段", "设计进尺(m)", "完成进尺(m)", "操作"].map((h) => (
+                    <th
+                      key={h}
+                      style={{
+                        textAlign: "left",
+                        padding: "8px 12px",
+                        borderBottom: "1px solid #eee",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {projects.map((p) => (
+                  <tr key={p.id}>
+                    <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{p.id}</td>
+                    <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{p.name}</td>
+                    <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{p.owner}</td>
+                    <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{p.contractor}</td>
+                    <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{p.stage}</td>
+                    <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{p.plannedMeters}</td>
+                    <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{p.completedMeters}</td>
+                    <td
+                      style={{
+                        padding: "8px 12px",
+                        borderBottom: "1px solid #f0f0f0",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => handleEditProject(p)}
+                        style={{
+                          padding: "4px 8px",
+                          fontSize: 12,
+                          marginRight: 8,
+                          borderRadius: 4,
+                          border: "1px solid #1677ff",
+                          background: "#1677ff",
+                          color: "#fff",
+                          cursor: "pointer",
+                        }}
+                      >
+                        编辑
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteProject(p.id)}
+                        style={{
+                          padding: "4px 8px",
+                          fontSize: 12,
+                          borderRadius: 4,
+                          border: "1px solid #ff4d4f",
+                          background: "#fff",
+                          color: "#ff4d4f",
+                          cursor: "pointer",
+                        }}
+                      >
+                        删除
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {projects.length === 0 && (
+                  <tr>
+                    <td
+                      colSpan={8}
+                      style={{ padding: "12px 0", textAlign: "center", color: "#999" }}
+                    >
+                      暂无项目，请先新建。
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {/* 2）钻孔数据库 */}
+      {subTab === 'drillholes' && (
+        <div>
+          <h3 style={{ marginTop: 0, marginBottom: 8 }}>钻孔数据库</h3>
+          <p style={{ fontSize: 12, color: '#666', marginBottom: 8 }}>
+            管理钻孔开孔坐标、孔深、方位/倾角等工程信息，为三维地质建模和资源量估算提供基础数据。
+          </p>
+          <KpiCards items={drillholeDbMock.kpis} />
+          <BasicTable
+            headers={[
+              '钻孔编号',
+              'X',
+              'Y',
+              'Z',
+              '孔深(m)',
+              '方位/倾角',
+              '施工单位',
+              '状态',
+            ]}
+            rows={drillholeDbMock.drillholes.map((h) => [
+              h.holeId,
+              h.collarX.toFixed(2),
+              h.collarY.toFixed(2),
+              h.collarZ.toFixed(1),
+              h.depth,
+              `${h.azimuth}° / ${h.dip}°`,
+              h.contractor,
+              h.status,
+            ])}
+          />
+        </div>
+      )}
+
+      {/* 3）三维地质模型 */}
+      {subTab === 'geology3d' && (
+        <div>
+          <h3 style={{ marginTop: 0, marginBottom: 8 }}>三维地质模型概要</h3>
+          <p style={{ fontSize: 12, color: '#666', marginBottom: 8 }}>
+            直观展示地层、构造及 DEM 高程信息，可对接外部三维软件进行可视化。
+          </p>
+          <KpiCards items={geology3DMock.kpis} />
+          <h4 style={{ marginTop: 8, marginBottom: 4 }}>主要地层单元</h4>
+          <BasicTable
+            headers={['代号', '名称', '时代', '岩性', '厚度范围', '平均厚度(m)']}
+            rows={geology3DMock.layers.map((l) => [
+              l.code,
+              l.name,
+              l.age,
+              l.lithology,
+              l.thicknessRange,
+              l.avgThickness,
+            ])}
+          />
+          <h4 style={{ marginTop: 16, marginBottom: 4 }}>主要断层</h4>
+          <BasicTable
+            headers={['编号', '名称', '性质', '走向(°)', '倾角(°)', '断距', '说明']}
+            rows={geology3DMock.faults.map((f) => [
+              f.id,
+              f.name,
+              f.type,
+              f.strike,
+              f.dip,
+              f.throwDesc,
+              f.remark,
+            ])}
+          />
+        </div>
+      )}
+
+      {/* 4）三维资源模型 */}
+      {subTab === 'resource3d' && (
+        <div>
+          <h3 style={{ marginTop: 0, marginBottom: 8 }}>三维资源模型</h3>
+          <p style={{ fontSize: 12, color: '#666', marginBottom: 8 }}>
+            基于三维块体模型统计矿体资源量与品位分布，可作为采矿设计与生产计划编制的资源基础。
+          </p>
+          <KpiCards items={resource3DMock.kpis} />
+          <h4 style={{ marginTop: 8, marginBottom: 4 }}>矿体汇总</h4>
+          <BasicTable
+            headers={['矿体编号', '名称', '类型', '资源类别', '资源量(t)', 'Cu(%)', 'Au(g/t)']}
+            rows={resource3DMock.oreBodies.map((o) => [
+              o.id,
+              o.name,
+              o.type,
+              o.category,
+              o.tonnage,
+              o.avgGradeCu,
+              o.avgGradeAu,
+            ])}
+          />
+          <h4 style={{ marginTop: 16, marginBottom: 4 }}>Cu 品位区间分布</h4>
+          <BasicTable
+            headers={['品位区间', '矿石量(t)', '占比(%)']}
+            rows={resource3DMock.gradeBands.map((g) => [
+              g.range,
+              g.tonnage,
+              g.percentage,
+            ])}
+          />
+        </div>
+      )}
+
+      {/* 5）地质经济联动分析 */}
+      {subTab === 'economy' && (
+        <div>
+          <h3 style={{ marginTop: 0, marginBottom: 8 }}>地质经济联动分析</h3>
+          <p style={{ fontSize: 12, color: '#666', marginBottom: 8 }}>
+            将钻探进尺、样品分析与新增资源量、资源价值联动，实现“地质成果 → 经济价值”的量化闭环，可对接集团财务系统。
+          </p>
+          <KpiCards items={geoEconomicMock.kpis} />
+          <BasicTable
+            headers={[
+              '项目编号',
+              '项目名称',
+              '钻探进尺(m)',
+              '勘探投资(元)',
+              '新增资源量(t)',
+              '新增 Cu 金属量(t)',
+              '新增资源价值(元)',
+              '投入产出比(倍)',
+            ]}
+            rows={geoEconomicMock.byProject.map((p) => [
+              p.projectId,
+              p.name,
+              p.drillMeters,
+              p.invest,
+              p.newResourceTonnage,
+              p.newCuMetal,
+              p.newValue,
+              p.roi,
+            ])}
+          />
+        </div>
+      )}
     </div>
   );
 }
