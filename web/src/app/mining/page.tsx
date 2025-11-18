@@ -3491,7 +3491,7 @@ function SectionEquipment() {
     <div>
       <h2>设备管理与预测性维护</h2>
       <p style={{ fontSize: 12, color: "#666", marginBottom: 12 }}>
-        管理设备档案、运行与检修记录，引入传感器数据进行预测性维护预警。
+        管理设备档案、运行与检修记录，引入传感器数据进行预测性维护预警，并通过 EAM 备件与工单闭环支撑设备全生命周期管理。
       </p>
       <KpiCards items={equipmentMock.kpis} />
 
@@ -3703,6 +3703,31 @@ function SectionEquipment() {
           <div style={{ color: "#999" }}>暂无预警记录。</div>
         )}
       </div>
+
+      <h3 style={{ marginTop: 16, marginBottom: 8 }}>EAM 备件与检修计划</h3>
+      <BasicTable
+        headers={["设备编号", "上次检修", "下次检修计划", "关键备件", "库存数量", "库存状态"]}
+        rows={equipmentMock.eamRecords.map((r) => [
+          r.equipmentId,
+          r.lastRepairDate,
+          r.nextRepairPlan,
+          r.sparePart,
+          r.spareStock,
+          r.inventoryStatus,
+        ])}
+      />
+
+      <h3 style={{ marginTop: 16, marginBottom: 8 }}>维修工单闭环</h3>
+      <BasicTable
+        headers={["工单号", "触发来源", "负责班组", "状态", "截止时间"]}
+        rows={equipmentMock.workOrders.map((w) => [
+          w.id,
+          w.trigger,
+          w.assignedTeam,
+          w.status,
+          w.due,
+        ])}
+      />
     </div>
   );
 }

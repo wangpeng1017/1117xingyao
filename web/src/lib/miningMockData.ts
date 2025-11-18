@@ -1526,6 +1526,55 @@ export const equipmentMock = {
       suggestion: '立即停机检查联轴器及地脚螺栓，必要时更换叶轮。',
     },
   ],
+  eamRecords: [
+    {
+      equipmentId: 'EQ-CR-01',
+      lastRepairDate: '2025-11-10',
+      nextRepairPlan: '2025-12-05',
+      sparePart: '主轴组件',
+      spareStock: 2,
+      inventoryStatus: '正常',
+    },
+    {
+      equipmentId: 'EQ-BM-01',
+      lastRepairDate: '2025-11-05',
+      nextRepairPlan: '2025-11-25',
+      sparePart: '联轴器+轴承',
+      spareStock: 1,
+      inventoryStatus: '需补货',
+    },
+    {
+      equipmentId: 'EQ-PU-03',
+      lastRepairDate: '2025-10-30',
+      nextRepairPlan: '2025-11-16',
+      sparePart: '机封组件',
+      spareStock: 0,
+      inventoryStatus: '紧急采购',
+    },
+  ],
+  workOrders: [
+    {
+      id: 'WO-20251115-001',
+      trigger: 'SAG磨振动超限',
+      assignedTeam: '机修二班',
+      status: '执行中',
+      due: '2025-11-16 18:00',
+    },
+    {
+      id: 'WO-20251115-004',
+      trigger: '尾矿泵机封泄漏',
+      assignedTeam: '泵站检修组',
+      status: '待验收',
+      due: '2025-11-15 22:00',
+    },
+    {
+      id: 'WO-20251116-002',
+      trigger: '主皮带减速机温度上升',
+      assignedTeam: '机电一班',
+      status: '已派工',
+      due: '2025-11-17 08:00',
+    },
+  ],
 };
 
 // 7. 矿山决策分析（驾驶舱 KPI）
