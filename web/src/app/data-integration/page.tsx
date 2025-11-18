@@ -1,0 +1,486 @@
+"use client";
+
+import React, { useState } from "react";
+import Layout from "@/components/Layout";
+import {
+  diNavItems,
+  diMock,
+  type DINavKey,
+  type SystemConnection,
+  type DataMapping,
+  type SyncTask,
+} from "@/lib/dataIntegrationMockData";
+
+function BasicTable({
+  headers,
+  rows,
+}: {
+  headers: string[];
+  rows: (string | number | null)[][];
+}) {
+  return (
+    <div
+      style={{
+        borderRadius: 8,
+        border: "1px solid #eee",
+        overflow: "hidden",
+        background: "#fff",
+      }}
+    >
+      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
+        <thead style={{ background: "#fafafa" }}>
+          <tr>
+            {headers.map((h) => (
+              <th
+                key={h}
+                style={{
+                  textAlign: "left",
+                  padding: "8px 12px",
+                  borderBottom: "1px solid #eee",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {h}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, idx) => (
+            <tr key={idx}>
+              {row.map((cell, i) => (
+                <td
+                  key={i}
+                  style={{
+                    padding: "8px 12px",
+                    borderBottom: "1px solid #f0f0f0",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {cell ?? "-"}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function SectionSystemConnection() {
+  const [systems, setSystems] = useState(diMock.systemConnections);
+
+  const handleAdd = () => {
+    const id = window.prompt("系统编号", "");
+    if (!id) return;
+    const name = window.prompt("系统名称", "") || "";
+    const type = window.prompt("系统类型 (ERP/HR/SCM/Portal/MES)", "ERP") || "ERP";
+    const provider = window.prompt("供应商", "") || "";
+    const status = window.prompt("状态 (已连接/未连接)", "未连接") || "未连接";
+    const lastSync = window.prompt("最后同步时间", "") || "";
+
+    setSystems((prev) => [...prev, { id, name, type, provider, status, lastSync }]);
+  };
+
+  const handleEdit = (sys: SystemConnection) => {
+    const name = window.prompt("系统名称", sys.name) || sys.name;
+    const type = window.prompt("系统类型", sys.type) || sys.type;
+    const provider = window.prompt("供应商", sys.provider) || sys.provider;
+    const status = window.prompt("状态", sys.status) || sys.status;
+    const lastSync = window.prompt("最后同步时间", sys.lastSync) || sys.lastSync;
+
+    setSystems((prev) =>
+      prev.map((s) => (s.id === sys.id ? { ...s, name, type, provider, status, lastSync } : s))
+    );
+  };
+
+  const handleDelete = (id: string) => {
+    if (!window.confirm("确定删除该系统对接吗?")) return;
+    setSystems((prev) => prev.filter((s) => s.id !== id));
+  };
+
+  return (
+    <div>
+      <h2>系统对接管理</h2>
+      <p style={{ fontSize: 12, color: "#666", marginBottom: 12 }}>
+        管理与金蝶云星瀚ERP、人力资源、供应链、云之家、东方测控等外部系统的对接配置与连接状态。
+      </p>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 16, marginBottom: 8 }}>
+        <h3 style={{ margin: 0 }}>系统对接列表</h3>
+        <button
+          type="button"
+          onClick={handleAdd}
+          style={{
+            padding: "6px 12px",
+            fontSize: 12,
+            borderRadius: 4,
+            border: "1px solid #1677ff",
+            background: "#1677ff",
+            color: "#fff",
+            cursor: "pointer",
+          }}
+        >
+          新增对接
+        </button>
+      </div>
+      <div style={{ borderRadius: 8, border: "1px solid #eee", overflow: "hidden", background: "#fff" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
+          <thead style={{ background: "#fafafa" }}>
+            <tr>
+              {["系统编号", "系统名称", "类型", "供应商", "状态", "最后同步时间", "操作"].map((h) => (
+                <th key={h} style={{ textAlign: "left", padding: "8px 12px", borderBottom: "1px solid #eee", whiteSpace: "nowrap" }}>
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {systems.map((s) => (
+              <tr key={s.id}>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.id}</td>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.name}</td>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.type}</td>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.provider}</td>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.status}</td>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.lastSync}</td>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>
+                  <button
+                    type="button"
+                    onClick={() => handleEdit(s)}
+                    style={{
+                      padding: "4px 8px",
+                      fontSize: 12,
+                      marginRight: 8,
+                      borderRadius: 4,
+                      border: "1px solid #1677ff",
+                      background: "#1677ff",
+                      color: "#fff",
+                      cursor: "pointer",
+                    }}
+                  >
+                    编辑
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(s.id)}
+                    style={{
+                      padding: "4px 8px",
+                      fontSize: 12,
+                      borderRadius: 4,
+                      border: "1px solid #ff4d4f",
+                      background: "#fff",
+                      color: "#ff4d4f",
+                      cursor: "pointer",
+                    }}
+                  >
+                    删除
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function SectionDataMapping() {
+  const [mappings, setMappings] = useState(diMock.dataMappings);
+
+  const handleAdd = () => {
+    const id = window.prompt("映射编号", "");
+    if (!id) return;
+    const name = window.prompt("映射名称", "") || "";
+    const sourceSystem = window.prompt("源系统", "") || "";
+    const targetSystem = window.prompt("目标系统", "") || "";
+    const mappingFieldsStr = window.prompt("映射字段数", "0");
+    const mappingFields = mappingFieldsStr ? Number(mappingFieldsStr) || 0 : 0;
+    const status = window.prompt("状态 (已启用/已停用)", "已启用") || "已启用";
+
+    setMappings((prev) => [...prev, { id, name, sourceSystem, targetSystem, mappingFields, status }]);
+  };
+
+  const handleEdit = (map: DataMapping) => {
+    const name = window.prompt("映射名称", map.name) || map.name;
+    const sourceSystem = window.prompt("源系统", map.sourceSystem) || map.sourceSystem;
+    const targetSystem = window.prompt("目标系统", map.targetSystem) || map.targetSystem;
+    const mappingFieldsStr = window.prompt("映射字段数", String(map.mappingFields));
+    const mappingFields = mappingFieldsStr ? Number(mappingFieldsStr) || map.mappingFields : map.mappingFields;
+    const status = window.prompt("状态", map.status) || map.status;
+
+    setMappings((prev) =>
+      prev.map((m) => (m.id === map.id ? { ...m, name, sourceSystem, targetSystem, mappingFields, status } : m))
+    );
+  };
+
+  const handleDelete = (id: string) => {
+    if (!window.confirm("确定删除该数据映射吗?")) return;
+    setMappings((prev) => prev.filter((m) => m.id !== id));
+  };
+
+  return (
+    <div>
+      <h2>数据映射配置</h2>
+      <p style={{ fontSize: 12, color: "#666", marginBottom: 12 }}>
+        配置不同系统间的数据字段映射关系,实现数据格式转换和字段对应。
+      </p>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 16, marginBottom: 8 }}>
+        <h3 style={{ margin: 0 }}>数据映射列表</h3>
+        <button
+          type="button"
+          onClick={handleAdd}
+          style={{
+            padding: "6px 12px",
+            fontSize: 12,
+            borderRadius: 4,
+            border: "1px solid #1677ff",
+            background: "#1677ff",
+            color: "#fff",
+            cursor: "pointer",
+          }}
+        >
+          新增映射
+        </button>
+      </div>
+      <div style={{ borderRadius: 8, border: "1px solid #eee", overflow: "hidden", background: "#fff" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
+          <thead style={{ background: "#fafafa" }}>
+            <tr>
+              {["映射编号", "映射名称", "源系统", "目标系统", "映射字段数", "状态", "操作"].map((h) => (
+                <th key={h} style={{ textAlign: "left", padding: "8px 12px", borderBottom: "1px solid #eee", whiteSpace: "nowrap" }}>
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {mappings.map((m) => (
+              <tr key={m.id}>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{m.id}</td>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{m.name}</td>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{m.sourceSystem}</td>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{m.targetSystem}</td>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{m.mappingFields}</td>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{m.status}</td>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>
+                  <button
+                    type="button"
+                    onClick={() => handleEdit(m)}
+                    style={{
+                      padding: "4px 8px",
+                      fontSize: 12,
+                      marginRight: 8,
+                      borderRadius: 4,
+                      border: "1px solid #1677ff",
+                      background: "#1677ff",
+                      color: "#fff",
+                      cursor: "pointer",
+                    }}
+                  >
+                    编辑
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(m.id)}
+                    style={{
+                      padding: "4px 8px",
+                      fontSize: 12,
+                      borderRadius: 4,
+                      border: "1px solid #ff4d4f",
+                      background: "#fff",
+                      color: "#ff4d4f",
+                      cursor: "pointer",
+                    }}
+                  >
+                    删除
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function SectionSyncTask() {
+  const [tasks, setTasks] = useState(diMock.syncTasks);
+
+  const handleAdd = () => {
+    const id = window.prompt("任务编号", "");
+    if (!id) return;
+    const name = window.prompt("任务名称", "") || "";
+    const source = window.prompt("数据源", "") || "";
+    const target = window.prompt("目标系统", "") || "";
+    const frequency = window.prompt("同步频率 (实时/10s/每小时/每日)", "实时") || "实时";
+    const lastRun = window.prompt("最后运行时间", "") || "";
+    const status = window.prompt("状态 (运行中/已完成/已停止)", "已停止") || "已停止";
+
+    setTasks((prev) => [...prev, { id, name, source, target, frequency, lastRun, status }]);
+  };
+
+  const handleEdit = (task: SyncTask) => {
+    const name = window.prompt("任务名称", task.name) || task.name;
+    const source = window.prompt("数据源", task.source) || task.source;
+    const target = window.prompt("目标系统", task.target) || task.target;
+    const frequency = window.prompt("同步频率", task.frequency) || task.frequency;
+    const lastRun = window.prompt("最后运行时间", task.lastRun) || task.lastRun;
+    const status = window.prompt("状态", task.status) || task.status;
+
+    setTasks((prev) =>
+      prev.map((t) => (t.id === task.id ? { ...t, name, source, target, frequency, lastRun, status } : t))
+    );
+  };
+
+  const handleDelete = (id: string) => {
+    if (!window.confirm("确定删除该同步任务吗?")) return;
+    setTasks((prev) => prev.filter((t) => t.id !== id));
+  };
+
+  return (
+    <div>
+      <h2>同步任务管理</h2>
+      <p style={{ fontSize: 12, color: "#666", marginBottom: 12 }}>
+        创建和管理数据同步任务,设置同步频率、调度策略和异常处理规则。
+      </p>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 16, marginBottom: 8 }}>
+        <h3 style={{ margin: 0 }}>同步任务列表</h3>
+        <button
+          type="button"
+          onClick={handleAdd}
+          style={{
+            padding: "6px 12px",
+            fontSize: 12,
+            borderRadius: 4,
+            border: "1px solid #1677ff",
+            background: "#1677ff",
+            color: "#fff",
+            cursor: "pointer",
+          }}
+        >
+          新增任务
+        </button>
+      </div>
+      <div style={{ borderRadius: 8, border: "1px solid #eee", overflow: "hidden", background: "#fff" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
+          <thead style={{ background: "#fafafa" }}>
+            <tr>
+              {["任务编号", "任务名称", "数据源", "目标系统", "同步频率", "最后运行时间", "状态", "操作"].map((h) => (
+                <th key={h} style={{ textAlign: "left", padding: "8px 12px", borderBottom: "1px solid #eee", whiteSpace: "nowrap" }}>
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {tasks.map((t) => (
+              <tr key={t.id}>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{t.id}</td>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{t.name}</td>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{t.source}</td>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{t.target}</td>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{t.frequency}</td>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{t.lastRun}</td>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{t.status}</td>
+                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>
+                  <button
+                    type="button"
+                    onClick={() => handleEdit(t)}
+                    style={{
+                      padding: "4px 8px",
+                      fontSize: 12,
+                      marginRight: 8,
+                      borderRadius: 4,
+                      border: "1px solid #1677ff",
+                      background: "#1677ff",
+                      color: "#fff",
+                      cursor: "pointer",
+                    }}
+                  >
+                    编辑
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(t.id)}
+                    style={{
+                      padding: "4px 8px",
+                      fontSize: 12,
+                      borderRadius: 4,
+                      border: "1px solid #ff4d4f",
+                      background: "#fff",
+                      color: "#ff4d4f",
+                      cursor: "pointer",
+                    }}
+                  >
+                    删除
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function SectionDataMonitoring() {
+  return (
+    <div>
+      <h2>数据流监控</h2>
+      <p style={{ fontSize: 12, color: "#666", marginBottom: 12 }}>
+        实时监控各系统间数据流转情况,查看传输吞吐量、延迟和异常告警。
+      </p>
+      <h3 style={{ marginTop: 16, marginBottom: 8 }}>数据流概况</h3>
+      <BasicTable
+        headers={["源系统", "目标系统", "数据类型", "吞吐量", "状态"]}
+        rows={diMock.dataFlows.map((f) => [f.source, f.target, f.dataType, f.throughput, f.status])}
+      />
+    </div>
+  );
+}
+
+export default function DataIntegrationPage() {
+  const [activeKey, setActiveKey] = useState<DINavKey>("systemConnection");
+
+  return (
+    <Layout>
+      <aside
+        style={{
+          width: 220,
+          background: "#fff",
+          borderRight: "1px solid #eee",
+          padding: "16px 0",
+          overflow: "auto",
+        }}
+      >
+        {diNavItems.map((item) => (
+          <div
+            key={item.key}
+            onClick={() => setActiveKey(item.key)}
+            style={{
+              padding: "10px 16px",
+              fontSize: 14,
+              cursor: "pointer",
+              background: activeKey === item.key ? "#e6f7ff" : "transparent",
+              borderLeft: activeKey === item.key ? "3px solid #1677ff" : "3px solid transparent",
+              color: activeKey === item.key ? "#1677ff" : "#333",
+            }}
+          >
+            {item.label}
+          </div>
+        ))}
+      </aside>
+
+      <main style={{ flex: 1, padding: 24, background: "#f5f5f5", overflow: "auto" }}>
+        {activeKey === "systemConnection" && <SectionSystemConnection />}
+        {activeKey === "dataMapping" && <SectionDataMapping />}
+        {activeKey === "syncTask" && <SectionSyncTask />}
+        {activeKey === "dataMonitoring" && <SectionDataMonitoring />}
+      </main>
+    </Layout>
+  );
+}
