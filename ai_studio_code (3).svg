@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750">
+  <!-- Background -->
+  <rect x="0" y="0" width="1000" height="750" fill="#f0fdf4"/>
+  
+  <!-- Title -->
+  <text x="500" y="35" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#2c3e50">星耀特特崂选矿安全环保一体化管理系统业务架构图</text>
+
+  <!-- Left Pillar: Standards -->
+  <rect x="10" y="60" width="40" height="670" fill="#27ae60" rx="5"/>
+  <text x="35" y="395" font-family="'Microsoft YaHei', sans-serif" font-size="16" fill="white" text-anchor="middle" writing-mode="tb" letter-spacing="4">安全生产法律法规与环保标准体系</text>
+
+  <!-- Right Pillar: Emergency -->
+  <rect x="950" y="60" width="40" height="670" fill="#c0392b" rx="5"/>
+  <text x="975" y="395" font-family="'Microsoft YaHei', sans-serif" font-size="16" fill="white" text-anchor="middle" writing-mode="tb" letter-spacing="4">应急指挥与事故救援保障体系</text>
+
+  <!-- L5 决策展示层 -->
+  <g transform="translate(60, 60)">
+    <rect x="0" y="0" width="880" height="70" fill="#16a085" rx="5"/>
+    <text x="20" y="42" font-family="'Microsoft YaHei', sans-serif" font-size="16" fill="white" font-weight="bold">L5 决策展示层</text>
+    
+    <rect x="180" y="10" width="200" height="50" fill="white" rx="3" stroke="#117a65" stroke-width="1"/>
+    <text x="280" y="40" font-family="'Microsoft YaHei', sans-serif" font-size="14" text-anchor="middle" fill="#333">安环态势一张图(GIS)</text>
+    
+    <rect x="400" y="10" width="200" height="50" fill="white" rx="3" stroke="#117a65" stroke-width="1"/>
+    <text x="500" y="40" font-family="'Microsoft YaHei', sans-serif" font-size="14" text-anchor="middle">应急指挥调度台</text>
+    
+    <rect x="620" y="10" width="200" height="50" fill="white" rx="3" stroke="#117a65" stroke-width="1"/>
+    <text x="720" y="40" font-family="'Microsoft YaHei', sans-serif" font-size="14" text-anchor="middle">隐患随手拍 APP</text>
+  </g>
+
+  <!-- L4 协同集成层 -->
+  <g transform="translate(60, 145)">
+    <rect x="0" y="0" width="880" height="50" fill="#ecf0f1" stroke="#95a5a6" stroke-width="1" rx="5"/>
+    <text x="440" y="32" font-family="'Microsoft YaHei', sans-serif" font-size="14" text-anchor="middle" fill="#2c3e50">L4 协同集成层 —— 对接政府监管平台 / 视频监控系统 / 广播系统 / HR培训</text>
+  </g>
+
+  <!-- L3 业务应用层 (Core) -->
+  <g transform="translate(60, 210)">
+    <rect x="0" y="0" width="880" height="260" fill="#ffffff" stroke="#2c3e50" stroke-width="2" rx="5"/>
+    <text x="20" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="16" fill="#2c3e50" font-weight="bold">L3 核心业务应用层</text>
+
+    <!-- Module 1: Dual Prevention -->
+    <g transform="translate(30, 50)">
+      <rect x="0" y="0" width="150" height="190" fill="#fdedec" stroke="#e74c3c" stroke-width="2" rx="5"/>
+      <rect x="0" y="0" width="150" height="35" fill="#e74c3c" rx="5"/>
+      <text x="75" y="23" font-family="'Microsoft YaHei', sans-serif" font-size="13" fill="white" text-anchor="middle" font-weight="bold">双重预防机制</text>
+      <text x="75" y="60" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">风险分级管控</text>
+      <text x="75" y="90" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">隐患排查治理</text>
+      <text x="75" y="120" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">安全风险地图</text>
+      <text x="75" y="150" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">整改闭环追踪</text>
+    </g>
+
+    <!-- Module 2: On-site Safety -->
+    <g transform="translate(200, 50)">
+      <rect x="0" y="0" width="150" height="190" fill="#fff8e1" stroke="#f39c12" stroke-width="2" rx="5"/>
+      <rect x="0" y="0" width="150" height="35" fill="#f39c12" rx="5"/>
+      <text x="75" y="23" font-family="'Microsoft YaHei', sans-serif" font-size="13" fill="white" text-anchor="middle" font-weight="bold">现场作业安全</text>
+      <text x="75" y="60" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">人员精确定位</text>
+      <text x="75" y="90" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">电子作业票许可</text>
+      <text x="75" y="120" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">AI 违章抓拍</text>
+      <text x="75" y="150" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">外包商管理</text>
+    </g>
+
+    <!-- Module 3: Major Hazard -->
+    <g transform="translate(370, 50)">
+      <rect x="0" y="0" width="150" height="190" fill="#fdf2e9" stroke="#d35400" stroke-width="2" rx="5"/>
+      <rect x="0" y="0" width="150" height="35" fill="#d35400" rx="5"/>
+      <text x="75" y="23" font-family="'Microsoft YaHei', sans-serif" font-size="13" fill="white" text-anchor="middle" font-weight="bold">重大危险源</text>
+      <text x="75" y="60" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">尾矿库安全监测</text>
+      <text x="75" y="90" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">危化品(药剂)监管</text>
+      <text x="75" y="120" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">消防设施管理</text>
+      <text x="75" y="150" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">防汛监测预警</text>
+    </g>
+
+    <!-- Module 4: Environment -->
+    <g transform="translate(540, 50)">
+      <rect x="0" y="0" width="150" height="190" fill="#e8f8f5" stroke="#2ecc71" stroke-width="2" rx="5"/>
+      <rect x="0" y="0" width="150" height="35" fill="#2ecc71" rx="5"/>
+      <text x="75" y="23" font-family="'Microsoft YaHei', sans-serif" font-size="13" fill="white" text-anchor="middle" font-weight="bold">环保与碳排</text>
+      <text x="75" y="60" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">在线环境监测</text>
+      <text x="75" y="90" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">固废/危废管理</text>
+      <text x="75" y="120" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">水资源利用分析</text>
+      <text x="75" y="150" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">碳足迹与能耗</text>
+    </g>
+    
+     <!-- Module 5: Health & Emergency -->
+    <g transform="translate(710, 50)">
+      <rect x="0" y="0" width="150" height="190" fill="#eafaf1" stroke="#1abc9c" stroke-width="2" rx="5"/>
+      <rect x="0" y="0" width="150" height="35" fill="#1abc9c" rx="5"/>
+      <text x="75" y="23" font-family="'Microsoft YaHei', sans-serif" font-size="13" fill="white" text-anchor="middle" font-weight="bold">职业健康与应急</text>
+      <text x="75" y="60" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">员工健康档案</text>
+      <text x="75" y="90" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">劳保用品管理</text>
+      <text x="75" y="120" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">应急预案/演练</text>
+      <text x="75" y="150" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">应急物资调度</text>
+    </g>
+  </g>
+
+  <!-- L2 Platform Layer -->
+  <g transform="translate(60, 485)">
+    <rect x="0" y="0" width="880" height="100" fill="#bdc3c7" rx="5"/>
+    <text x="20" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="16" fill="#2c3e50" font-weight="bold">L2 工业互联网平台层 (PaaS)</text>
+    
+    <rect x="100" y="45" width="200" height="40" fill="white" rx="3"/>
+    <text x="200" y="70" font-family="'Microsoft YaHei', sans-serif" font-size="13" text-anchor="middle">视频 AI 分析中心</text>
+    
+    <rect x="340" y="45" width="200" height="40" fill="white" rx="3"/>
+    <text x="440" y="70" font-family="'Microsoft YaHei', sans-serif" font-size="13" text-anchor="middle">安全风险评估模型</text>
+    
+    <rect x="580" y="45" width="200" height="40" fill="white" rx="3"/>
+    <text x="680" y="70" font-family="'Microsoft YaHei', sans-serif" font-size="13" text-anchor="middle">GIS 空间服务引擎</text>
+  </g>
+
+  <!-- L1 Edge Layer -->
+  <g transform="translate(60, 600)">
+    <rect x="0" y="0" width="880" height="120" fill="#2c3e50" rx="5"/>
+    <text x="20" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="16" fill="white" font-weight="bold">L1 现场感知与边缘层</text>
+
+    <g transform="translate(50, 50)">
+        <rect x="0" y="0" width="140" height="50" fill="#2c3e50" stroke="white" stroke-width="1" rx="3"/>
+        <text x="70" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="white" text-anchor="middle">气体/粉尘/噪声传感器</text>
+    </g>
+    
+    <g transform="translate(210, 50)">
+        <rect x="0" y="0" width="140" height="50" fill="#2c3e50" stroke="white" stroke-width="1" rx="3"/>
+        <text x="70" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="white" text-anchor="middle">AI 智能摄像头</text>
+    </g>
+
+    <g transform="translate(370, 50)">
+        <rect x="0" y="0" width="140" height="50" fill="#2c3e50" stroke="white" stroke-width="1" rx="3"/>
+        <text x="70" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="white" text-anchor="middle">UWB/北斗定位标签</text>
+    </g>
+
+    <g transform="translate(530, 50)">
+        <rect x="0" y="0" width="140" height="50" fill="#2c3e50" stroke="white" stroke-width="1" rx="3"/>
+        <text x="70" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="white" text-anchor="middle">尾矿库监测仪</text>
+    </g>
+
+    <g transform="translate(690, 50)">
+        <rect x="0" y="0" width="140" height="50" fill="#2c3e50" stroke="white" stroke-width="1" rx="3"/>
+        <text x="70" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="white" text-anchor="middle">水质/流量监测</text>
+    </g>
+  </g>
+
+  <!-- Connection Lines -->
+  <line x1="500" y1="600" x2="500" y2="585" stroke="#95a5a6" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="500" y1="485" x2="500" y2="470" stroke="#95a5a6" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="500" y1="210" x2="500" y2="195" stroke="#95a5a6" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="500" y1="145" x2="500" y2="130" stroke="#95a5a6" stroke-width="2" stroke-dasharray="5,5"/>
+
+</svg>

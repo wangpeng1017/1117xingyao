@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750">
+  <!-- Background -->
+  <rect x="0" y="0" width="1000" height="750" fill="#f4f7fc"/>
+  
+  <!-- Title -->
+  <text x="500" y="35" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#2c3e50">星耀特特崂选矿设备全生命周期管理系统业务架构图</text>
+
+  <!-- Left Pillar: Standards -->
+  <rect x="10" y="60" width="40" height="670" fill="#2c3e50" rx="5"/>
+  <text x="35" y="395" font-family="'Microsoft YaHei', sans-serif" font-size="16" fill="white" text-anchor="middle" writing-mode="tb" letter-spacing="4">设备维护维修标准体系(ISO55000)</text>
+
+  <!-- Right Pillar: Security -->
+  <rect x="950" y="60" width="40" height="670" fill="#2c3e50" rx="5"/>
+  <text x="975" y="395" font-family="'Microsoft YaHei', sans-serif" font-size="16" fill="white" text-anchor="middle" writing-mode="tb" letter-spacing="4">数据安全与运维保障体系</text>
+
+  <!-- L5 决策展示层 -->
+  <g transform="translate(60, 60)">
+    <rect x="0" y="0" width="880" height="70" fill="#3498db" rx="5"/>
+    <text x="20" y="42" font-family="'Microsoft YaHei', sans-serif" font-size="16" fill="white" font-weight="bold">L5 决策展示层</text>
+    
+    <rect x="180" y="10" width="200" height="50" fill="white" rx="3" stroke="#2980b9" stroke-width="1"/>
+    <text x="280" y="40" font-family="'Microsoft YaHei', sans-serif" font-size="14" text-anchor="middle" fill="#333">设备健康驾驶舱(IOC)</text>
+    
+    <rect x="400" y="10" width="200" height="50" fill="white" rx="3" stroke="#2980b9" stroke-width="1"/>
+    <text x="500" y="40" font-family="'Microsoft YaHei', sans-serif" font-size="14" text-anchor="middle">OEE 效能分析看板</text>
+    
+    <rect x="620" y="10" width="200" height="50" fill="white" rx="3" stroke="#2980b9" stroke-width="1"/>
+    <text x="720" y="40" font-family="'Microsoft YaHei', sans-serif" font-size="14" text-anchor="middle">移动维保 APP / 钉钉</text>
+  </g>
+
+  <!-- L4 协同集成层 -->
+  <g transform="translate(60, 145)">
+    <rect x="0" y="0" width="880" height="50" fill="#ecf0f1" stroke="#95a5a6" stroke-width="1" rx="5"/>
+    <text x="440" y="32" font-family="'Microsoft YaHei', sans-serif" font-size="14" text-anchor="middle" fill="#2c3e50">L4 协同集成层 (API/ESB) —— 对接 ERP 备件采购 / 财务核算 / 生产计划</text>
+  </g>
+
+  <!-- L3 业务应用层 (Core) -->
+  <g transform="translate(60, 210)">
+    <rect x="0" y="0" width="880" height="260" fill="#ffffff" stroke="#34495e" stroke-width="2" rx="5"/>
+    <text x="20" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="16" fill="#2c3e50" font-weight="bold">L3 核心业务应用层</text>
+
+    <!-- Module 1: Asset Archive -->
+    <g transform="translate(30, 50)">
+      <rect x="0" y="0" width="150" height="190" fill="#e8f8f5" stroke="#16a085" stroke-width="2" rx="5"/>
+      <rect x="0" y="0" width="150" height="35" fill="#16a085" rx="5"/>
+      <text x="75" y="23" font-family="'Microsoft YaHei', sans-serif" font-size="13" fill="white" text-anchor="middle" font-weight="bold">设备资产台账</text>
+      <text x="75" y="60" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">设备全生命周期</text>
+      <text x="75" y="90" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">设备树/BOM管理</text>
+      <text x="75" y="120" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">技术档案/图纸</text>
+      <text x="75" y="150" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">特种设备管理</text>
+    </g>
+
+    <!-- Module 2: Inspection -->
+    <g transform="translate(200, 50)">
+      <rect x="0" y="0" width="150" height="190" fill="#f4ecf7" stroke="#8e44ad" stroke-width="2" rx="5"/>
+      <rect x="0" y="0" width="150" height="35" fill="#8e44ad" rx="5"/>
+      <text x="75" y="23" font-family="'Microsoft YaHei', sans-serif" font-size="13" fill="white" text-anchor="middle" font-weight="bold">运行与点巡检</text>
+      <text x="75" y="60" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">智能巡检路线</text>
+      <text x="75" y="90" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">移动扫码点检</text>
+      <text x="75" y="120" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">润滑/保养管理</text>
+      <text x="75" y="150" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">运行工时统计</text>
+    </g>
+
+    <!-- Module 3: Diagnosis -->
+    <g transform="translate(370, 50)">
+      <rect x="0" y="0" width="150" height="190" fill="#fcf3cf" stroke="#f39c12" stroke-width="2" rx="5"/>
+      <rect x="0" y="0" width="150" height="35" fill="#f39c12" rx="5"/>
+      <text x="75" y="23" font-family="'Microsoft YaHei', sans-serif" font-size="13" fill="white" text-anchor="middle" font-weight="bold">智能诊断与预警</text>
+      <text x="75" y="60" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">振动/温度监测</text>
+      <text x="75" y="90" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">故障诊断模型</text>
+      <text x="75" y="120" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">劣化趋势分析</text>
+      <text x="75" y="150" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">分级报警推送</text>
+    </g>
+
+    <!-- Module 4: Maintenance -->
+    <g transform="translate(540, 50)">
+      <rect x="0" y="0" width="150" height="190" fill="#d6eaf8" stroke="#2980b9" stroke-width="2" rx="5"/>
+      <rect x="0" y="0" width="150" height="35" fill="#2980b9" rx="5"/>
+      <text x="75" y="23" font-family="'Microsoft YaHei', sans-serif" font-size="13" fill="white" text-anchor="middle" font-weight="bold">维修工单管理</text>
+      <text x="75" y="60" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">维修计划排程</text>
+      <text x="75" y="90" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">工单闭环流转</text>
+      <text x="75" y="120" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">故障知识库</text>
+      <text x="75" y="150" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">维修绩效考核</text>
+    </g>
+    
+     <!-- Module 5: Spare Parts -->
+    <g transform="translate(710, 50)">
+      <rect x="0" y="0" width="150" height="190" fill="#f2f4f4" stroke="#7f8c8d" stroke-width="2" rx="5"/>
+      <rect x="0" y="0" width="150" height="35" fill="#7f8c8d" rx="5"/>
+      <text x="75" y="23" font-family="'Microsoft YaHei', sans-serif" font-size="13" fill="white" text-anchor="middle" font-weight="bold">备件与物资</text>
+      <text x="75" y="60" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">备件库存查询</text>
+      <text x="75" y="90" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">需求计划提报</text>
+      <text x="75" y="120" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">领料/退库管理</text>
+      <text x="75" y="150" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">修旧利废管理</text>
+    </g>
+  </g>
+
+  <!-- L2 Platform Layer -->
+  <g transform="translate(60, 485)">
+    <rect x="0" y="0" width="880" height="100" fill="#bdc3c7" rx="5"/>
+    <text x="20" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="16" fill="#2c3e50" font-weight="bold">L2 工业互联网平台层 (PaaS)</text>
+    
+    <rect x="100" y="45" width="200" height="40" fill="white" rx="3"/>
+    <text x="200" y="70" font-family="'Microsoft YaHei', sans-serif" font-size="13" text-anchor="middle">设备物联接入中心</text>
+    
+    <rect x="340" y="45" width="200" height="40" fill="white" rx="3"/>
+    <text x="440" y="70" font-family="'Microsoft YaHei', sans-serif" font-size="13" text-anchor="middle">PHM 故障预测算法引擎</text>
+    
+    <rect x="580" y="45" width="200" height="40" fill="white" rx="3"/>
+    <text x="680" y="70" font-family="'Microsoft YaHei', sans-serif" font-size="13" text-anchor="middle">设备主数据管理 (MDM)</text>
+  </g>
+
+  <!-- L1 Edge Layer -->
+  <g transform="translate(60, 600)">
+    <rect x="0" y="0" width="880" height="120" fill="#34495e" rx="5"/>
+    <text x="20" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="16" fill="white" font-weight="bold">L1 现场感知与边缘层</text>
+
+    <g transform="translate(50, 50)">
+        <rect x="0" y="0" width="140" height="50" fill="#2c3e50" stroke="white" stroke-width="1" rx="3"/>
+        <text x="70" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="white" text-anchor="middle">智能传感器(振动/温)</text>
+    </g>
+    
+    <g transform="translate(210, 50)">
+        <rect x="0" y="0" width="140" height="50" fill="#2c3e50" stroke="white" stroke-width="1" rx="3"/>
+        <text x="70" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="white" text-anchor="middle">DCS/PLC 运行数据</text>
+    </g>
+
+    <g transform="translate(370, 50)">
+        <rect x="0" y="0" width="140" height="50" fill="#2c3e50" stroke="white" stroke-width="1" rx="3"/>
+        <text x="70" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="white" text-anchor="middle">手持点检终端(PDA)</text>
+    </g>
+
+    <g transform="translate(530, 50)">
+        <rect x="0" y="0" width="140" height="50" fill="#2c3e50" stroke="white" stroke-width="1" rx="3"/>
+        <text x="70" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="white" text-anchor="middle">油液在线监测</text>
+    </g>
+
+    <g transform="translate(690, 50)">
+        <rect x="0" y="0" width="140" height="50" fill="#2c3e50" stroke="white" stroke-width="1" rx="3"/>
+        <text x="70" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="white" text-anchor="middle">边缘计算网关</text>
+    </g>
+  </g>
+
+  <!-- Connection Lines -->
+  <line x1="500" y1="600" x2="500" y2="585" stroke="#95a5a6" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="500" y1="485" x2="500" y2="470" stroke="#95a5a6" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="500" y1="210" x2="500" y2="195" stroke="#95a5a6" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="500" y1="145" x2="500" y2="130" stroke="#95a5a6" stroke-width="2" stroke-dasharray="5,5"/>
+
+</svg>

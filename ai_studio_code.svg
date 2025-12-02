@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750">
+  <!-- Background -->
+  <rect x="0" y="0" width="1000" height="750" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="500" y="35" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#2c3e50">星耀特特崂选矿生产管理系统总体业务架构图</text>
+
+  <!-- Left Pillar: Security & Standards -->
+  <rect x="10" y="60" width="40" height="670" fill="#34495e" rx="5"/>
+  <text x="35" y="395" font-family="'Microsoft YaHei', sans-serif" font-size="16" fill="white" text-anchor="middle" writing-mode="tb" letter-spacing="4">安全保障与标准规范体系</text>
+
+  <!-- Right Pillar: O&M -->
+  <rect x="950" y="60" width="40" height="670" fill="#34495e" rx="5"/>
+  <text x="975" y="395" font-family="'Microsoft YaHei', sans-serif" font-size="16" fill="white" text-anchor="middle" writing-mode="tb" letter-spacing="4">运维管理与技术支持体系</text>
+
+  <!-- L5 决策展示层 -->
+  <g transform="translate(60, 60)">
+    <rect x="0" y="0" width="880" height="70" fill="#3498db" rx="5"/>
+    <text x="20" y="42" font-family="'Microsoft YaHei', sans-serif" font-size="16" fill="white" font-weight="bold">L5 决策展示层</text>
+    
+    <!-- Blocks -->
+    <rect x="180" y="10" width="200" height="50" fill="white" rx="3" stroke="#2980b9" stroke-width="1"/>
+    <text x="280" y="40" font-family="'Microsoft YaHei', sans-serif" font-size="14" text-anchor="middle" fill="#333">选矿智能集控大屏(IOC)</text>
+    
+    <rect x="400" y="10" width="200" height="50" fill="white" rx="3" stroke="#2980b9" stroke-width="1"/>
+    <text x="500" y="40" font-family="'Microsoft YaHei', sans-serif" font-size="14" text-anchor="middle">PC WEB 管理端</text>
+    
+    <rect x="620" y="10" width="200" height="50" fill="white" rx="3" stroke="#2980b9" stroke-width="1"/>
+    <text x="720" y="40" font-family="'Microsoft YaHei', sans-serif" font-size="14" text-anchor="middle">移动作业 APP</text>
+  </g>
+
+  <!-- L4 协同集成层 -->
+  <g transform="translate(60, 145)">
+    <rect x="0" y="0" width="880" height="50" fill="#ecf0f1" stroke="#95a5a6" stroke-width="1" rx="5"/>
+    <text x="440" y="32" font-family="'Microsoft YaHei', sans-serif" font-size="14" text-anchor="middle" fill="#2c3e50">L4 协同集成层 (ESB/API网关) —— 对接 ERP / OA / 物资 / 销售系统</text>
+  </g>
+
+  <!-- L3 业务应用层 (Core) -->
+  <g transform="translate(60, 210)">
+    <rect x="0" y="0" width="880" height="260" fill="#ffffff" stroke="#2c3e50" stroke-width="2" rx="5"/>
+    <text x="20" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="16" fill="#2c3e50" font-weight="bold">L3 核心业务应用层</text>
+
+    <!-- Module 1: Plan & Schedule -->
+    <g transform="translate(30, 50)">
+      <rect x="0" y="0" width="150" height="190" fill="#e8f6f3" stroke="#1abc9c" stroke-width="2" rx="5"/>
+      <rect x="0" y="0" width="150" height="35" fill="#1abc9c" rx="5"/>
+      <text x="75" y="23" font-family="'Microsoft YaHei', sans-serif" font-size="13" fill="white" text-anchor="middle" font-weight="bold">计划与调度</text>
+      <text x="75" y="60" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">年/月/日计划分解</text>
+      <text x="75" y="90" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">生产排程优化</text>
+      <text x="75" y="120" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">调度指令下发</text>
+      <text x="75" y="150" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">异常事件与报警</text>
+    </g>
+
+    <!-- Module 2: Execution & Monitor -->
+    <g transform="translate(200, 50)">
+      <rect x="0" y="0" width="150" height="190" fill="#eaf2f8" stroke="#3498db" stroke-width="2" rx="5"/>
+      <rect x="0" y="0" width="150" height="35" fill="#3498db" rx="5"/>
+      <text x="75" y="23" font-family="'Microsoft YaHei', sans-serif" font-size="13" fill="white" text-anchor="middle" font-weight="bold">生产执行与监控</text>
+      <text x="75" y="60" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">全流程实时监控</text>
+      <text x="75" y="90" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">生产台账管理</text>
+      <text x="75" y="120" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">交接班管理</text>
+      <text x="75" y="150" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">停复工管理</text>
+    </g>
+
+    <!-- Module 3: Process & Quality -->
+    <g transform="translate(370, 50)">
+      <rect x="0" y="0" width="150" height="190" fill="#fef9e7" stroke="#f1c40f" stroke-width="2" rx="5"/>
+      <rect x="0" y="0" width="150" height="35" fill="#f1c40f" rx="5"/>
+      <text x="75" y="23" font-family="'Microsoft YaHei', sans-serif" font-size="13" fill="white" text-anchor="middle" font-weight="bold">工艺与质量</text>
+      <text x="75" y="60" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">工艺参数监控</text>
+      <text x="75" y="90" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">药剂添加管理</text>
+      <text x="75" y="120" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">质量数据追溯</text>
+      <text x="75" y="150" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">配矿管理</text>
+    </g>
+
+    <!-- Module 4: Balance & Cost -->
+    <g transform="translate(540, 50)">
+      <rect x="0" y="0" width="150" height="190" fill="#fdedec" stroke="#e74c3c" stroke-width="2" rx="5"/>
+      <rect x="0" y="0" width="150" height="35" fill="#e74c3c" rx="5"/>
+      <text x="75" y="23" font-family="'Microsoft YaHei', sans-serif" font-size="13" fill="white" text-anchor="middle" font-weight="bold">金属平衡与成本</text>
+      <text x="75" y="60" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">计量仪表管理</text>
+      <text x="75" y="90" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">二元/三元金属平衡</text>
+      <text x="75" y="120" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">回收率分析</text>
+      <text x="75" y="150" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">单耗/成本核算</text>
+    </g>
+    
+     <!-- Module 5: Stat & Analysis -->
+    <g transform="translate(710, 50)">
+      <rect x="0" y="0" width="150" height="190" fill="#ebf5fb" stroke="#8e44ad" stroke-width="2" rx="5"/>
+      <rect x="0" y="0" width="150" height="35" fill="#8e44ad" rx="5"/>
+      <text x="75" y="23" font-family="'Microsoft YaHei', sans-serif" font-size="13" fill="white" text-anchor="middle" font-weight="bold">统计分析与报表</text>
+      <text x="75" y="60" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">自动报表(日/周/月)</text>
+      <text x="75" y="90" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">生产绩效考核</text>
+      <text x="75" y="120" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">工序能力分析</text>
+      <text x="75" y="150" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="#333" text-anchor="middle">历史数据回溯</text>
+    </g>
+  </g>
+
+  <!-- L2 Platform Layer -->
+  <g transform="translate(60, 485)">
+    <rect x="0" y="0" width="880" height="100" fill="#bdc3c7" rx="5"/>
+    <text x="20" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="16" fill="#2c3e50" font-weight="bold">L2 工业互联网平台层 (PaaS)</text>
+    
+    <!-- Components -->
+    <rect x="50" y="45" width="180" height="40" fill="white" rx="3"/>
+    <text x="140" y="70" font-family="'Microsoft YaHei', sans-serif" font-size="13" text-anchor="middle">IoT 物联网平台</text>
+    
+    <rect x="250" y="45" width="180" height="40" fill="white" rx="3"/>
+    <text x="340" y="70" font-family="'Microsoft YaHei', sans-serif" font-size="13" text-anchor="middle">金属平衡计算引擎</text>
+    
+    <rect x="450" y="45" width="180" height="40" fill="white" rx="3"/>
+    <text x="540" y="70" font-family="'Microsoft YaHei', sans-serif" font-size="13" text-anchor="middle">实时/历史数据库</text>
+    
+    <rect x="650" y="45" width="180" height="40" fill="white" rx="3"/>
+    <text x="740" y="70" font-family="'Microsoft YaHei', sans-serif" font-size="13" text-anchor="middle">数字孪生模型库</text>
+  </g>
+
+  <!-- L1 Edge Layer -->
+  <g transform="translate(60, 600)">
+    <rect x="0" y="0" width="880" height="120" fill="#2c3e50" rx="5"/>
+    <text x="20" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="16" fill="white" font-weight="bold">L1 现场感知与边缘层</text>
+
+    <!-- Devices -->
+    <g transform="translate(50, 50)">
+        <rect x="0" y="0" width="140" height="50" fill="#34495e" stroke="white" stroke-width="1" rx="3"/>
+        <text x="70" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="white" text-anchor="middle">DCS / PLC 系统</text>
+    </g>
+    
+    <g transform="translate(210, 50)">
+        <rect x="0" y="0" width="140" height="50" fill="#34495e" stroke="white" stroke-width="1" rx="3"/>
+        <text x="70" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="white" text-anchor="middle">LIMS 化验数据</text>
+    </g>
+
+    <g transform="translate(370, 50)">
+        <rect x="0" y="0" width="140" height="50" fill="#34495e" stroke="white" stroke-width="1" rx="3"/>
+        <text x="70" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="white" text-anchor="middle">皮带秤/地磅/流量计</text>
+    </g>
+
+    <g transform="translate(530, 50)">
+        <rect x="0" y="0" width="140" height="50" fill="#34495e" stroke="white" stroke-width="1" rx="3"/>
+        <text x="70" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="white" text-anchor="middle">在线品位/粒度分析仪</text>
+    </g>
+
+    <g transform="translate(690, 50)">
+        <rect x="0" y="0" width="140" height="50" fill="#34495e" stroke="white" stroke-width="1" rx="3"/>
+        <text x="70" y="30" font-family="'Microsoft YaHei', sans-serif" font-size="12" fill="white" text-anchor="middle">水/电/气能源仪表</text>
+    </g>
+  </g>
+
+  <!-- Connection Lines -->
+  <line x1="500" y1="600" x2="500" y2="585" stroke="#7f8c8d" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="500" y1="485" x2="500" y2="470" stroke="#7f8c8d" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="500" y1="210" x2="500" y2="195" stroke="#7f8c8d" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="500" y1="145" x2="500" y2="130" stroke="#7f8c8d" stroke-width="2" stroke-dasharray="5,5"/>
+
+</svg>
