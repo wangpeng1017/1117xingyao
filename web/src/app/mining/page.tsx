@@ -20,6 +20,7 @@ import {
   safetyMock,
   qualityCostMock,
   mobileMock,
+  esgMock,
 } from "@/lib/miningMockData";
 import { digitalTwinMock } from "@/lib/digitalTwinMockData";
 
@@ -564,14 +565,14 @@ function SectionGeoInfo() {
       prev.map((p) =>
         p.id === project.id
           ? {
-              ...p,
-              name,
-              owner,
-              contractor,
-              stage,
-              plannedMeters,
-              completedMeters,
-            }
+            ...p,
+            name,
+            owner,
+            contractor,
+            stage,
+            plannedMeters,
+            completedMeters,
+          }
           : p,
       ),
     );
@@ -1452,8 +1453,8 @@ function SectionUnderground() {
       setDrivageLedger((prev) =>
         prev.map((r) =>
           r.date === drivageEditingKey.date &&
-          r.roadway === drivageEditingKey.roadway &&
-          r.shift === drivageEditingKey.shift
+            r.roadway === drivageEditingKey.roadway &&
+            r.shift === drivageEditingKey.shift
             ? nextRow
             : r,
         ),
@@ -2037,7 +2038,7 @@ function SectionConcentrator() {
             <p style={{ fontSize: 12, color: '#666', marginBottom: 16 }}>
               点击设备查看实时参数（给矿量、矿浆浓度、品位等）
             </p>
-            
+
             {/* SVG 工艺流程图 */}
             <div style={{ position: 'relative', width: '100%', height: 600, overflow: 'auto', background: '#f8f9fa', borderRadius: 8 }}>
               <svg width="1400" height="800" viewBox="0 0 1400 800" style={{ display: 'block' }}>
@@ -2219,7 +2220,7 @@ function SectionConcentrator() {
                   <text x="130" y="0" fontSize="11" fill="#666">警告</text>
                   <circle cx="180" cy="-4" r="4" fill="#ff4d4f" />
                   <text x="190" y="0" fontSize="11" fill="#666">报警</text>
-                  
+
                   <rect x="260" y="-10" width="15" height="15" fill="#4caf50" />
                   <text x="280" y="0" fontSize="11" fill="#666">精矿流程</text>
                   <rect x="350" y="-10" width="15" height="15" fill="#999" />
@@ -2238,9 +2239,9 @@ function SectionConcentrator() {
                 <div style={{ marginTop: 16, padding: 16, background: '#f8f9fa', borderRadius: 8, border: '1px solid #e8e8e8' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
                     <h4 style={{ margin: 0 }}>{equipment.name} - 实时参数</h4>
-                    <span style={{ 
-                      padding: '4px 12px', 
-                      borderRadius: 12, 
+                    <span style={{
+                      padding: '4px 12px',
+                      borderRadius: 12,
                       fontSize: 12,
                       background: equipment.status === 'running' ? '#f6ffed' : equipment.status === 'warning' ? '#fffbe6' : '#fff1f0',
                       color: equipment.status === 'running' ? '#52c41a' : equipment.status === 'warning' ? '#faad14' : '#ff4d4f',
@@ -2251,9 +2252,9 @@ function SectionConcentrator() {
                   </div>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 12 }}>
                     {equipment.parameters.map((param, idx) => (
-                      <div key={idx} style={{ 
-                        padding: 12, 
-                        background: '#fff', 
+                      <div key={idx} style={{
+                        padding: 12,
+                        background: '#fff',
                         borderRadius: 6,
                         border: `1px solid ${param.status === 'normal' ? '#e8e8e8' : param.status === 'warning' ? '#ffe58f' : '#ffccc7'}`
                       }}>
@@ -2902,18 +2903,18 @@ function SectionLab() {
       prev.map((s) =>
         s.sampleId === sample.sampleId
           ? {
-              ...s,
-              barcode,
-              materialType,
-              source,
-              project,
-              status,
-              fe: parseNullableNumber(feStr, sample.fe),
-              sio2: parseNullableNumber(sio2Str, sample.sio2),
-              s: parseNullableNumber(sStr, sample.s),
-              receivedAt,
-              reportedAt: reportedAt || null,
-            }
+            ...s,
+            barcode,
+            materialType,
+            source,
+            project,
+            status,
+            fe: parseNullableNumber(feStr, sample.fe),
+            sio2: parseNullableNumber(sio2Str, sample.sio2),
+            s: parseNullableNumber(sStr, sample.s),
+            receivedAt,
+            reportedAt: reportedAt || null,
+          }
           : s,
       ),
     );
@@ -2986,102 +2987,102 @@ function SectionLab() {
             </button>
           </div>
 
-      <div
-        style={{
-          borderRadius: 8,
-          border: "1px solid #eee",
-          overflowX: "auto",
-          overflowY: "hidden",
-          background: "#fff",
-          maxWidth: "100%",
-        }}
-      >
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
-          <thead style={{ background: "#fafafa" }}>
-            <tr>
-              {["样品号", "条码", "物料类型", "来源", "项目", "状态", "Fe(%)", "SiO₂(%)", "S(%)", "受理时间", "出报告时间", "操作"].map((h) => (
-                <th
-                  key={h}
-                  style={{
-                    textAlign: "left",
-                    padding: "8px 12px",
-                    borderBottom: "1px solid #eee",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {h}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {samples.map((s) => (
-              <tr key={s.sampleId}>
-                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.sampleId}</td>
-                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.barcode}</td>
-                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.materialType}</td>
-                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.source}</td>
-                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.project}</td>
-                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.status}</td>
-                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.fe ?? '-'}</td>
-                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.sio2 ?? '-'}</td>
-                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.s ?? '-'}</td>
-                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.receivedAt}</td>
-                <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.reportedAt || '-'}</td>
-                <td
-                  style={{
-                    padding: "8px 12px",
-                    borderBottom: "1px solid #f0f0f0",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  <button
-                    type="button"
-                    onClick={() => handleEditSample(s)}
-                    style={{
-                      padding: "4px 8px",
-                      fontSize: 12,
-                      marginRight: 8,
-                      borderRadius: 4,
-                      border: "1px solid #1677ff",
-                      background: "#1677ff",
-                      color: "#fff",
-                      cursor: "pointer",
-                    }}
-                  >
-                    编辑
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleDeleteSample(s)}
-                    style={{
-                      padding: "4px 8px",
-                      fontSize: 12,
-                      borderRadius: 4,
-                      border: "1px solid #ff4d4f",
-                      background: "#fff",
-                      color: "#ff4d4f",
-                      cursor: "pointer",
-                    }}
-                  >
-                    删除
-                  </button>
-                </td>
-              </tr>
-            ))}
-            {samples.length === 0 && (
-              <tr>
-                <td
-                  colSpan={12}
-                  style={{ padding: "12px 0", textAlign: "center", color: "#999" }}
-                >
-                  暂无样品，请先新增。
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+          <div
+            style={{
+              borderRadius: 8,
+              border: "1px solid #eee",
+              overflowX: "auto",
+              overflowY: "hidden",
+              background: "#fff",
+              maxWidth: "100%",
+            }}
+          >
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
+              <thead style={{ background: "#fafafa" }}>
+                <tr>
+                  {["样品号", "条码", "物料类型", "来源", "项目", "状态", "Fe(%)", "SiO₂(%)", "S(%)", "受理时间", "出报告时间", "操作"].map((h) => (
+                    <th
+                      key={h}
+                      style={{
+                        textAlign: "left",
+                        padding: "8px 12px",
+                        borderBottom: "1px solid #eee",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {samples.map((s) => (
+                  <tr key={s.sampleId}>
+                    <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.sampleId}</td>
+                    <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.barcode}</td>
+                    <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.materialType}</td>
+                    <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.source}</td>
+                    <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.project}</td>
+                    <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.status}</td>
+                    <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.fe ?? '-'}</td>
+                    <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.sio2 ?? '-'}</td>
+                    <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.s ?? '-'}</td>
+                    <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.receivedAt}</td>
+                    <td style={{ padding: "8px 12px", borderBottom: "1px solid #f0f0f0", whiteSpace: "nowrap" }}>{s.reportedAt || '-'}</td>
+                    <td
+                      style={{
+                        padding: "8px 12px",
+                        borderBottom: "1px solid #f0f0f0",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => handleEditSample(s)}
+                        style={{
+                          padding: "4px 8px",
+                          fontSize: 12,
+                          marginRight: 8,
+                          borderRadius: 4,
+                          border: "1px solid #1677ff",
+                          background: "#1677ff",
+                          color: "#fff",
+                          cursor: "pointer",
+                        }}
+                      >
+                        编辑
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteSample(s)}
+                        style={{
+                          padding: "4px 8px",
+                          fontSize: 12,
+                          borderRadius: 4,
+                          border: "1px solid #ff4d4f",
+                          background: "#fff",
+                          color: "#ff4d4f",
+                          cursor: "pointer",
+                        }}
+                      >
+                        删除
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {samples.length === 0 && (
+                  <tr>
+                    <td
+                      colSpan={12}
+                      style={{ padding: "12px 0", textAlign: "center", color: "#999" }}
+                    >
+                      暂无样品，请先新增。
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 
@@ -3419,17 +3420,17 @@ function SectionEquipment() {
       prev.map((e) =>
         e.id === row.id
           ? {
-              ...e,
-              name,
-              area,
-              status,
-              availability: availabilityStr ? Number(availabilityStr) || row.availability : row.availability,
-              mtbfHours: mtbfStr ? Number(mtbfStr) || row.mtbfHours : row.mtbfHours,
-              lastMaintenance,
-              nextMaintenance,
-              vibrationMmS: vibrationStr ? Number(vibrationStr) || row.vibrationMmS : row.vibrationMmS,
-              tempCelsius: tempStr ? Number(tempStr) || row.tempCelsius : row.tempCelsius,
-            }
+            ...e,
+            name,
+            area,
+            status,
+            availability: availabilityStr ? Number(availabilityStr) || row.availability : row.availability,
+            mtbfHours: mtbfStr ? Number(mtbfStr) || row.mtbfHours : row.mtbfHours,
+            lastMaintenance,
+            nextMaintenance,
+            vibrationMmS: vibrationStr ? Number(vibrationStr) || row.vibrationMmS : row.vibrationMmS,
+            tempCelsius: tempStr ? Number(tempStr) || row.tempCelsius : row.tempCelsius,
+          }
           : e,
       ),
     );
@@ -3470,12 +3471,12 @@ function SectionEquipment() {
       prev.map((a) =>
         a.equipmentId === row.equipmentId && a.type === row.type
           ? {
-              ...a,
-              level,
-              type,
-              predictedFailureHours: hoursStr ? Number(hoursStr) || row.predictedFailureHours : row.predictedFailureHours,
-              suggestion,
-            }
+            ...a,
+            level,
+            type,
+            predictedFailureHours: hoursStr ? Number(hoursStr) || row.predictedFailureHours : row.predictedFailureHours,
+            suggestion,
+          }
           : a,
       ),
     );
@@ -3782,17 +3783,17 @@ function SectionAnalytics() {
       prev.map((r) =>
         r.id === row.id
           ? {
-              ...r,
-              type,
-              period,
-              oreTonnage: oreTonnageStr ? Number(oreTonnageStr) || row.oreTonnage : row.oreTonnage,
-              concentrateTonnage: concentrateTonnageStr ? Number(concentrateTonnageStr) || row.concentrateTonnage : row.concentrateTonnage,
-              avgGrade: avgGradeStr ? Number(avgGradeStr) || row.avgGrade : row.avgGrade,
-              recovery: recoveryStr ? Number(recoveryStr) || row.recovery : row.recovery,
-              equipmentAvailability: availabilityStr ? Number(availabilityStr) || row.equipmentAvailability : row.equipmentAvailability,
-              status,
-              generatedAt,
-            }
+            ...r,
+            type,
+            period,
+            oreTonnage: oreTonnageStr ? Number(oreTonnageStr) || row.oreTonnage : row.oreTonnage,
+            concentrateTonnage: concentrateTonnageStr ? Number(concentrateTonnageStr) || row.concentrateTonnage : row.concentrateTonnage,
+            avgGrade: avgGradeStr ? Number(avgGradeStr) || row.avgGrade : row.avgGrade,
+            recovery: recoveryStr ? Number(recoveryStr) || row.recovery : row.recovery,
+            equipmentAvailability: availabilityStr ? Number(availabilityStr) || row.equipmentAvailability : row.equipmentAvailability,
+            status,
+            generatedAt,
+          }
           : r,
       ),
     );
@@ -4118,15 +4119,15 @@ function SectionSafety() {
       prev.map((h) =>
         h.id === row.id
           ? {
-              ...h,
-              type,
-              area,
-              level,
-              status,
-              createdAt,
-              dueDate,
-              responsible,
-            }
+            ...h,
+            type,
+            area,
+            level,
+            status,
+            createdAt,
+            dueDate,
+            responsible,
+          }
           : h,
       ),
     );
@@ -4345,6 +4346,422 @@ function SectionSafety() {
   );
 }
 
+function SectionESG() {
+  const [tab, setTab] = React.useState<'dashboard' | 'environmental' | 'social' | 'governance' | 'reports'>('dashboard');
+
+  return (
+    <div>
+      <h2>ESG管理</h2>
+      <p style={{ fontSize: 12, color: "#666", marginBottom: 12 }}>
+        基于GRI标准和港交所ESG指引，从环境(Environmental)、社会(Social)、管治(Governance)三个维度管理企业可持续发展绩效。
+      </p>
+      <KpiCards items={esgMock.kpis} />
+
+      {/* Tab 导航 */}
+      <div style={{ display: 'flex', gap: 8, marginTop: 8, marginBottom: 16, borderBottom: '1px solid #eee' }}>
+        {[
+          { key: 'dashboard', label: '驾驶舱' },
+          { key: 'environmental', label: '环境指标' },
+          { key: 'social', label: '社会指标' },
+          { key: 'governance', label: '管治指标' },
+          { key: 'reports', label: '报告生成' },
+        ].map((t) => (
+          <div
+            key={t.key}
+            onClick={() => setTab(t.key as typeof tab)}
+            style={{
+              padding: '8px 16px',
+              cursor: 'pointer',
+              borderBottom: tab === t.key ? '2px solid #1677ff' : '2px solid transparent',
+              color: tab === t.key ? '#1677ff' : '#666',
+              fontWeight: tab === t.key ? 600 : 400,
+              fontSize: 13,
+            }}
+          >
+            {t.label}
+          </div>
+        ))}
+      </div>
+
+      {/* 驾驶舱 Tab */}
+      {tab === 'dashboard' && (
+        <div>
+          <h3 style={{ marginTop: 8, marginBottom: 8 }}>碳排放趋势（月度）</h3>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 16 }}>
+            {esgMock.carbonTrend.map((item) => (
+              <div
+                key={item.month}
+                style={{
+                  padding: '8px 12px',
+                  background: '#fff',
+                  border: '1px solid #eee',
+                  borderRadius: 6,
+                  fontSize: 12,
+                  minWidth: 80,
+                  textAlign: 'center',
+                }}
+              >
+                <div style={{ color: '#999', marginBottom: 4 }}>{item.month.slice(5)}</div>
+                <div style={{ fontWeight: 600, color: '#1677ff' }}>{item.total}</div>
+                <div style={{ fontSize: 10, color: '#999' }}>tCO₂e</div>
+              </div>
+            ))}
+          </div>
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>实质性议题矩阵</h3>
+          <BasicTable
+            headers={["排名", "议题", "企业重要性", "利益相关方关注度"]}
+            rows={esgMock.governance.materialTopics.map((t) => [
+              t.rank,
+              t.topic,
+              t.importance,
+              t.stakeholderConcern,
+            ])}
+          />
+
+          <div style={{ marginTop: 16, padding: 12, background: '#f0f9ff', borderRadius: 8, fontSize: 12 }}>
+            <strong>ESG绩效概览：</strong>2025年度碳排放同比下降3.2%，连续365天零工亡事故，本地化用工比例达72.5%，社区投资$52万美元。
+          </div>
+        </div>
+      )}
+
+      {/* 环境指标 Tab */}
+      {tab === 'environmental' && (
+        <div>
+          <h3 style={{ marginTop: 8, marginBottom: 8 }}>温室气体与废气排放</h3>
+          <BasicTable
+            headers={["编号", "类别", "指标", "数值", "单位", "统计周期", "数据来源", "披露标准"]}
+            rows={esgMock.environmental.emissions.map((e) => [
+              e.id,
+              e.category,
+              e.indicator,
+              typeof e.value === 'number' ? e.value.toLocaleString() : e.value,
+              e.unit,
+              e.period,
+              e.dataSource,
+              e.standard,
+            ])}
+          />
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>废弃物管理</h3>
+          <BasicTable
+            headers={["编号", "类别", "指标", "数值", "单位", "统计周期", "处置方式", "披露标准"]}
+            rows={esgMock.environmental.waste.map((w) => [
+              w.id,
+              w.category,
+              w.indicator,
+              w.value.toLocaleString(),
+              w.unit,
+              w.period,
+              w.disposal,
+              w.standard,
+            ])}
+          />
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>废水排放</h3>
+          <BasicTable
+            headers={["编号", "指标", "数值", "单位", "限值", "状态", "披露标准"]}
+            rows={esgMock.environmental.wastewater.map((w) => [
+              w.id,
+              w.indicator,
+              w.value,
+              w.unit,
+              'limit' in w && w.limit !== undefined ? w.limit : '-',
+              'status' in w && w.status !== undefined ? w.status : '-',
+              w.standard,
+            ])}
+          />
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>资源使用</h3>
+          <BasicTable
+            headers={["编号", "类别", "指标", "数值", "单位", "强度", "披露标准"]}
+            rows={esgMock.environmental.resources.map((r) => [
+              r.id,
+              r.category,
+              r.indicator,
+              r.value.toLocaleString(),
+              r.unit,
+              'intensity' in r ? `${r.intensity} ${r.intensityUnit}` : '-',
+              r.standard,
+            ])}
+          />
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>生态保护与气候变化</h3>
+          <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+            <div style={{ flex: 1, minWidth: 300 }}>
+              <h4 style={{ fontSize: 12, marginBottom: 8 }}>生态保护</h4>
+              <BasicTable
+                headers={["编号", "指标", "数值/状态", "进度", "披露标准"]}
+                rows={esgMock.environmental.ecology.map((e) => [
+                  e.id,
+                  e.indicator,
+                  'value' in e ? `${e.value} ${e.unit}` : e.status,
+                  'progress' in e ? `${e.progress}%` : '-',
+                  e.standard,
+                ])}
+              />
+            </div>
+            <div style={{ flex: 1, minWidth: 300 }}>
+              <h4 style={{ fontSize: 12, marginBottom: 8 }}>气候变化</h4>
+              <BasicTable
+                headers={["编号", "指标", "状态/数值", "详情", "披露标准"]}
+                rows={esgMock.environmental.climate.map((c) => [
+                  c.id,
+                  c.indicator,
+                  'status' in c && c.status !== undefined ? c.status : ('value' in c && c.value !== undefined ? `${c.value} ${c.unit ?? ''}` : '-'),
+                  'coverage' in c && c.coverage !== undefined ? c.coverage : ('mitigationMeasures' in c && c.mitigationMeasures !== undefined ? c.mitigationMeasures : '-'),
+                  c.standard,
+                ])}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 社会指标 Tab */}
+      {tab === 'social' && (
+        <div>
+          <h3 style={{ marginTop: 8, marginBottom: 8 }}>雇佣情况</h3>
+          <BasicTable
+            headers={["编号", "指标", "数值", "单位", "统计周期", "目标/基准", "披露标准"]}
+            rows={esgMock.social.employment.map((e) => [
+              e.id,
+              e.indicator,
+              e.value,
+              e.unit,
+              e.period,
+              'target' in e && e.target !== undefined ? e.target : ('benchmark' in e && e.benchmark !== undefined ? e.benchmark : '-'),
+              e.standard,
+            ])}
+          />
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>健康与安全</h3>
+          <BasicTable
+            headers={["编号", "指标", "数值", "单位", "统计周期", "行业基准", "披露标准"]}
+            rows={esgMock.social.healthSafety.map((h) => [
+              h.id,
+              h.indicator,
+              h.value,
+              h.unit,
+              h.period,
+              'benchmark' in h && h.benchmark !== undefined ? h.benchmark : '-',
+              h.standard,
+            ])}
+          />
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>发展与培训</h3>
+          <BasicTable
+            headers={["编号", "指标", "数值", "单位", "统计周期", "披露标准"]}
+            rows={esgMock.social.training.map((t) => [
+              t.id,
+              t.indicator,
+              t.value,
+              t.unit,
+              t.period,
+              t.standard,
+            ])}
+          />
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>劳工准则</h3>
+          <BasicTable
+            headers={["编号", "指标", "状态", "最近审核", "审核结果", "披露标准"]}
+            rows={esgMock.social.laborPractices.map((l) => [
+              l.id,
+              l.indicator,
+              l.status,
+              l.lastAudit,
+              l.result,
+              l.standard,
+            ])}
+          />
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>供应链管理</h3>
+          <BasicTable
+            headers={["编号", "指标", "数值", "单位", "通过率", "披露标准"]}
+            rows={esgMock.social.supplyChain.map((s) => [
+              s.id,
+              s.indicator,
+              s.value,
+              s.unit,
+              'percentage' in s ? `${s.percentage}%` : '-',
+              s.standard,
+            ])}
+          />
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>产品责任</h3>
+          <BasicTable
+            headers={["编号", "指标", "数值", "单位", "统计周期", "披露标准"]}
+            rows={esgMock.social.productQuality.map((p) => [
+              p.id,
+              p.indicator,
+              p.value,
+              p.unit,
+              p.period,
+              p.standard,
+            ])}
+          />
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>反贪污</h3>
+          <BasicTable
+            headers={["编号", "指标", "数值", "单位", "统计周期", "披露标准"]}
+            rows={esgMock.social.antiCorruption.map((a) => [
+              a.id,
+              a.indicator,
+              a.value,
+              a.unit,
+              a.period,
+              a.standard,
+            ])}
+          />
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>社区投资</h3>
+          <BasicTable
+            headers={["编号", "指标", "数值", "单位", "统计周期", "详情", "披露标准"]}
+            rows={esgMock.social.community.map((c) => [
+              c.id,
+              c.indicator,
+              typeof c.value === 'number' ? c.value.toLocaleString() : c.value,
+              c.unit,
+              c.period,
+              'projects' in c && c.projects !== undefined ? c.projects : ('frequency' in c && c.frequency !== undefined ? c.frequency : '-'),
+              c.standard,
+            ])}
+          />
+        </div>
+      )}
+
+      {/* 管治指标 Tab */}
+      {tab === 'governance' && (
+        <div>
+          <h3 style={{ marginTop: 8, marginBottom: 8 }}>董事会ESG声明</h3>
+          <div style={{ padding: 16, background: '#fff', border: '1px solid #eee', borderRadius: 8, marginBottom: 16 }}>
+            <div style={{ fontWeight: 600, marginBottom: 8 }}>{esgMock.governance.boardStatement.title}</div>
+            <div style={{ fontSize: 12, color: '#666', lineHeight: 1.8 }}>{esgMock.governance.boardStatement.content}</div>
+            <div style={{ fontSize: 12, color: '#999', marginTop: 8 }}>
+              批准日期：{esgMock.governance.boardStatement.approvalDate} | 签署人：{esgMock.governance.boardStatement.signatory}
+            </div>
+          </div>
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>ESG管治架构</h3>
+          <BasicTable
+            headers={["层级", "职责", "会议频次"]}
+            rows={esgMock.governance.esgStructure.map((s) => [
+              s.level,
+              s.role,
+              s.frequency,
+            ])}
+          />
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>利益相关方沟通</h3>
+          <BasicTable
+            headers={["利益相关方", "沟通渠道", "沟通频次", "核心议题"]}
+            rows={esgMock.governance.stakeholders.map((s) => [
+              s.group,
+              s.channel,
+              s.frequency,
+              s.keyTopics,
+            ])}
+          />
+
+          <h3 style={{ marginTop: 16, marginBottom: 8 }}>实质性议题分析</h3>
+          <BasicTable
+            headers={["排名", "议题", "企业重要性", "利益相关方关注度"]}
+            rows={esgMock.governance.materialTopics.map((t) => [
+              t.rank,
+              t.topic,
+              t.importance,
+              t.stakeholderConcern,
+            ])}
+          />
+        </div>
+      )}
+
+      {/* 报告生成 Tab */}
+      {tab === 'reports' && (
+        <div>
+          <h3 style={{ marginTop: 8, marginBottom: 8 }}>ESG报告历史</h3>
+          <BasicTable
+            headers={["报告编号", "报告标题", "统计周期", "编制标准", "状态", "发布日期"]}
+            rows={esgMock.reportHistory.map((r) => [
+              r.id,
+              r.title,
+              r.period,
+              r.standard,
+              r.status,
+              r.publishDate,
+            ])}
+          />
+
+          <div style={{ marginTop: 16, padding: 16, background: '#f0f9ff', borderRadius: 8 }}>
+            <h4 style={{ margin: '0 0 12px', fontSize: 14 }}>生成新报告</h4>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                onClick={() => window.alert('即将生成2025年度ESG报告（Word格式）...')}
+                style={{
+                  padding: '8px 16px',
+                  fontSize: 12,
+                  borderRadius: 4,
+                  border: '1px solid #1677ff',
+                  background: '#1677ff',
+                  color: '#fff',
+                  cursor: 'pointer',
+                }}
+              >
+                生成年度ESG报告 (Word)
+              </button>
+              <button
+                type="button"
+                onClick={() => window.alert('即将生成2025年度ESG报告（PDF格式）...')}
+                style={{
+                  padding: '8px 16px',
+                  fontSize: 12,
+                  borderRadius: 4,
+                  border: '1px solid #52c41a',
+                  background: '#52c41a',
+                  color: '#fff',
+                  cursor: 'pointer',
+                }}
+              >
+                生成年度ESG报告 (PDF)
+              </button>
+              <button
+                type="button"
+                onClick={() => window.alert('即将导出ESG指标数据（Excel格式）...')}
+                style={{
+                  padding: '8px 16px',
+                  fontSize: 12,
+                  borderRadius: 4,
+                  border: '1px solid #fa8c16',
+                  background: '#fa8c16',
+                  color: '#fff',
+                  cursor: 'pointer',
+                }}
+              >
+                导出指标数据 (Excel)
+              </button>
+            </div>
+            <div style={{ marginTop: 12, fontSize: 12, color: '#666' }}>
+              <strong>说明：</strong>报告将按照GRI Standards和港交所ESG报告指引格式自动生成，包含环境、社会、管治三大维度的完整披露内容。
+            </div>
+          </div>
+
+          <div style={{ marginTop: 16, padding: 16, background: '#fff5f5', borderRadius: 8 }}>
+            <h4 style={{ margin: '0 0 12px', fontSize: 14, color: '#cf1322' }}>数据采集状态</h4>
+            <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', fontSize: 12 }}>
+              <div><span style={{ color: '#52c41a' }}>●</span> 环境数据：已同步（来自EMS/DCS）</div>
+              <div><span style={{ color: '#52c41a' }}>●</span> 安全数据：已同步（来自HSE系统）</div>
+              <div><span style={{ color: '#52c41a' }}>●</span> 人力数据：已同步（来自HR系统）</div>
+              <div><span style={{ color: '#faad14' }}>●</span> 社区数据：部分待填报</div>
+              <div><span style={{ color: '#faad14' }}>●</span> 管治数据：部分待更新</div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function SectionQualityCost() {
   return (
     <div>
@@ -4430,13 +4847,13 @@ function SectionMobile() {
       prev.map((t) =>
         t.id === row.id
           ? {
-              ...t,
-              type,
-              title,
-              module: moduleName,
-              deadline,
-              status,
-            }
+            ...t,
+            type,
+            title,
+            module: moduleName,
+            deadline,
+            status,
+          }
           : t,
       ),
     );
@@ -4480,13 +4897,13 @@ function SectionMobile() {
       prev.map((a) =>
         a.id === row.id
           ? {
-              ...a,
-              type,
-              applicant,
-              area,
-              status,
-              submittedAt,
-            }
+            ...a,
+            type,
+            applicant,
+            area,
+            status,
+            submittedAt,
+          }
           : a,
       ),
     );
@@ -4756,6 +5173,8 @@ function renderSection(key: NavKey) {
       return <SectionAnalytics />;
     case "safety":
       return <SectionSafety />;
+    case "esg":
+      return <SectionESG />;
     case "qualityCost":
       return <SectionQualityCost />;
     case "alarmCenter":
@@ -4776,6 +5195,7 @@ const navIcons: Record<NavKey, string> = {
   equipment: '⚙️',
   analytics: '📈',
   safety: '🛡️',
+  esg: '🌱',
   qualityCost: '💰',
   alarmCenter: '🚨',
   mobile: '📱',
